@@ -1,0 +1,16 @@
+{
+    "folders": [
+      {
+        "name": "eam",
+        "path": "."
+      },
+      {
+        "name": "sever",
+        "path": "./server"
+      },
+      {
+        "name": "web",
+        "path": "./web"
+      }
+    ]
+  }
