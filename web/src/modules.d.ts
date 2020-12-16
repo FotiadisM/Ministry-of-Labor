@@ -1,5 +1,5 @@
 interface Route {
   text: string;
-  status: "active" | "";
+  status?: "active" | "";
   href: string;
 }

@@ -5,7 +5,7 @@ import { Homepage } from "../Homepage/Homepage";
 
 export const Middleware: React.FC = ({ children }) => {
   return (
-    <div className="App">
+    <div className="App" style={{ backgroundColor: "#e5e5e5" }}>
       <NavBar />
       {children}
       <footer className="text-center">footer</footer>

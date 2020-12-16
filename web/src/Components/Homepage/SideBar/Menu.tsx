@@ -1,30 +1,25 @@
 import React, { useState } from "react";
 
-interface MenuItemProps {
-  text: string;
-  href: string;
-}
-
-const MenuItem: React.FC<MenuItemProps> = ({ text }) => {
+const MenuItem: React.FC<Route> = ({ text }) => {
   const [hovered, setHovered] = useState<boolean>(false);
   const toggleHover = () => {
     setHovered((h) => !h);
   };
   return (
     <div
-      className={"bg-primary " + (hovered ? "ps-2" : "")}
+      className={"bg-primary " + (hovered ? "ps-3" : "")}
       onMouseEnter={toggleHover}
       onMouseLeave={toggleHover}
       data-bs-toggle="tooltip"
       data-bs-placement="right"
       title="Tooltip on right"
     >
-      <div className="bg-white ms-4 text-center">{text}</div>
+      <div className="bg-white ms-4 text-center py-2">{text}</div>
     </div>
   );
 };
 
-const items: MenuItemProps[] = [
+const items: Route[] = [
   { text: "Υπουργείο", href: "#" },
   { text: "Νομοθεσία", href: "#" },
   { text: "e-Βιβλιοθήκη", href: "#" },
@@ -39,9 +34,9 @@ interface MenuProps {}
 
 export const Menu: React.FC<MenuProps> = () => {
   return (
-    <div className="shadow">
-      {items.map((i) => {
-        return <MenuItem key={i.href} text={i.text} href={i.href} />;
+    <div className="bg-white shadow-lg rounded-end pe-1">
+      {items.map((i, index) => {
+        return <MenuItem key={index} text={i.text} href={i.href} />;
       })}
     </div>
   );

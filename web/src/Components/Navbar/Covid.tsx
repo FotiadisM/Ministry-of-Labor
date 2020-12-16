@@ -12,7 +12,7 @@ export const Covid: React.FC<Props> = () => {
   return (
     <nav className="container-fluid bg-dark text-white">
       <div className="row py-2 px-4">
-        <div className="col my-auto">
+        <div className="col my-auto fw-bolder">
           Μάθετε τα τελευταία νέα για τον COVID-19
         </div>
         {routes.map((r) => {
