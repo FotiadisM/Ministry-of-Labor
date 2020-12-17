@@ -6,13 +6,13 @@ interface SearchBarProps {}
 const SearchBar: React.FC<SearchBarProps> = () => {
   const [text, setText] = useState<string | undefined>(undefined);
   return (
-    <div className="py-4 px-5 bg-primary shadow rounded-start">
+    <div className="py-4 px-5 bg-primary shadow-lg rounded-start">
       <div className="mx-5 d-flex justify-content-between">
         <h4 className="text-white ms-5 fw-bolder my-auto">
           Βρείτε εύκολα και γρήγορα αυτό που ξάχνετε
         </h4>
         <form
-          className="bg-white me-5 rounded-pill d-flex"
+          className="bg-white me-5 shadow-lg rounded-pill d-flex"
           style={{ width: "34%" }}
         >
           <input
@@ -24,7 +24,7 @@ const SearchBar: React.FC<SearchBarProps> = () => {
           />
           <div
             className="bg-warning rounded-pill"
-            style={{ padding: "10px 12px" }}
+            style={{ padding: "7px 10px", margin: "2px 2.5px 2px 0px" }}
           >
             <i className="bi bi-search m-auto p-0"></i>
           </div>

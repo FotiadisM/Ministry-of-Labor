@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 interface NewsItemProps {
   date: string;
@@ -16,7 +16,7 @@ const NewsItem: React.FC<NewsItemProps> = ({ date, text, href }) => {
           <p
             className="text-break mb-0"
             style={{
-              maxHeight: "70px",
+              maxHeight: "72px",
               overflow: "hidden",
             }}
           >
@@ -62,9 +62,23 @@ interface NewsListsProps {
 }
 
 export const NewsList: React.FC<NewsListsProps> = ({ title }) => {
+  const [hovered, setHovered] = useState<boolean>(false);
+  const toggleHover = () => {
+    setHovered((h) => !h);
+  };
+
   return (
     <div className="mx-4">
-      <h3 className="ms-3 mb-2">{title}</h3>
+      <h3
+        className={
+          "ms-3 mb-2 " +
+          (hovered ? "text-primary text-decoration-underline" : "")
+        }
+        onMouseEnter={toggleHover}
+        onMouseLeave={toggleHover}
+      >
+        {title}
+      </h3>
       <div>
         <NewsItem date={news[0].date} text={news[0].text} href={news[0].href} />
         <NewsItem date={news[1].date} text={news[1].text} href={news[1].href} />

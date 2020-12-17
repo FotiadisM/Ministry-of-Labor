@@ -4,8 +4,11 @@ import { NavBar } from "../../Components/Navbar/NavBar";
 import { Homepage } from "../Homepage/Homepage";
 
 export const Middleware: React.FC = ({ children }) => {
+  // const backgroundColor1: string = "#e5e5e5";
+  const backgroundColor2: string = "#f8f9fa";
+
   return (
-    <div className="App" style={{ backgroundColor: "#e5e5e5" }}>
+    <div className="App" style={{ backgroundColor: backgroundColor2 }}>
       <NavBar />
       {children}
       <footer className="text-center">footer</footer>

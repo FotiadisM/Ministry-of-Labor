@@ -24,9 +24,12 @@ interface NavBarProps {}
 export const NavBar: React.FC<NavBarProps> = () => {
   return (
     <header>
-      <nav className="navbar navbar-expand-lg navbar-light bg-light flex-row-reverse">
+      <nav
+        className="navbar navbar-expand-lg navbar-light flex-row-reverse"
+        style={{ backgroundColor: "#f8f9fa" }}
+      >
         <div className="container-fluid">
-          <a className="navbar-brand fw-bold" href="#">
+          <a className="navbar-brand fw-bold" href="/">
             Υπουργείο Εργασίας & Κοινωνικών Υποθέσεων
           </a>
           <button
