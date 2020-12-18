@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
+import { Footer } from "../../Components/Footer/Footer";
 import { NavBar } from "../../Components/Navbar/NavBar";
 import { Homepage } from "../Homepage/Homepage";
 
@@ -11,7 +12,9 @@ export const Middleware: React.FC = ({ children }) => {
     <div className="App" style={{ backgroundColor: backgroundColor2 }}>
       <NavBar />
       {children}
-      <footer className="text-center">footer</footer>
+      <div className="pt-5">
+        <Footer />
+      </div>
     </div>
   );
 };

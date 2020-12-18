@@ -17,7 +17,9 @@ export const Homepage: React.FC<Props> = () => {
         </div>
       </div>
       <hr className="w-75" style={{ height: "2px", margin: "3rem auto" }} />
-      <MiddlePage />
+      <div className="py-5">
+        <MiddlePage />
+      </div>
     </main>
   );
 };

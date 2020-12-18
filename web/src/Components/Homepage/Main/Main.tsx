@@ -41,7 +41,7 @@ export const Main: React.FC<MainProps> = () => {
     <div className="ps-5">
       <SearchBar />
       <div className="container-fluid mt-5">
-        <div className="row g-0 justify-content-around">
+        <div className="row g-0 justify-content-around px-4">
           <div className="col" style={{ maxWidth: "42%" }}>
             <NewsList title="Δελτία τύπου" />
           </div>

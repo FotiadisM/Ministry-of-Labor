@@ -25,7 +25,7 @@ export const NavBar: React.FC<NavBarProps> = () => {
   return (
     <header>
       <nav
-        className="navbar navbar-expand-lg navbar-light flex-row-reverse"
+        className="navbar navbar-expand-lg navbar-light flex-row-reverse px-4"
         style={{ backgroundColor: "#f8f9fa" }}
       >
         <div className="container-fluid">
