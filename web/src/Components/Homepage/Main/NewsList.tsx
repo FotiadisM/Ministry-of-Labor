@@ -1,12 +1,12 @@
 import React, { useState } from "react";
+import { Modal } from "../../Modal/Modal";
 
 interface NewsItemProps {
   date: string;
   text: string;
-  href: string;
 }
 
-const NewsItem: React.FC<NewsItemProps> = ({ date, text, href }) => {
+const NewsItem: React.FC<NewsItemProps> = ({ date, text }) => {
   return (
     <div className="bg-white py-2 px-3 mb-3 rounded-3 shadow-lg">
       <div>{date}</div>
@@ -24,7 +24,11 @@ const NewsItem: React.FC<NewsItemProps> = ({ date, text, href }) => {
           </p>
         </div>
         <div className="col-auto ms-3 d-flex">
-          <button className="btn btn-primary my-auto">
+          <button
+            className="btn btn-primary my-auto"
+            data-bs-toggle="modal"
+            data-bs-target="#modalPopUp"
+          >
             <i
               className="bi bi-arrow-right-short m-auto"
               style={{ fontSize: "1.5rem" }}
@@ -41,19 +45,16 @@ const news: NewsItemProps[] = [
     date: "28/10/2020",
     text:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    href: "#",
   },
   {
     date: "28/10/2020",
     text:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    href: "#",
   },
   {
     date: "28/10/2020",
     text:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    href: "#",
   },
 ];
 
@@ -80,10 +81,15 @@ export const NewsList: React.FC<NewsListsProps> = ({ title }) => {
         {title}
       </h3>
       <div>
-        <NewsItem date={news[0].date} text={news[0].text} href={news[0].href} />
-        <NewsItem date={news[1].date} text={news[1].text} href={news[1].href} />
-        <NewsItem date={news[2].date} text={news[2].text} href={news[2].href} />
+        <NewsItem date={news[0].date} text={news[0].text} />
+        <NewsItem date={news[1].date} text={news[1].text} />
+        <NewsItem date={news[2].date} text={news[2].text} />
       </div>
+
+      <Modal
+        title="Oops.. 🤯🤯"
+        text="What you are trying to access is not implemeted yet."
+      />
     </div>
   );
 };

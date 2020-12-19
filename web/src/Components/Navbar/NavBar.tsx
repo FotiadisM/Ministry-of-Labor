@@ -1,13 +1,18 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import { Covid } from "./Covid";
 
 const NavItem: React.FC<Route> = ({ text, status, href }) => {
   return (
     <li className="nav-item">
-      {/* {The extra space gap is needed here} */}
-      <a className={"nav-link fw-bold " + status} href={href}>
+      <NavLink
+        className={"nav-link fw-bold"}
+        to={href}
+        activeClassName="active"
+        exact={true}
+      >
         {text}
-      </a>
+      </NavLink>
     </li>
   );
 };
@@ -29,9 +34,9 @@ export const NavBar: React.FC<NavBarProps> = () => {
         style={{ backgroundColor: "#f8f9fa" }}
       >
         <div className="container-fluid">
-          <a className="navbar-brand fw-bold" href="/">
+          <div className="navbar-brand fw-bold">
             Υπουργείο Εργασίας & Κοινωνικών Υποθέσεων
-          </a>
+          </div>
           <button
             className="navbar-toggler"
             type="button"
