@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useHovered } from "../../../Hooks/hooks";
 import { Modal } from "../../Modal/Modal";
 
 interface NewsItemProps {
@@ -63,10 +64,7 @@ interface NewsListsProps {
 }
 
 export const NewsList: React.FC<NewsListsProps> = ({ title }) => {
-  const [hovered, setHovered] = useState<boolean>(false);
-  const toggleHover = () => {
-    setHovered((h) => !h);
-  };
+  const [hovered, toggleHovered] = useHovered();
 
   return (
     <div className="mx-4">
@@ -75,8 +73,8 @@ export const NewsList: React.FC<NewsListsProps> = ({ title }) => {
           "ms-3 mb-2 " +
           (hovered ? "text-primary text-decoration-underline" : "")
         }
-        onMouseEnter={toggleHover}
-        onMouseLeave={toggleHover}
+        onMouseEnter={toggleHovered}
+        onMouseLeave={toggleHovered}
       >
         {title}
       </h3>

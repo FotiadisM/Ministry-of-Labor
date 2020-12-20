@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Route, Switch } from "react-router-dom";
-import { Footer } from "../../Components/Footer/Footer";
-import { NavBar } from "../../Components/Navbar/NavBar";
-import { Contact } from "../Contact/Contact";
-import { Homepage } from "../Homepage/Homepage";
+import { Footer } from "../Components/Footer/Footer";
+import { NavBar } from "../Components/Navbar/NavBar";
+// import { UserContext } from "../Context/context";
+import { Contact } from "./Contact";
+import { Homepage } from "./Homepage";
+import { Login } from "./Login";
 
 export const Middleware: React.FC = ({ children }) => {
   // const backgroundColor1: string = "#e5e5e5";
@@ -24,6 +26,13 @@ export const Middleware: React.FC = ({ children }) => {
 };
 
 function App() {
+  const [userInfo, setUserInfo] = useState<UserInfo>({
+    isLogedIn: false,
+    user: null,
+  });
+
+  console.log(userInfo);
+
   return (
     <Switch>
       <Route exact path="/">
@@ -36,8 +45,15 @@ function App() {
           <Contact />
         </Middleware>
       </Route>
+      <Route exact path="/login">
+        <Middleware>
+          <Login setUserInfo={setUserInfo} />
+        </Middleware>
+      </Route>
       <Route path="/">
-        <h4>404, the page you are trying to reach doesn't exist</h4>
+        <h4 className="text-center">
+          404, the page you are trying to reach doesn't exist
+        </h4>
       </Route>
     </Switch>
   );

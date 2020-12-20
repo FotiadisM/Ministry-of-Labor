@@ -1,7 +1,7 @@
 import React from "react";
-import { Main } from "../../Components/Homepage/Main/Main";
-import { MiddlePage } from "../../Components/Homepage/Main/MiddlePage";
-import { SideBar } from "../../Components/Homepage/SideBar/SideBar";
+import { Main } from "../Components/Homepage/Main/Main";
+import { MiddlePage } from "../Components/Homepage/Main/MiddlePage";
+import { SideBar } from "../Components/Homepage/SideBar/SideBar";
 
 interface Props {}
 

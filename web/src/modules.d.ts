@@ -10,11 +10,19 @@ interface User {
   AFM: string;
   firstName: string;
   lastName: string;
-  born: Date;
+  born: string;
+}
+
+interface UserInfo {
+  isLogedIn: boolean;
+  user: User | null;
+  access_token?: string;
 }
 
 enum Status {
-  WORKING,
+  WORKING = "-",
+  SUSPENSION = "Αναστολή",
+  WORK_PERMIT = "Άδεια ειδικού σκοπού",
 }
 
 interface Employ {

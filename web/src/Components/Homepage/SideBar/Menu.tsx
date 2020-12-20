@@ -1,15 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
+import { useHovered } from "../../../Hooks/hooks";
 
 const MenuItem: React.FC<Route> = ({ text }) => {
-  const [hovered, setHovered] = useState<boolean>(false);
-  const toggleHover = () => {
-    setHovered((h) => !h);
-  };
+  const [hovered, toggleHovered] = useHovered();
+
   return (
     <div
       className={"bg-primary " + (hovered ? "ps-3" : "")}
-      onMouseEnter={toggleHover}
-      onMouseLeave={toggleHover}
+      onMouseEnter={toggleHovered}
+      onMouseLeave={toggleHovered}
       data-bs-toggle="tooltip"
       data-bs-placement="right"
       title="Tooltip on right"

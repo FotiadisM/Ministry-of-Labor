@@ -1,20 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import grFlag from "../../assets/greek.jpeg";
 import euFlag from "../../assets/euflag.png";
+import { useHovered } from "../../Hooks/hooks";
 
 const Service: React.FC<{ text: string }> = ({ text }) => {
-  const [hovered, setHovered] = useState<boolean>(false);
-  const toggleHover = () => {
-    setHovered((h) => !h);
-  };
+  const [hovered, toggleHovered] = useHovered();
 
   return (
     <li>
       <i className="bi bi-arrow-right" style={{ fontSize: "1.6rem" }}></i>
       <span
         className={"ps-2 " + (hovered ? "text-primary fw-bold" : "")}
-        onMouseEnter={toggleHover}
-        onMouseLeave={toggleHover}
+        onMouseEnter={toggleHovered}
+        onMouseLeave={toggleHovered}
       >
         {text}
       </span>
