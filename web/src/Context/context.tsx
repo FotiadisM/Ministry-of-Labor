@@ -1,6 +1,7 @@
 import { createContext } from "react";
 
-export const UserContext = createContext<UserInfo>({
-  isLogedIn: false,
-  user: null,
-});
+interface UserContextProps {
+  userInfo: UserInfo;
+  serUserInfo: React.Dispatch<React.SetStateAction<UserInfo>>;
+}
+export const UserContext = createContext<UserContextProps | null>(null);

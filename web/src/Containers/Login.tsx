@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
+import { UserContext } from "../Context/context";
 import { useHovered } from "../Hooks/hooks";
+import { LogInAPI } from "../APIs/auth";
 
-interface LoginProps {
-  setUserInfo: React.Dispatch<React.SetStateAction<UserInfo>>;
-}
+interface LoginProps {}
 
-export const Login: React.FC<LoginProps> = ({ setUserInfo }) => {
+export const Login: React.FC<LoginProps> = () => {
   let history = useHistory();
   const [hovered, toggleHovered] = useHovered();
 
@@ -15,23 +15,15 @@ export const Login: React.FC<LoginProps> = ({ setUserInfo }) => {
     password: "",
   });
 
-  const login = (): void => {
-    setUserInfo({
-      isLogedIn: true,
-      user: {
-        id: "1234",
-        firstName: "Μιχαήλ",
-        lastName: "Φωτιάδης",
-        email: "mike@mail.com",
-        AFM: "123442131245",
-        born: "25/10/1999",
-      },
-    });
-  };
+  const userContext = useContext(UserContext);
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
-    login();
-    history.push("/home");
+    const res = LogInAPI(input.username, input.password);
+
+    if (res != null) {
+      userContext!.serUserInfo(res);
+      history.push("/");
+    }
   };
 
   return (

@@ -67,7 +67,9 @@ const drops: DropdownProps[] = [
 interface UserBarProps {}
 
 export const UserBar: React.FC<UserBarProps> = () => {
-  const userInfo = useContext(UserContext);
+  const userContext = useContext(UserContext);
+  const { userInfo } = userContext!;
+
   const userDrop: DropdownProps = {
     title: userInfo.user!.firstName + " " + userInfo.user!.lastName,
     routes: [{ text: "Αποσύνδεση", href: "asdf" }],
@@ -75,7 +77,7 @@ export const UserBar: React.FC<UserBarProps> = () => {
   };
 
   return (
-    <ul className="nav px-3">
+    <ul className="nav px-3 shadow">
       {drops.map((d) => {
         return (
           <Dropdown key={d.title} title={d.title} routes={d.routes} id={d.id} />

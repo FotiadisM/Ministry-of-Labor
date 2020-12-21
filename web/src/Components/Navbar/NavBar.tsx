@@ -29,7 +29,7 @@ const routes: Route[] = [
 interface NavBarProps {}
 
 export const NavBar: React.FC<NavBarProps> = () => {
-  const userInfo = useContext(UserContext);
+  const userContext = useContext(UserContext);
 
   return (
     <header>
@@ -69,7 +69,7 @@ export const NavBar: React.FC<NavBarProps> = () => {
         </div>
       </nav>
       <Covid />
-      {userInfo.isLogedIn ? <UserBar /> : ""}
+      {userContext!.userInfo.isLogedIn ? <UserBar /> : ""}
     </header>
   );
 };

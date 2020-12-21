@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useHovered } from "../../../Hooks/hooks";
 import { Modal } from "../../Modal/Modal";
 
