@@ -6,6 +6,7 @@ import { UserContext } from "../Context/context";
 import { Contact } from "./Contact";
 import { Homepage } from "./Homepage";
 import { Login } from "./Login";
+import { User } from "./User";
 
 export const Middleware: React.FC = ({ children }) => {
   // const backgroundColor1: string = "#e5e5e5";
@@ -31,11 +32,9 @@ function App() {
     user: null,
   });
 
-  console.log(userInfo);
-
   return (
     <UserContext.Provider
-      value={{ userInfo: userInfo, serUserInfo: setUserInfo }}
+      value={{ userInfo: userInfo, setUserInfo: setUserInfo }}
     >
       <Switch>
         <Route exact path="/">
@@ -51,6 +50,11 @@ function App() {
         <Route exact path="/login">
           <Middleware>
             <Login />
+          </Middleware>
+        </Route>
+        <Route path="/user">
+          <Middleware>
+            <User />
           </Middleware>
         </Route>
         <Route path="/">

@@ -22,16 +22,23 @@ const Service: React.FC<{ text: string }> = ({ text }) => {
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="pt-2 pb-4" style={{ backgroundColor: "#e5e5e5" }}>
+    <footer className="pt-2 pb-4 shadow">
+      {/**style={{ backgroundColor: "#e5e5e5" }} */}
       <div className="container">
         <div className="row justify-content-around">
           <div className="col">
-            <hr className="bg-primary" style={{ height: "5px" }} />
+            <hr
+              className="bg-primary"
+              style={{ height: "5px", opacity: "initial" }}
+            />
             <h5>Υπουργείο Εργασίας & Κοινωνικών Υποθέσεων</h5>
           </div>
 
           <div className="col">
-            <hr className="bg-primary" style={{ height: "5px" }} />
+            <hr
+              className="bg-primary"
+              style={{ height: "5px", opacity: "initial" }}
+            />
             <h5>Επικοινωνία</h5>
             <p>
               Σταδίου 29, Αθήνα 10559,
@@ -53,7 +60,10 @@ export const Footer: React.FC = () => {
           </div>
 
           <div className="col">
-            <hr className="bg-primary" style={{ height: "5px" }} />
+            <hr
+              className="bg-primary"
+              style={{ height: "5px", opacity: "initial" }}
+            />
             <h5>Υπηρεσίες και Προσβασιμότητα</h5>
             <ul className="list-unstyled">
               <Service text="Υπηρερίσες" />

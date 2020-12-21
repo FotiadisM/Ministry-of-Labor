@@ -1,4 +1,6 @@
 import React, { useContext } from "react";
+import { NavLink } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { UserContext } from "../../Context/context";
 
 interface DropdownProps {
@@ -26,9 +28,14 @@ const Dropdown: React.FC<DropdownProps> = ({ title, routes, id }) => {
         {routes.map((r) => {
           return (
             <li key={r.text}>
-              <a className="dropdown-item" href={r.href}>
+              <NavLink
+                className="dropdown-item"
+                to={r.href}
+                activeClassName="active"
+                exact
+              >
                 {r.text}
-              </a>
+              </NavLink>
             </li>
           );
         })}
@@ -39,41 +46,50 @@ const Dropdown: React.FC<DropdownProps> = ({ title, routes, id }) => {
 
 const drops: DropdownProps[] = [
   {
-    title: "Τα στοιχεία μου",
-    routes: [{ text: "hasdf", href: "asdf" }],
     id: 1,
+    title: "Τα στοιχεία μου",
+    routes: [
+      { text: "Το προφίλ μου", href: "/user/profile" },
+      { text: "Τα ένσημά μου", href: "/user/profile/stamps" },
+    ],
   },
   {
+    id: 2,
     title: "Ο οργανισμός μου",
     routes: [{ text: "hasdf", href: "asdf" }],
-    id: 2,
   },
   {
+    id: 3,
     title: "Τα ραντεβού μου",
     routes: [
-      { text: "Νέο ραντεβού", href: "asdf" },
-      { text: "Ημερολόγιο", href: "asdf" },
+      { text: "Νέο ραντεβού", href: "/user/dates/new" },
+      { text: "Ημερολόγιο", href: "/user/dates" },
     ],
-    id: 3,
   },
   {
+    id: 4,
     title: "Αίτηση για Πιστωποιητικά",
     routes: [{ text: "hasdf", href: "asdf" }],
-    id: 4,
   },
-  { title: "Covid-19", routes: [{ text: "hasdf", href: "asdf" }], id: 5 },
+  {
+    id: 5,
+    title: "Covid-19",
+    routes: [{ text: "hasdf", href: "asdf" }],
+  },
 ];
 
 interface UserBarProps {}
 
 export const UserBar: React.FC<UserBarProps> = () => {
   const userContext = useContext(UserContext);
-  const { userInfo } = userContext!;
+  const { userInfo, setUserInfo } = userContext!;
 
-  const userDrop: DropdownProps = {
-    title: userInfo.user!.firstName + " " + userInfo.user!.lastName,
-    routes: [{ text: "Αποσύνδεση", href: "asdf" }],
-    id: 6,
+  let history = useHistory();
+  const LogOut = () => {
+    setUserInfo((s) => {
+      return { isLogedIn: false, user: null };
+    });
+    history.push("/");
   };
 
   return (
@@ -84,11 +100,28 @@ export const UserBar: React.FC<UserBarProps> = () => {
         );
       })}
       <div className="ms-auto">
-        <Dropdown
-          title={userDrop.title}
-          routes={userDrop.routes}
-          id={userDrop.id}
-        />
+        <li className="nav-item dropdown">
+          <div
+            className="nav-link dropdown-toggle"
+            id="userNavbarDropdownUser"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            {userInfo.user!.firstName + " " + userInfo.user!.lastName}
+          </div>
+          <ul
+            className="dropdown-menu"
+            aria-labelledby="userNavbarDropdownUser"
+          >
+            <li>
+              <div className="dropdown-item" onClick={() => LogOut()}>
+                Αποσύνδεση
+                <i className="bi bi-arrow-bar-right fs-5 ps-2"></i>
+              </div>
+            </li>
+          </ul>
+        </li>
       </div>
     </ul>
   );

@@ -21,24 +21,29 @@ export const Login: React.FC<LoginProps> = () => {
     const res = LogInAPI(input.username, input.password);
 
     if (res != null) {
-      userContext!.serUserInfo(res);
+      userContext!.setUserInfo(res);
       history.push("/");
     }
   };
 
   return (
-    <div className="flex-grow-1 position-relative">
+    <div className="container position-relative">
       <button
         className="position-absolute btn btn-primary"
-        style={{ top: "15%", left: "15%", transform: "translate(-50%, -50%)" }}
+        style={{
+          top: "60px",
+          left: "45px",
+          transform: "translate(-50%, -50%)",
+        }}
       >
         <i className="bi bi-arrow-left fs-5">
           <span className="fs-6 ps-2">Αρχική</span>
         </i>
       </button>
       <div
-        className="position-absolute w-25"
-        style={{ top: "52%", left: "50%", transform: "translate(-50%, -50%)" }}
+        className="py-5 w-25 mx-auto"
+        // className="position-absolute w-25"
+        // style={{ top: "52%", left: "50%", transform: "translate(-50%, -50%)" }}
       >
         <h2 className="text-center text-primary mb-4">Σύδενση μέσω Taxisnet</h2>
         <div
