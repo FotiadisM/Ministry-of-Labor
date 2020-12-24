@@ -9,7 +9,7 @@ const SearchBar: React.FC<SearchBarProps> = () => {
     <div className="py-4 px-5 bg-primary shadow-lg rounded-start">
       <div className="mx-5 d-flex justify-content-between">
         <h4 className="text-white ms-5 fw-bolder my-auto">
-          Βρείτε εύκολα και γρήγορα αυτό που ξάχνετε
+          Βρείτε εύκολα και γρήγορα αυτό που ψάχνετε
         </h4>
         <form
           className="bg-white me-5 shadow-lg rounded-pill d-flex"

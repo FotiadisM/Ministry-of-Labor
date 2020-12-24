@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getActiveDates } from "../../../APIs/user";
+import { getUserActiveDates } from "../../../APIs/User/dates";
 
 interface TableProps {
   title: string;
@@ -68,12 +68,12 @@ export const Calendar: React.FC<CalendarProps> = () => {
   const [oldDates, setOldDates] = useState<Date[]>([]);
 
   useEffect(() => {
-    let aDates = getActiveDates("asdf");
+    let aDates = getUserActiveDates("asdf");
     if (aDates != null) {
       setActiveDates(aDates);
     }
 
-    let oldDates = getActiveDates("asdf");
+    let oldDates = getUserActiveDates("asdf");
     if (oldDates != null) {
       setOldDates(oldDates);
     }

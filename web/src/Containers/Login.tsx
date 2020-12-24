@@ -36,9 +36,8 @@ export const Login: React.FC<LoginProps> = () => {
           transform: "translate(-50%, -50%)",
         }}
       >
-        <i className="bi bi-arrow-left fs-5">
-          <span className="fs-6 ps-2">Αρχική</span>
-        </i>
+        <i className="bi bi-arrow-left fs-5"></i>
+        <span className="fs-6 ps-2 my-auto">Αρχική</span>
       </button>
       <div
         className="py-5 w-25 mx-auto"
