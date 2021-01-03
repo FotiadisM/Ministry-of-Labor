@@ -21,9 +21,9 @@ const NavItem: React.FC<Route> = ({ text, status, href }) => {
 
 const routes: Route[] = [
   { text: "Αρχική", href: "/", status: "active" },
-  { text: "Σχετικά με εμάς", href: "/about", status: "" },
+  // { text: "Σχετικά με εμάς", href: "/about", status: "" },
   { text: "Επικοινωνία", href: "/contact", status: "" },
-  { text: "Σύνδεση μέσω Taxis Net", href: "/login", status: "" },
+  { text: "Σύνδεση μέσω TaxisNet", href: "/login", status: "" },
 ];
 
 interface NavBarProps {}

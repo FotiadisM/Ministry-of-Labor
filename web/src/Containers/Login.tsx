@@ -28,7 +28,7 @@ export const Login: React.FC<LoginProps> = () => {
 
   return (
     <div className="container position-relative">
-      <button
+      {/* <button
         className="position-absolute btn btn-primary"
         style={{
           top: "60px",
@@ -38,7 +38,7 @@ export const Login: React.FC<LoginProps> = () => {
       >
         <i className="bi bi-arrow-left fs-5"></i>
         <span className="fs-6 ps-2 my-auto">Αρχική</span>
-      </button>
+      </button> */}
       <div
         className="py-5 w-25 mx-auto"
         // className="position-absolute w-25"

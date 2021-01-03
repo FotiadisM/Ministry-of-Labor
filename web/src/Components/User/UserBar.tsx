@@ -68,7 +68,7 @@ const drops: DropdownProps[] = [
   },
   {
     id: 4,
-    title: "Αίτηση για Πιστωποιητικά",
+    title: "Αίτηση για Πιστoποιητικά",
     routes: [{ text: "hasdf", href: "asdf" }],
   },
   {

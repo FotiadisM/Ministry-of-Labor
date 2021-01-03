@@ -88,19 +88,29 @@ export const Calendar: React.FC<CalendarProps> = () => {
   };
 
   return (
-    <div className="container">
+    <div className="container text-center py-5">
       <Table
         title="Ανερχόμενα Ραντεβού"
         rows={activeDates}
         active={true}
         setDeletedDate={setDeletedDate}
       />
+      {activeDates.length === 0 ? (
+        <div className="fs-4 py-5">Δεν έχεται κανένα ραντεβού</div>
+      ) : (
+        ""
+      )}
       <Table
-        title="Περασμέna Ραντεβού"
+        title="Περασμένα Ραντεβού"
         rows={oldDates}
         active={false}
         setDeletedDate={setDeletedDate}
       />
+      {activeDates.length === 0 ? (
+        <div className="fs-4 py-5">Δεν έχεται προηγούμενα ραντεβού</div>
+      ) : (
+        ""
+      )}
 
       <div
         className="modal fade"

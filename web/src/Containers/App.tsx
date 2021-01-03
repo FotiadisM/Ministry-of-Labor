@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Route, Switch } from "react-router-dom";
+import { CovidRouter } from "../Components/Covid/Covid";
 import { Footer } from "../Components/Footer/Footer";
 import { NavBar } from "../Components/Navbar/NavBar";
 import { UserContext } from "../Context/context";
@@ -55,6 +56,11 @@ function App() {
         <Route path="/user">
           <Middleware>
             <User />
+          </Middleware>
+        </Route>
+        <Route path="/covid">
+          <Middleware>
+            <CovidRouter />
           </Middleware>
         </Route>
         <Route path="/">
