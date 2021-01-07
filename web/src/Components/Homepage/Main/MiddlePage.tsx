@@ -34,9 +34,9 @@ const Box: React.FC<BoxProps> = ({ title, links }) => {
       {links !== null ? (
         <div className="bg-white container-fluid rounded-3">
           <div className="row g-0 row-cols-2 pb-2">
-            {links.map((l) => {
+            {links.map((l, i) => {
               return (
-                <div className="col mt-2" key={l.text}>
+                <div className="col mt-2" key={i}>
                   <Link text={l.text} link={l.link} />
                 </div>
               );

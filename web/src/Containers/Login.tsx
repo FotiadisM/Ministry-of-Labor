@@ -39,11 +39,7 @@ export const Login: React.FC<LoginProps> = () => {
         <i className="bi bi-arrow-left fs-5"></i>
         <span className="fs-6 ps-2 my-auto">Αρχική</span>
       </button> */}
-      <div
-        className="py-5 w-25 mx-auto"
-        // className="position-absolute w-25"
-        // style={{ top: "52%", left: "50%", transform: "translate(-50%, -50%)" }}
-      >
+      <div className="py-5 my-5 mx-auto" style={{ width: "30%" }}>
         <h2 className="text-center text-primary mb-4">Σύδενση μέσω Taxisnet</h2>
         <div
           className="border p-4 shadow mx-auto"
