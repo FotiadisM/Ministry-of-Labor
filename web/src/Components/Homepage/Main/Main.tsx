@@ -4,7 +4,7 @@ import { NewsList } from "./NewsList";
 interface SearchBarProps {}
 
 const SearchBar: React.FC<SearchBarProps> = () => {
-  const [text, setText] = useState<string | undefined>(undefined);
+  const [text, setText] = useState<string>("");
   return (
     <div className="py-4 px-5 bg-primary shadow-lg rounded-start">
       <div className="mx-5 d-flex justify-content-between">

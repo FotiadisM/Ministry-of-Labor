@@ -40,7 +40,7 @@ export const Login: React.FC<LoginProps> = () => {
         <span className="fs-6 ps-2 my-auto">Αρχική</span>
       </button> */}
       <div className="py-5 my-5 mx-auto" style={{ width: "30%" }}>
-        <h2 className="text-center text-primary mb-4">Σύδενση μέσω Taxisnet</h2>
+        <h2 className="text-center text-primary mb-4">Σύνδεση μέσω Taxisnet</h2>
         <div
           className="border p-4 shadow mx-auto"
           style={{ borderRadius: "1.6rem" }}
@@ -66,7 +66,7 @@ export const Login: React.FC<LoginProps> = () => {
               }}
             />
             <label htmlFor="passwordLogin" className="form-label mt-4">
-              Κωδικός χρήστης
+              Κωδικός χρήστη
             </label>
             <input
               type="password"
@@ -92,7 +92,7 @@ export const Login: React.FC<LoginProps> = () => {
               onMouseEnter={toggleHovered}
               onMouseLeave={toggleHovered}
             >
-              Ξέχασα όνομα χρήστη ή κωδικό;
+              Ξεχάσατε το όνομα χρήστη ή τον κωδικό;
             </div>
             <button className="btn btn-primary w-100 mt-4" type="submit">
               Είσοδος
