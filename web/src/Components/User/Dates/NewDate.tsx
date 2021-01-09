@@ -1,69 +1,69 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { Modal } from "bootstrap";
 import { getAvailableDates } from "../../../APIs/User/dates";
 import { useHovered } from "../../../Hooks/hooks";
+import { Day, Hour, Month } from "../../../Types/User/calendar";
 
 interface HourElementProps {
-  hour: string;
-  minute: string;
-  active: boolean;
+  hour: Hour;
+  showModal: () => void;
 }
 
-const HourElement: React.FC<HourElementProps> = ({ hour, minute, active }) => {
+const HourElement: React.FC<HourElementProps> = ({ hour, showModal }) => {
   const inactiveColor = "#e5e5e5";
   const [hovered, setHovered] = useHovered();
+  const selectDate = () => {
+    showModal();
+  };
 
   return (
     <li
       className={
         "py-2 ps-3 border-bottom " +
-        (active && hovered ? "shadow-lg text-primary fw-bold" : "")
+        (hour.active && hovered ? "shadow-lg text-primary fw-bold" : "")
       }
       style={{
-        backgroundColor: active ? "" : inactiveColor,
-        cursor: active ? "pointer" : "",
+        backgroundColor: hour.active ? "" : inactiveColor,
+        cursor: hour.active ? "pointer" : "",
       }}
-      onMouseEnter={active ? setHovered : undefined}
-      onMouseLeave={active ? setHovered : undefined}
-      onClick={() => alert("asfonC")}
+      onMouseEnter={hour.active ? setHovered : undefined}
+      onMouseLeave={hour.active ? setHovered : undefined}
+      onClick={() => selectDate()}
     >
-      {hour + ":" + minute}
+      {hour.hour + ":" + hour.minute}
     </li>
   );
 };
 
 interface DateCardProps {
-  date: string;
-  hours: HourElementProps[];
+  day: Day;
+  showModal: () => void;
 }
 
-const DateCard: React.FC<DateCardProps> = ({ date, hours }) => {
+const DateCard: React.FC<DateCardProps> = ({ day, showModal }) => {
   return (
     <div className="border rounded">
       <p
         className="text-primary fw-bolder float-end mb-0 me-3"
         style={{ fontSize: "3rem" }}
       >
-        {date}
+        {day.date}
       </p>
       <ul className="list-unstyled mb-0">
-        {hours.map((h, i) => {
-          return <HourElement key={i} {...h} />;
+        {day.hours.map((h, i) => {
+          return <HourElement key={i} hour={h} showModal={showModal} />;
         })}
       </ul>
     </div>
   );
 };
 
-interface CalendarMonth {
-  name: string;
-  days: DateCardProps[];
-}
-
 interface NewDateProps {
-  months: CalendarMonth[];
+  months: Month[];
+  showModal: () => void;
 }
 
-const NewDate: React.FC<NewDateProps> = ({ months }) => {
+const NewDate: React.FC<NewDateProps> = ({ months, showModal }) => {
   const [curMonth, setCurMonth] = useState<number>(0);
 
   return (
@@ -98,7 +98,7 @@ const NewDate: React.FC<NewDateProps> = ({ months }) => {
         {months[curMonth].days.map((d, i) => {
           return (
             <div key={i} className="col g-2">
-              <DateCard date={d.date} hours={d.hours} />
+              <DateCard day={d} showModal={showModal} />
             </div>
           );
         })}
@@ -107,736 +107,66 @@ const NewDate: React.FC<NewDateProps> = ({ months }) => {
   );
 };
 
-const m: CalendarMonth[] = [
-  {
-    name: "Junuary",
-    days: [
-      {
-        date: "1",
-        hours: [
-          { hour: "09", minute: "00", active: false },
-          { hour: "10", minute: "00", active: true },
-          { hour: "11", minute: "00", active: false },
-          { hour: "12", minute: "00", active: false },
-          { hour: "13", minute: "00", active: true },
-          { hour: "14", minute: "00", active: true },
-          { hour: "15", minute: "00", active: false },
-        ],
-      },
-      {
-        date: "2",
-        hours: [
-          { hour: "09", minute: "00", active: true },
-          { hour: "10", minute: "00", active: true },
-          { hour: "11", minute: "00", active: true },
-          { hour: "12", minute: "00", active: true },
-          { hour: "13", minute: "00", active: true },
-          { hour: "14", minute: "00", active: true },
-          { hour: "15", minute: "00", active: true },
-        ],
-      },
-      {
-        date: "3",
-        hours: [
-          { hour: "09", minute: "00", active: true },
-          { hour: "10", minute: "00", active: true },
-          { hour: "11", minute: "00", active: true },
-          { hour: "12", minute: "00", active: true },
-          { hour: "13", minute: "00", active: true },
-          { hour: "14", minute: "00", active: true },
-          { hour: "15", minute: "00", active: true },
-        ],
-      },
-      {
-        date: "4",
-        hours: [
-          { hour: "09", minute: "00", active: true },
-          { hour: "10", minute: "00", active: true },
-          { hour: "11", minute: "00", active: true },
-          { hour: "12", minute: "00", active: true },
-          { hour: "13", minute: "00", active: true },
-          { hour: "14", minute: "00", active: true },
-          { hour: "15", minute: "00", active: true },
-        ],
-      },
-      {
-        date: "5",
-        hours: [
-          { hour: "09", minute: "00", active: true },
-          { hour: "10", minute: "00", active: true },
-          { hour: "11", minute: "00", active: true },
-          { hour: "12", minute: "00", active: true },
-          { hour: "13", minute: "00", active: true },
-          { hour: "14", minute: "00", active: true },
-          { hour: "15", minute: "00", active: true },
-        ],
-      },
-      {
-        date: "6",
-        hours: [
-          { hour: "09", minute: "00", active: true },
-          { hour: "10", minute: "00", active: true },
-          { hour: "11", minute: "00", active: true },
-          { hour: "12", minute: "00", active: true },
-          { hour: "13", minute: "00", active: true },
-          { hour: "14", minute: "00", active: true },
-          { hour: "15", minute: "00", active: true },
-        ],
-      },
-      {
-        date: "7",
-        hours: [
-          { hour: "09", minute: "00", active: true },
-          { hour: "10", minute: "00", active: true },
-          { hour: "11", minute: "00", active: true },
-          { hour: "12", minute: "00", active: true },
-          { hour: "13", minute: "00", active: true },
-          { hour: "14", minute: "00", active: true },
-          { hour: "15", minute: "00", active: true },
-        ],
-      },
-      {
-        date: "8",
-        hours: [
-          { hour: "09", minute: "00", active: true },
-          { hour: "10", minute: "00", active: true },
-          { hour: "11", minute: "00", active: true },
-          { hour: "12", minute: "00", active: true },
-          { hour: "13", minute: "00", active: true },
-          { hour: "14", minute: "00", active: true },
-          { hour: "15", minute: "00", active: true },
-        ],
-      },
-      {
-        date: "9",
-        hours: [
-          { hour: "09", minute: "00", active: true },
-          { hour: "10", minute: "00", active: true },
-          { hour: "11", minute: "00", active: true },
-          { hour: "12", minute: "00", active: true },
-          { hour: "13", minute: "00", active: true },
-          { hour: "14", minute: "00", active: true },
-          { hour: "15", minute: "00", active: true },
-        ],
-      },
-      {
-        date: "10",
-        hours: [
-          { hour: "09", minute: "00", active: true },
-          { hour: "10", minute: "00", active: true },
-          { hour: "11", minute: "00", active: true },
-          { hour: "12", minute: "00", active: true },
-          { hour: "13", minute: "00", active: true },
-          { hour: "14", minute: "00", active: true },
-          { hour: "15", minute: "00", active: true },
-        ],
-      },
-      {
-        date: "11",
-        hours: [
-          { hour: "09", minute: "00", active: true },
-          { hour: "10", minute: "00", active: true },
-          { hour: "11", minute: "00", active: true },
-          { hour: "12", minute: "00", active: true },
-          { hour: "13", minute: "00", active: true },
-          { hour: "14", minute: "00", active: true },
-          { hour: "15", minute: "00", active: true },
-        ],
-      },
-      {
-        date: "12",
-        hours: [
-          { hour: "09", minute: "00", active: true },
-          { hour: "10", minute: "00", active: true },
-          { hour: "11", minute: "00", active: true },
-          { hour: "12", minute: "00", active: true },
-          { hour: "13", minute: "00", active: true },
-          { hour: "14", minute: "00", active: true },
-          { hour: "15", minute: "00", active: true },
-        ],
-      },
-      {
-        date: "13",
-        hours: [
-          { hour: "09", minute: "00", active: true },
-          { hour: "10", minute: "00", active: true },
-          { hour: "11", minute: "00", active: true },
-          { hour: "12", minute: "00", active: true },
-          { hour: "13", minute: "00", active: true },
-          { hour: "14", minute: "00", active: true },
-          { hour: "15", minute: "00", active: true },
-        ],
-      },
-      {
-        date: "14",
-        hours: [
-          { hour: "09", minute: "00", active: true },
-          { hour: "10", minute: "00", active: true },
-          { hour: "11", minute: "00", active: true },
-          { hour: "12", minute: "00", active: true },
-          { hour: "13", minute: "00", active: true },
-          { hour: "14", minute: "00", active: true },
-          { hour: "15", minute: "00", active: true },
-        ],
-      },
-      {
-        date: "15",
-        hours: [
-          { hour: "09", minute: "00", active: true },
-          { hour: "10", minute: "00", active: true },
-          { hour: "11", minute: "00", active: true },
-          { hour: "12", minute: "00", active: true },
-          { hour: "13", minute: "00", active: true },
-          { hour: "14", minute: "00", active: true },
-          { hour: "15", minute: "00", active: true },
-        ],
-      },
-      {
-        date: "16",
-        hours: [
-          { hour: "09", minute: "00", active: true },
-          { hour: "10", minute: "00", active: true },
-          { hour: "11", minute: "00", active: true },
-          { hour: "12", minute: "00", active: true },
-          { hour: "13", minute: "00", active: true },
-          { hour: "14", minute: "00", active: true },
-          { hour: "15", minute: "00", active: true },
-        ],
-      },
-      {
-        date: "17",
-        hours: [
-          { hour: "09", minute: "00", active: true },
-          { hour: "10", minute: "00", active: true },
-          { hour: "11", minute: "00", active: true },
-          { hour: "12", minute: "00", active: true },
-          { hour: "13", minute: "00", active: true },
-          { hour: "14", minute: "00", active: true },
-          { hour: "15", minute: "00", active: true },
-        ],
-      },
-      {
-        date: "18",
-        hours: [
-          { hour: "09", minute: "00", active: true },
-          { hour: "10", minute: "00", active: true },
-          { hour: "11", minute: "00", active: true },
-          { hour: "12", minute: "00", active: true },
-          { hour: "13", minute: "00", active: true },
-          { hour: "14", minute: "00", active: true },
-          { hour: "15", minute: "00", active: true },
-        ],
-      },
-      {
-        date: "19",
-        hours: [
-          { hour: "09", minute: "00", active: true },
-          { hour: "10", minute: "00", active: true },
-          { hour: "11", minute: "00", active: true },
-          { hour: "12", minute: "00", active: true },
-          { hour: "13", minute: "00", active: true },
-          { hour: "14", minute: "00", active: true },
-          { hour: "15", minute: "00", active: true },
-        ],
-      },
-      {
-        date: "20",
-        hours: [
-          { hour: "09", minute: "00", active: true },
-          { hour: "10", minute: "00", active: true },
-          { hour: "11", minute: "00", active: true },
-          { hour: "12", minute: "00", active: true },
-          { hour: "13", minute: "00", active: true },
-          { hour: "14", minute: "00", active: true },
-          { hour: "15", minute: "00", active: true },
-        ],
-      },
-      {
-        date: "21",
-        hours: [
-          { hour: "09", minute: "00", active: true },
-          { hour: "10", minute: "00", active: true },
-          { hour: "11", minute: "00", active: true },
-          { hour: "12", minute: "00", active: true },
-          { hour: "13", minute: "00", active: true },
-          { hour: "14", minute: "00", active: true },
-          { hour: "15", minute: "00", active: true },
-        ],
-      },
-      {
-        date: "22",
-        hours: [
-          { hour: "09", minute: "00", active: true },
-          { hour: "10", minute: "00", active: true },
-          { hour: "11", minute: "00", active: true },
-          { hour: "12", minute: "00", active: true },
-          { hour: "13", minute: "00", active: true },
-          { hour: "14", minute: "00", active: true },
-          { hour: "15", minute: "00", active: true },
-        ],
-      },
-      {
-        date: "23",
-        hours: [
-          { hour: "09", minute: "00", active: true },
-          { hour: "10", minute: "00", active: true },
-          { hour: "11", minute: "00", active: true },
-          { hour: "12", minute: "00", active: true },
-          { hour: "13", minute: "00", active: true },
-          { hour: "14", minute: "00", active: true },
-          { hour: "15", minute: "00", active: true },
-        ],
-      },
-      {
-        date: "24",
-        hours: [
-          { hour: "09", minute: "00", active: true },
-          { hour: "10", minute: "00", active: true },
-          { hour: "11", minute: "00", active: true },
-          { hour: "12", minute: "00", active: true },
-          { hour: "13", minute: "00", active: true },
-          { hour: "14", minute: "00", active: true },
-          { hour: "15", minute: "00", active: true },
-        ],
-      },
-      {
-        date: "25",
-        hours: [
-          { hour: "09", minute: "00", active: true },
-          { hour: "10", minute: "00", active: true },
-          { hour: "11", minute: "00", active: true },
-          { hour: "12", minute: "00", active: true },
-          { hour: "13", minute: "00", active: true },
-          { hour: "14", minute: "00", active: true },
-          { hour: "15", minute: "00", active: true },
-        ],
-      },
-      {
-        date: "26",
-        hours: [
-          { hour: "09", minute: "00", active: true },
-          { hour: "10", minute: "00", active: true },
-          { hour: "11", minute: "00", active: true },
-          { hour: "12", minute: "00", active: true },
-          { hour: "13", minute: "00", active: true },
-          { hour: "14", minute: "00", active: true },
-          { hour: "15", minute: "00", active: true },
-        ],
-      },
-      {
-        date: "27",
-        hours: [
-          { hour: "09", minute: "00", active: true },
-          { hour: "10", minute: "00", active: true },
-          { hour: "11", minute: "00", active: true },
-          { hour: "12", minute: "00", active: true },
-          { hour: "13", minute: "00", active: true },
-          { hour: "14", minute: "00", active: true },
-          { hour: "15", minute: "00", active: true },
-        ],
-      },
-      {
-        date: "28",
-        hours: [
-          { hour: "09", minute: "00", active: true },
-          { hour: "10", minute: "00", active: true },
-          { hour: "11", minute: "00", active: true },
-          { hour: "12", minute: "00", active: true },
-          { hour: "13", minute: "00", active: true },
-          { hour: "14", minute: "00", active: true },
-          { hour: "15", minute: "00", active: true },
-        ],
-      },
-      {
-        date: "29",
-        hours: [
-          { hour: "09", minute: "00", active: true },
-          { hour: "10", minute: "00", active: true },
-          { hour: "11", minute: "00", active: true },
-          { hour: "12", minute: "00", active: true },
-          { hour: "13", minute: "00", active: true },
-          { hour: "14", minute: "00", active: true },
-          { hour: "15", minute: "00", active: true },
-        ],
-      },
-      {
-        date: "30",
-        hours: [
-          { hour: "09", minute: "00", active: true },
-          { hour: "10", minute: "00", active: true },
-          { hour: "11", minute: "00", active: true },
-          { hour: "12", minute: "00", active: true },
-          { hour: "13", minute: "00", active: true },
-          { hour: "14", minute: "00", active: true },
-          { hour: "15", minute: "00", active: true },
-        ],
-      },
-      {
-        date: "31",
-        hours: [
-          { hour: "09", minute: "00", active: true },
-          { hour: "10", minute: "00", active: true },
-          { hour: "11", minute: "00", active: true },
-          { hour: "12", minute: "00", active: true },
-          { hour: "13", minute: "00", active: true },
-          { hour: "14", minute: "00", active: true },
-          { hour: "15", minute: "00", active: true },
-        ],
-      },
-    ],
-  },
-  {
-    name: "February",
-    days: [
-      {
-        date: "1",
-        hours: [
-          { hour: "09", minute: "00", active: true },
-          { hour: "10", minute: "00", active: true },
-          { hour: "11", minute: "00", active: true },
-          { hour: "12", minute: "00", active: true },
-          { hour: "13", minute: "00", active: true },
-          { hour: "14", minute: "00", active: true },
-          { hour: "15", minute: "00", active: true },
-        ],
-      },
-      {
-        date: "2",
-        hours: [
-          { hour: "09", minute: "00", active: true },
-          { hour: "10", minute: "00", active: true },
-          { hour: "11", minute: "00", active: true },
-          { hour: "12", minute: "00", active: true },
-          { hour: "13", minute: "00", active: true },
-          { hour: "14", minute: "00", active: true },
-          { hour: "15", minute: "00", active: true },
-        ],
-      },
-      {
-        date: "3",
-        hours: [
-          { hour: "09", minute: "00", active: true },
-          { hour: "10", minute: "00", active: true },
-          { hour: "11", minute: "00", active: true },
-          { hour: "12", minute: "00", active: true },
-          { hour: "13", minute: "00", active: true },
-          { hour: "14", minute: "00", active: true },
-          { hour: "15", minute: "00", active: true },
-        ],
-      },
-      {
-        date: "4",
-        hours: [
-          { hour: "09", minute: "00", active: true },
-          { hour: "10", minute: "00", active: true },
-          { hour: "11", minute: "00", active: true },
-          { hour: "12", minute: "00", active: true },
-          { hour: "13", minute: "00", active: true },
-          { hour: "14", minute: "00", active: true },
-          { hour: "15", minute: "00", active: true },
-        ],
-      },
-      {
-        date: "5",
-        hours: [
-          { hour: "09", minute: "00", active: true },
-          { hour: "10", minute: "00", active: true },
-          { hour: "11", minute: "00", active: true },
-          { hour: "12", minute: "00", active: true },
-          { hour: "13", minute: "00", active: true },
-          { hour: "14", minute: "00", active: true },
-          { hour: "15", minute: "00", active: true },
-        ],
-      },
-      {
-        date: "6",
-        hours: [
-          { hour: "09", minute: "00", active: true },
-          { hour: "10", minute: "00", active: true },
-          { hour: "11", minute: "00", active: true },
-          { hour: "12", minute: "00", active: true },
-          { hour: "13", minute: "00", active: true },
-          { hour: "14", minute: "00", active: true },
-          { hour: "15", minute: "00", active: true },
-        ],
-      },
-      {
-        date: "7",
-        hours: [
-          { hour: "09", minute: "00", active: true },
-          { hour: "10", minute: "00", active: true },
-          { hour: "11", minute: "00", active: true },
-          { hour: "12", minute: "00", active: true },
-          { hour: "13", minute: "00", active: true },
-          { hour: "14", minute: "00", active: true },
-          { hour: "15", minute: "00", active: true },
-        ],
-      },
-      {
-        date: "8",
-        hours: [
-          { hour: "09", minute: "00", active: true },
-          { hour: "10", minute: "00", active: true },
-          { hour: "11", minute: "00", active: true },
-          { hour: "12", minute: "00", active: true },
-          { hour: "13", minute: "00", active: true },
-          { hour: "14", minute: "00", active: true },
-          { hour: "15", minute: "00", active: true },
-        ],
-      },
-      {
-        date: "9",
-        hours: [
-          { hour: "09", minute: "00", active: true },
-          { hour: "10", minute: "00", active: true },
-          { hour: "11", minute: "00", active: true },
-          { hour: "12", minute: "00", active: true },
-          { hour: "13", minute: "00", active: true },
-          { hour: "14", minute: "00", active: true },
-          { hour: "15", minute: "00", active: true },
-        ],
-      },
-      {
-        date: "10",
-        hours: [
-          { hour: "09", minute: "00", active: true },
-          { hour: "10", minute: "00", active: true },
-          { hour: "11", minute: "00", active: true },
-          { hour: "12", minute: "00", active: true },
-          { hour: "13", minute: "00", active: true },
-          { hour: "14", minute: "00", active: true },
-          { hour: "15", minute: "00", active: true },
-        ],
-      },
-      {
-        date: "11",
-        hours: [
-          { hour: "09", minute: "00", active: true },
-          { hour: "10", minute: "00", active: true },
-          { hour: "11", minute: "00", active: true },
-          { hour: "12", minute: "00", active: true },
-          { hour: "13", minute: "00", active: true },
-          { hour: "14", minute: "00", active: true },
-          { hour: "15", minute: "00", active: true },
-        ],
-      },
-      {
-        date: "12",
-        hours: [
-          { hour: "09", minute: "00", active: true },
-          { hour: "10", minute: "00", active: true },
-          { hour: "11", minute: "00", active: true },
-          { hour: "12", minute: "00", active: true },
-          { hour: "13", minute: "00", active: true },
-          { hour: "14", minute: "00", active: true },
-          { hour: "15", minute: "00", active: true },
-        ],
-      },
-      {
-        date: "13",
-        hours: [
-          { hour: "09", minute: "00", active: true },
-          { hour: "10", minute: "00", active: true },
-          { hour: "11", minute: "00", active: true },
-          { hour: "12", minute: "00", active: true },
-          { hour: "13", minute: "00", active: true },
-          { hour: "14", minute: "00", active: true },
-          { hour: "15", minute: "00", active: true },
-        ],
-      },
-      {
-        date: "14",
-        hours: [
-          { hour: "09", minute: "00", active: true },
-          { hour: "10", minute: "00", active: true },
-          { hour: "11", minute: "00", active: true },
-          { hour: "12", minute: "00", active: true },
-          { hour: "13", minute: "00", active: true },
-          { hour: "14", minute: "00", active: true },
-          { hour: "15", minute: "00", active: true },
-        ],
-      },
-      {
-        date: "15",
-        hours: [
-          { hour: "09", minute: "00", active: true },
-          { hour: "10", minute: "00", active: true },
-          { hour: "11", minute: "00", active: true },
-          { hour: "12", minute: "00", active: true },
-          { hour: "13", minute: "00", active: true },
-          { hour: "14", minute: "00", active: true },
-          { hour: "15", minute: "00", active: true },
-        ],
-      },
-      {
-        date: "16",
-        hours: [
-          { hour: "09", minute: "00", active: true },
-          { hour: "10", minute: "00", active: true },
-          { hour: "11", minute: "00", active: true },
-          { hour: "12", minute: "00", active: true },
-          { hour: "13", minute: "00", active: true },
-          { hour: "14", minute: "00", active: true },
-          { hour: "15", minute: "00", active: true },
-        ],
-      },
-      {
-        date: "17",
-        hours: [
-          { hour: "09", minute: "00", active: true },
-          { hour: "10", minute: "00", active: true },
-          { hour: "11", minute: "00", active: true },
-          { hour: "12", minute: "00", active: true },
-          { hour: "13", minute: "00", active: true },
-          { hour: "14", minute: "00", active: true },
-          { hour: "15", minute: "00", active: true },
-        ],
-      },
-      {
-        date: "18",
-        hours: [
-          { hour: "09", minute: "00", active: true },
-          { hour: "10", minute: "00", active: true },
-          { hour: "11", minute: "00", active: true },
-          { hour: "12", minute: "00", active: true },
-          { hour: "13", minute: "00", active: true },
-          { hour: "14", minute: "00", active: true },
-          { hour: "15", minute: "00", active: true },
-        ],
-      },
-      {
-        date: "19",
-        hours: [
-          { hour: "09", minute: "00", active: true },
-          { hour: "10", minute: "00", active: true },
-          { hour: "11", minute: "00", active: true },
-          { hour: "12", minute: "00", active: true },
-          { hour: "13", minute: "00", active: true },
-          { hour: "14", minute: "00", active: true },
-          { hour: "15", minute: "00", active: true },
-        ],
-      },
-      {
-        date: "20",
-        hours: [
-          { hour: "09", minute: "00", active: true },
-          { hour: "10", minute: "00", active: true },
-          { hour: "11", minute: "00", active: true },
-          { hour: "12", minute: "00", active: true },
-          { hour: "13", minute: "00", active: true },
-          { hour: "14", minute: "00", active: true },
-          { hour: "15", minute: "00", active: true },
-        ],
-      },
-      {
-        date: "21",
-        hours: [
-          { hour: "09", minute: "00", active: true },
-          { hour: "10", minute: "00", active: true },
-          { hour: "11", minute: "00", active: true },
-          { hour: "12", minute: "00", active: true },
-          { hour: "13", minute: "00", active: true },
-          { hour: "14", minute: "00", active: true },
-          { hour: "15", minute: "00", active: true },
-        ],
-      },
-      {
-        date: "22",
-        hours: [
-          { hour: "09", minute: "00", active: true },
-          { hour: "10", minute: "00", active: true },
-          { hour: "11", minute: "00", active: true },
-          { hour: "12", minute: "00", active: true },
-          { hour: "13", minute: "00", active: true },
-          { hour: "14", minute: "00", active: true },
-          { hour: "15", minute: "00", active: true },
-        ],
-      },
-      {
-        date: "23",
-        hours: [
-          { hour: "09", minute: "00", active: true },
-          { hour: "10", minute: "00", active: true },
-          { hour: "11", minute: "00", active: true },
-          { hour: "12", minute: "00", active: true },
-          { hour: "13", minute: "00", active: true },
-          { hour: "14", minute: "00", active: true },
-          { hour: "15", minute: "00", active: true },
-        ],
-      },
-      {
-        date: "24",
-        hours: [
-          { hour: "09", minute: "00", active: true },
-          { hour: "10", minute: "00", active: true },
-          { hour: "11", minute: "00", active: true },
-          { hour: "12", minute: "00", active: true },
-          { hour: "13", minute: "00", active: true },
-          { hour: "14", minute: "00", active: true },
-          { hour: "15", minute: "00", active: true },
-        ],
-      },
-      {
-        date: "25",
-        hours: [
-          { hour: "09", minute: "00", active: true },
-          { hour: "10", minute: "00", active: true },
-          { hour: "11", minute: "00", active: true },
-          { hour: "12", minute: "00", active: true },
-          { hour: "13", minute: "00", active: true },
-          { hour: "14", minute: "00", active: true },
-          { hour: "15", minute: "00", active: true },
-        ],
-      },
-      {
-        date: "26",
-        hours: [
-          { hour: "09", minute: "00", active: true },
-          { hour: "10", minute: "00", active: true },
-          { hour: "11", minute: "00", active: true },
-          { hour: "12", minute: "00", active: true },
-          { hour: "13", minute: "00", active: true },
-          { hour: "14", minute: "00", active: true },
-          { hour: "15", minute: "00", active: true },
-        ],
-      },
-      {
-        date: "27",
-        hours: [
-          { hour: "09", minute: "00", active: true },
-          { hour: "10", minute: "00", active: true },
-          { hour: "11", minute: "00", active: true },
-          { hour: "12", minute: "00", active: true },
-          { hour: "13", minute: "00", active: true },
-          { hour: "14", minute: "00", active: true },
-          { hour: "15", minute: "00", active: true },
-        ],
-      },
-      {
-        date: "28",
-        hours: [
-          { hour: "09", minute: "00", active: true },
-          { hour: "10", minute: "00", active: true },
-          { hour: "11", minute: "00", active: true },
-          { hour: "12", minute: "00", active: true },
-          { hour: "13", minute: "00", active: true },
-          { hour: "14", minute: "00", active: true },
-          { hour: "15", minute: "00", active: true },
-        ],
-      },
-    ],
-  },
-];
-
 export const NewDateProvider: React.FC = () => {
-  // const [months, setMonths] = useState<CalendarMonth[]>([]);
+  const [months, setMonths] = useState<Month[]>([]);
+  useEffect(() => {
+    let data = getAvailableDates("asfd");
+    if (data !== null) {
+      setMonths(data);
+    }
+  }, []);
 
-  // useEffect(() => {
-  //   let m = getAvailableDates("asfd");
-  //   if (m !== null) {
-  //     setMonths(m);
-  //   }
-  // }, []);
+  // const [selectedDate, setSelectedDate] = useState<{
+  //   month: string;
+  //   day: string;
+  //   hour: string;
+  //   minutes: string;
+  // } | null>(null);
 
-  return <NewDate months={m} />;
+  const showModal = () => {
+    const modal = new Modal(document.getElementById("newDateModal")!);
+    modal.show();
+  };
+
+  return (
+    <div>
+      {months.length ? <NewDate months={months} showModal={showModal} /> : ""}
+      <div
+        className="modal fade"
+        id="newDateModal"
+        tabIndex={-1}
+        aria-labelledby="newDateModalLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog modal-dialog-centered">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="newDateModalLabel">
+                Καταχώρηση ραντεβού;
+              </h5>
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div className="modal-body">Το ραντεβού θα καταχωρηθεί στις</div>
+            <div className="modal-footer">
+              <button
+                type="button"
+                className="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Ακύρωση
+              </button>
+              <button type="button" className="btn btn-primary">
+                Υποβολή
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 };
