@@ -27,18 +27,7 @@ export const Login: React.FC<LoginProps> = () => {
   };
 
   return (
-    <div className="container position-relative">
-      {/* <button
-        className="position-absolute btn btn-primary"
-        style={{
-          top: "60px",
-          left: "45px",
-          transform: "translate(-50%, -50%)",
-        }}
-      >
-        <i className="bi bi-arrow-left fs-5"></i>
-        <span className="fs-6 ps-2 my-auto">Αρχική</span>
-      </button> */}
+    <div className="container">
       <div className="py-5 my-5 mx-auto" style={{ width: "30%" }}>
         <h2 className="text-center text-primary mb-4">Σύνδεση μέσω Taxisnet</h2>
         <div
