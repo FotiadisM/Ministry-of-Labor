@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Modal } from "bootstrap";
 import { getAvailableDates } from "../../../APIs/User/dates";
 import { useHovered } from "../../../Hooks/hooks";
 import { Day, Hour, Month } from "../../../Types/User/calendar";
+// const bootstrap = require("bootstrap");
 
 interface HourElementProps {
   hour: Hour;
@@ -123,14 +123,23 @@ export const NewDateProvider: React.FC = () => {
   //   minutes: string;
   // } | null>(null);
 
-  const showModal = () => {
-    const modal = new Modal(document.getElementById("newDateModal")!);
-    modal.show();
+  const showModal = (): void => {
+    document.getElementById("newDateModalBtn")!.click();
   };
 
   return (
     <div>
       {months.length ? <NewDate months={months} showModal={showModal} /> : ""}
+      <button
+        type="button"
+        id="newDateModalBtn"
+        className="btn btn-primary"
+        data-bs-toggle="modal"
+        data-bs-target="#newDateModal"
+        style={{ display: "none", visibility: "hidden" }}
+      >
+        Launch demo modal
+      </button>
       <div
         className="modal fade"
         id="newDateModal"
