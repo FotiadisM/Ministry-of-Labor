@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { getAvailableDates } from "../../../APIs/User/dates";
 import { useHovered } from "../../../Hooks/hooks";
 import { Day, Hour, Month } from "../../../Types/User/calendar";
-// const bootstrap = require("bootstrap");
 
 interface HourElementProps {
   hour: Hour;
@@ -95,6 +94,10 @@ const NewDate: React.FC<NewDateProps> = ({ months, showModal }) => {
         <div className="fw-bold">Τετάρτη</div>
         <div className="fw-bold">Πέμπτη</div>
         <div className="fw-bold">Παρασκευή</div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
         {months[curMonth].days.map((d, i) => {
           return (
             <div key={i} className="col g-2">

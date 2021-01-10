@@ -1,7 +1,8 @@
 import React from "react";
-import { NavLink as button } from "react-router-dom";
+import { NavLink as button, useHistory } from "react-router-dom";
 
 export const Contact: React.FC = () => {
+  let history = useHistory();
   return (
     <div className="container my-5">
       <div className="alert alert-danger" role="alert">
@@ -36,7 +37,10 @@ export const Contact: React.FC = () => {
           Μπορείτε να κλείσετε ραντεβού με την υπηρεσία e -ραντεβού με την χρήση
           κωδικών Taxisnet.
         </p>
-        <button className="btn btn-primary">
+        <button
+          className="btn btn-primary"
+          onClick={() => history.push("/user/dates/new")}
+        >
           Προγραμματείστε ηλεκτρονικό ραντεβού
           <i className="bi bi-arrow-right ps-2"></i>
         </button>

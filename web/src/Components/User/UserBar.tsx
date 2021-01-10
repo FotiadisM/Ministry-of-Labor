@@ -63,7 +63,7 @@ const drops: DropdownProps[] = [
     title: "Τα ραντεβού μου",
     routes: [
       { text: "Νέο ραντεβού", href: "/user/dates/new" },
-      { text: "Ημερολόγιο", href: "/user/dates" },
+      { text: "Τα ραντεβού μου", href: "/user/dates" },
     ],
   },
   {

@@ -18,7 +18,7 @@ export const getAvailableDates = (access_token: string): Month[] | null => {
 
 const dates = [
   {
-    name: "Junuary",
+    name: "Ιανουάριος",
     days: [
       {
         date: "1",
@@ -395,7 +395,7 @@ const dates = [
     ],
   },
   {
-    name: "February",
+    name: "Φεβρουάριος",
     days: [
       {
         date: "1",

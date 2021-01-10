@@ -1,14 +1,14 @@
 import React, { useContext, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { UserContext } from "../Context/context";
 import { useHovered } from "../Hooks/hooks";
 import { LogInAPI } from "../APIs/auth";
 
-interface LoginProps {}
-
-export const Login: React.FC<LoginProps> = () => {
-  let history = useHistory();
+export const Login: React.FC = () => {
   const [hovered, toggleHovered] = useHovered();
+  let history = useHistory();
+  let location = useLocation<{ from: string }>();
+  const { from } = location.state || { from: "/" };
 
   const [input, setInput] = useState<{ username: string; password: string }>({
     username: "",
@@ -22,7 +22,7 @@ export const Login: React.FC<LoginProps> = () => {
 
     if (res != null) {
       userContext!.setUserInfo(res);
-      history.push("/");
+      history.push(from);
     }
   };
 
