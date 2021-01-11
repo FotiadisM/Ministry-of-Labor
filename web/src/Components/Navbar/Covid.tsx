@@ -2,7 +2,7 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 
 const routes: Route[] = [
-  { text: "Χώρος Εργασίας", href: "/covid/workplace", status: "" },
+  // { text: "Χώρος Εργασίας", href: "/covid/workplace", status: "" },
   { text: "Εργαζόμενοι", href: "/covid/employees", status: "" },
   { text: "Εργοδότες", href: "/covid/employer", status: "" },
 ];

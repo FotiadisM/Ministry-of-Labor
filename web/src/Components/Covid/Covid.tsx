@@ -1,54 +1,157 @@
 import React from "react";
-import { Route as ReactRoute, Switch, NavLink } from "react-router-dom";
+import { Route as ReactRoute, Switch } from "react-router-dom";
 
-interface CovidMenuProps {
-  title: string;
-  info: Route[];
-  services: Route[];
-}
+// const workplace = {
+//   title: "Covid-19 και όσα αφορούν τον χώρο εργασίας",
+//   info: [
+//     { text: "Απαραίτητα μέτρα πρόληψης", href: "cw1" },
+//     { text: "Οδηγίες σε περίπτωση εμφάνισης κρούσματος", href: "cw2" },
+//     {
+//       text: "Γενικές οδηγίες για καθαρισμό και απολύμανση των εργασιακών χώρων",
+//       href: "cw3",
+//     },
+//   ],
+//   services: [{ text: "Δήλωση κρούσματος", href: "" }],
+// };
 
-const CovidMenu: React.FC<CovidMenuProps> = ({ title, info, services }) => {
-  return (
-    <div className="container">
-      <h2>{title}</h2>
-      <hr />
-      <div className="d-flex bg-white border rounded p-3 shadow">
-        <div className="container-fluid">
-          <h4>Πληροφορίες</h4>
-          <ul className="list-group list-group-flush">
-            {info.map((i, index) => {
-              return (
-                <li key={index} className="list-group-item">
-                  <a href={"#" + i.href}>{i.text}</a>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-        <div className="container-fluid">
-          <h4>Υπηρεσίες</h4>
-          <ul className="list-group list-group-flush">
-            {services.map((s, index) => {
-              return (
-                <li key={index} className="list-group-item">
-                  <NavLink to={s.href} activeClassName="active">
-                    {s.text}
-                  </NavLink>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-      </div>
-    </div>
-  );
+const employer: { info: Category[]; services: Category[] } = {
+  info: [
+    {
+      title: "Μέτρα πρόλυψης",
+      elements: [
+        { text: "Οδηγίες εφαρμογής μέτρων πρόληψης", href: "cb1" },
+        { text: "Οδηγίες σε περίπτωση εμφάνισης κρούσματος", href: "cb2" },
+        {
+          text:
+            "Γενικές οδηγίες για καθαρισμό και απολύμανση των εργασιακών χώρων",
+          href: "cb3",
+        },
+      ],
+    },
+    {
+      title: "Οικονομικά μέτρα",
+      elements: [{ text: "Μέτρα στήριξης επιχειρήσεων", href: "cb4" }],
+    },
+    {
+      title: "Σχετικά με το ",
+      elements: [
+        { text: "Ευέλικτοι τρόποι εργασίας", href: "cb5" },
+        {
+          text:
+            "Αναστολές Συμβάσεων Εργασίας, Συν-Εργασία - Μονομερείς - Ειδικές Κατηγορίες",
+          href: "cb6",
+        },
+        { text: "Άδειες Ειδικού Σκοπού", href: "cb7" },
+      ],
+    },
+  ],
+  services: [
+    {
+      title: "Γενικές υπηρεσίες υγείας",
+      elements: [
+        {
+          text:
+            "Αίτημα για προγραμματισμό ελέγχων (rapid test) στην επιχείρηση",
+          href: "",
+        },
+        {
+          text: "Αίτημα για μαζικό εμβολιασμό εργαζομένων",
+          href: "",
+        },
+      ],
+    },
+    {
+      title: "Οικονομικές υπηρεσίες",
+      elements: [
+        {
+          text: "Αίτημα για Επιστρεπτέα Προκαταβολή",
+          href: "",
+        },
+        {
+          text: "Αίτημα για έκπτωση ενοικίου επιχείρησης",
+          href: "",
+        },
+        {
+          text: "Αίτημα για αναστολή φορολογικών υποχρεώσεων",
+          href: "",
+        },
+      ],
+    },
+    {
+      title: "Κάτι",
+      elements: [
+        {
+          text: "Υποβολή δηλώσεων αναστολών/τροποποιήσεων συμβάσεων εργασίας",
+          href: "",
+        },
+      ],
+    },
+  ],
 };
 
-interface CovidBoxProps {
-  info: Route;
-}
+const employees: { info: Category[]; services: Category[] } = {
+  info: [
+    {
+      title: "Μέτρα πρόλυψης",
+      elements: [
+        { text: "Απαραίτητα μέτρα πρόληψης", href: "cs1" },
+        { text: "Οδηγίες σε περίπτωση εμφάνισης κρούσματος", href: "cs2" },
+      ],
+    },
+    {
+      title: "Οικονομικά μέτρα",
+      elements: [
+        {
+          text: "Δικαιούμαι επίδομα ειδικού σκοπού;",
+          href: "cs3",
+        },
+      ],
+    },
+    {
+      title: "Σχετικά με το ",
+      elements: [
+        {
+          text: "Δικαιώματα εργαζομένων",
+          href: "cs4",
+        },
+        {
+          text: "Δικαιώματα εργαζομένων κατα την τηλεργασία",
+          href: "cs5",
+        },
+      ],
+    },
+  ],
+  services: [
+    {
+      title: "Γενικές υπηρεσίες υγείας",
+      elements: [],
+    },
+    {
+      title: "Οικονομικές υπηρεσίες",
+      elements: [
+        {
+          text: "Αίτημα για έκπτωση ενοικίου πληττόμενου εργαζόμενου",
+          href: "",
+        },
+        {
+          text: "Εύρεση δικαιούχου επιδόματος ειδικού σκοπού",
+          href: "",
+        },
+      ],
+    },
+    {
+      title: "Κάτι",
+      elements: [
+        {
+          text: "Εύρεση βεβαίωσης κίνησης",
+          href: "",
+        },
+      ],
+    },
+  ],
+};
 
-const CovidBox: React.FC<CovidBoxProps> = ({ info }) => {
+const CovidBox: React.FC<{ info: Route }> = ({ info }) => {
   return (
     <div id={info.href} className="rounded border shadow p-4 mt-5">
       <h4>{info.text}</h4>
@@ -74,131 +177,89 @@ const CovidBox: React.FC<CovidBoxProps> = ({ info }) => {
   );
 };
 
-const workplace: CovidMenuProps = {
-  title: "Covid-19 και όσα αφορούν τον χώρο εργασίας",
-  info: [
-    { text: "Απαραίτητα μέτρα πρόληψης", href: "cw1" },
-    { text: "Οδηγίες σε περίπτωση εμφάνισης κρούσματος", href: "cw2" },
-    {
-      text: "Γενικές οδηγίες για καθαρισμό και απολύμανση των εργασιακών χώρων",
-      href: "cw3",
-    },
-  ],
-  services: [{ text: "Δήλωση κρούσματος", href: "" }],
+interface Category {
+  title: string;
+  elements: Route[];
+}
+
+interface MenuProps {
+  title: string;
+  categories: Category[];
+}
+
+const Menu: React.FC<MenuProps> = ({ title, categories }) => {
+  return (
+    <div className="mt-4" style={{ width: "45%" }}>
+      <h4 className="text-primary fw-bold">{title}</h4>
+      <div
+        className="border shadow bg-white p-4 ps-5"
+        style={{ borderRadius: "4%" }}
+      >
+        {categories.map((c, i) => {
+          return (
+            <div key={i}>
+              <h4>{c.title}</h4>
+              <ul>
+                {c.elements.map((e, index) => {
+                  return (
+                    <li key={index}>
+                      <a href={"#" + e.href}>{e.text}</a>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
 };
 
-const employer: CovidMenuProps = {
-  title: "Covid-19 και όσα αφορούν τους Εργοδότες",
-  info: [
-    { text: "Οδηγίες εφαρμογής μέτρων πρόληψης", href: "cb1" },
-    { text: "Οδηγίες σε περίπτωση εμφάνισης κρούσματος", href: "cb2" },
-    {
-      text: "Γενικές οδηγίες για καθαρισμό και απολύμανση των εργασιακών χώρων",
-      href: "cb3",
-    },
-    { text: "Μέτρα στήριξης επιχειρήσεων", href: "cb4" },
-    { text: "Ευέλικτοι τρόποι εργασίας", href: "cb5" },
-    {
-      text:
-        "Αναστολές Συμβάσεων Εργασίας, Συν-Εργασία - Μονομερείς - Ειδικές Κατηγορίες",
-      href: "cb6",
-    },
-    { text: "Άδειες Ειδικού Σκοπού", href: "cb7" },
-  ],
-  services: [
-    {
-      text: "Αίτημα για προγραμματισμό ελέγχων (rapid test) στην επιχείρηση",
-      href: "",
-    },
-    {
-      text: "Αίτημα για μαζικό εμβολιασμό εργαζομένων",
-      href: "",
-    },
-    {
-      text: "Αίτημα για Επιστρεπτέα Προκαταβολή",
-      href: "",
-    },
-    {
-      text: "Αίτημα για έκπτωση ενοικίου επιχείρησης",
-      href: "",
-    },
-    {
-      text: "Αίτημα για αναστολή φορολογικών υποχρεώσεων",
-      href: "",
-    },
-    {
-      text: "Υποβολή δηλώσεων αναστολών/τροποποιήσεων συμβάσεων εργασίας",
-      href: "",
-    },
-  ],
-};
+interface CovidPageProps {
+  title: string;
+  info: Category[];
+  services: Category[];
+}
 
-const employees: CovidMenuProps = {
-  title: "Covid-19 και όσα αφορούν τους Εργαζομένους",
-  info: [
-    { text: "Απαραίτητα μέτρα πρόληψης", href: "cs1" },
-    { text: "Οδηγίες σε περίπτωση εμφάνισης κρούσματος", href: "cs2" },
-    {
-      text: "Δικαιούμαι επίδομα ειδικού σκοπού;",
-      href: "cs3",
-    },
-    {
-      text: "Δικαιώματα εργαζομένων",
-      href: "cs4",
-    },
-    {
-      text: "Δικαιούμαι επίδομα ειδικού σκοπού;",
-      href: "cs5",
-    },
-    {
-      text: "Δικαιώματα εργαζομένων κατα την τηλεργασία",
-      href: "cs6",
-    },
-  ],
-  services: [
-    { text: "Δήλωση κρούσματος", href: "" },
-    {
-      text: "Αίτημα για έκπτωση ενοικίου πληττόμενου εργαζόμενου",
-      href: "",
-    },
-    {
-      text: "Εύρεση δικαιούχου επιδόματος ειδικού σκοπού",
-      href: "",
-    },
-    {
-      text: "Εύρεση βεβαίωσης κίνησης",
-      href: "",
-    },
-  ],
+const CovidPage: React.FC<CovidPageProps> = ({ title, info, services }) => {
+  return (
+    <div>
+      <h2>{title}</h2>
+      <hr />
+      <div className="d-flex justify-content-around">
+        <Menu title={"Πληροφορίες"} categories={info} />
+        <Menu title={"Υπηρεσίες"} categories={services} />
+      </div>
+      {info.map((c) => {
+        return c.elements.map((e) => {
+          return <CovidBox key={e.href} info={e} />;
+        });
+      })}
+    </div>
+  );
 };
 
 export const CovidRouter: React.FC = () => {
   return (
-    <div className="py-5">
+    <div className="container py-5">
       <Switch>
-        <ReactRoute exact path="/covid/workplace">
-          <CovidMenu {...workplace} />
-          <div className="container">
-            {workplace.info.map((i, index) => {
-              return <CovidBox key={index} info={i} />;
-            })}
-          </div>
-        </ReactRoute>
+        {/* <ReactRoute exact path="/covid/workplace"> */}
+        {/* <CovidPage /> */}
+        {/* </ReactRoute> */}
         <ReactRoute exact path="/covid/employer">
-          <CovidMenu {...employer} />
-          <div className="container">
-            {employer.info.map((i, index) => {
-              return <CovidBox key={index} info={i} />;
-            })}
-          </div>
+          <CovidPage
+            title="Covid-19 και όσα αφορούν τους Εργοδότες"
+            info={employer.info}
+            services={employer.services}
+          />
         </ReactRoute>
         <ReactRoute exact path="/covid/employees">
-          <CovidMenu {...employees} />
-          <div className="container">
-            {employees.info.map((i, index) => {
-              return <CovidBox key={index} info={i} />;
-            })}
-          </div>
+          <CovidPage
+            title="Covid-19 και όσα αφορούν τους Εργαζομένους"
+            info={employees.info}
+            services={employees.services}
+          />
         </ReactRoute>
       </Switch>
     </div>
