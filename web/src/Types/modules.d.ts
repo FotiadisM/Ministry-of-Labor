@@ -42,9 +42,10 @@ type Status = "NORMAL" | "SUSPENSION" | "VACATION" | "REMOTE";
 
 interface Employ {
   id: string;
-  position: string;
+  // position: string;
   userId: string;
-  joines: string;
+  joined: string;
+  salaryMonth: number;
   status: Status;
 }
 

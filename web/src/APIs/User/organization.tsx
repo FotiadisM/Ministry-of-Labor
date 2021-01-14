@@ -8,14 +8,32 @@ export const getOrganization = (id: string): Organization | null => {
     owner: {
       id: "",
       userId: "",
-      joines: "",
-      position: "",
+      joined: "",
       status: "NORMAL",
+      salaryMonth: 4000,
     },
     employees: [
-      { id: "", userId: "", joines: "", position: "", status: "NORMAL" },
-      { id: "", userId: "", joines: "", position: "", status: "NORMAL" },
-      { id: "", userId: "", joines: "", position: "", status: "NORMAL" },
+      {
+        id: "1",
+        userId: "1",
+        joined: "dd",
+        status: "NORMAL",
+        salaryMonth: 2500,
+      },
+      {
+        id: "2",
+        userId: "2",
+        joined: "fff",
+        status: "REMOTE",
+        salaryMonth: 2000,
+      },
+      {
+        id: "3",
+        userId: "3",
+        joined: "dd",
+        status: "SUSPENSION",
+        salaryMonth: 1900,
+      },
     ],
   };
 };

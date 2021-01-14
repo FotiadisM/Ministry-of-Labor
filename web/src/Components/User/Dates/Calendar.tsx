@@ -80,7 +80,6 @@ export const Calendar: React.FC<CalendarProps> = () => {
   }, []);
 
   const onDeleteDate = () => {
-    console.log(deletedDate);
     setActiveDates((dates) => {
       dates.splice(deletedDate, 1);
       return dates;

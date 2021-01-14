@@ -3,8 +3,8 @@ import { useHistory } from "react-router-dom";
 
 const routes: Route[] = [
   // { text: "Χώρος Εργασίας", href: "/covid/workplace", status: "" },
-  { text: "Εργαζόμενοι", href: "/covid/employees", status: "" },
-  { text: "Εργοδότες", href: "/covid/employer", status: "" },
+  { text: "Covid και Εργαζόμενοι", href: "/covid/employees", status: "" },
+  { text: "Covid και Εργοδότες", href: "/covid/employer", status: "" },
 ];
 
 interface Props {}

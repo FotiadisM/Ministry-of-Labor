@@ -6,7 +6,7 @@ export const Contact: React.FC = () => {
   return (
     <div className="container my-5">
       <div className="alert alert-danger" role="alert">
-        <h4 className="alert-heading">Σημαντική Σημείωση!</h4>
+        <h4 className="alert-heading">Σημαντική Σημείωση</h4>
         <hr />
         <p>
           Στο πλαίσιο των μέτρων πρόληψης της πανδημίας Covid-19 και κατ'
