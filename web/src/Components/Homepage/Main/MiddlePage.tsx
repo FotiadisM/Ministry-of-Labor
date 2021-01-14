@@ -75,51 +75,52 @@ const LinksBox: React.FC<LinksBoxProps> = ({ title, boxes }) => {
 };
 
 const boxes: LinksBoxProps[] = [
+  // {
+  //   title: "Υπηρεσίες για:",
+  //   boxes: [
+  //     {
+  //       title: "Ασφαλισμένους",
+  //       links: [
+  //         { text: "Fast link", link: "/link" },
+  //         { text: "Fast link", link: "/link" },
+  //         { text: "Fast link", link: "/link" },
+  //         { text: "Fast link", link: "/link" },
+  //         { text: "Fast link", link: "/link" },
+  //       ],
+  //     },
+  //     {
+  //       title: "Εργοδότες",
+  //       links: [
+  //         { text: "Fast link", link: "/link" },
+  //         { text: "Fast link", link: "/link" },
+  //         { text: "Fast link", link: "/link" },
+  //         { text: "Fast link", link: "/link" },
+  //         { text: "Fast link", link: "/link" },
+  //         { text: "Fast link", link: "/link" },
+  //       ],
+  //     },
+  //     {
+  //       title: "Συνταξιούχους",
+  //       links: [
+  //         { text: "Fast link", link: "/link" },
+  //         { text: "Fast link", link: "/link" },
+  //         { text: "Fast link", link: "/link" },
+  //         { text: "Fast link", link: "/link" },
+  //       ],
+  //     },
+  //     {
+  //       title: "Ανέργους",
+  //       links: [
+  //         { text: "Fast link", link: "/link" },
+  //         { text: "Fast link", link: "/link" },
+  //         { text: "Fast link", link: "/link" },
+  //       ],
+  //     },
+  //   ],
+  // },
   {
-    title: "Υπηρεσίες για:",
-    boxes: [
-      {
-        title: "Ασφαλισμένους",
-        links: [
-          { text: "Fast link", link: "/link" },
-          { text: "Fast link", link: "/link" },
-          { text: "Fast link", link: "/link" },
-          { text: "Fast link", link: "/link" },
-          { text: "Fast link", link: "/link" },
-        ],
-      },
-      {
-        title: "Εργοδότες",
-        links: [
-          { text: "Fast link", link: "/link" },
-          { text: "Fast link", link: "/link" },
-          { text: "Fast link", link: "/link" },
-          { text: "Fast link", link: "/link" },
-          { text: "Fast link", link: "/link" },
-          { text: "Fast link", link: "/link" },
-        ],
-      },
-      {
-        title: "Συνταξιούχους",
-        links: [
-          { text: "Fast link", link: "/link" },
-          { text: "Fast link", link: "/link" },
-          { text: "Fast link", link: "/link" },
-          { text: "Fast link", link: "/link" },
-        ],
-      },
-      {
-        title: "Ανέργους",
-        links: [
-          { text: "Fast link", link: "/link" },
-          { text: "Fast link", link: "/link" },
-          { text: "Fast link", link: "/link" },
-        ],
-      },
-    ],
-  },
-  {
-    title: "Πληροφορίες για:",
+    // title: "Πληροφορίες για:",
+    title: "",
     boxes: [
       {
         title: "Προσκλήσεις",

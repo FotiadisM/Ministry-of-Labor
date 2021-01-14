@@ -75,6 +75,7 @@ export const Main: React.FC = () => {
     const el = document.getElementsByClassName("pageEl");
     for (let i = 0; i < 4; i += 1) {
       el[i].classList.remove("active");
+      el[i].classList.remove("shadow");
     }
 
     document.getElementById("page" + id.toString())?.classList.add("active");
@@ -95,7 +96,7 @@ export const Main: React.FC = () => {
           <i className="bi bi-arrow-right ms-2 fs-4"></i>
         </button>
       </div>
-      <div className="container-fluid mt-5">
+      <div className="container-fluid mt-5 pe-4">
         <ul className="nav nav-tabs fw-bold">
           <PageLink id="1" text="Εργαζόμενοι" changePage={changePage} />
           <PageLink id="2" text="Εργοδότες" changePage={changePage} />
@@ -106,7 +107,7 @@ export const Main: React.FC = () => {
           <div className="" style={{ width: "45%" }}>
             <h4 className="fw-bold">Πληροφορίες</h4>
             <div
-              className="border shadow bg-white p-4 ps-5"
+              className="border shadow-lg bg-white p-4 ps-5"
               style={{ borderRadius: "5%" }}
             >
               <div className="row row-cols-2 g-2">
@@ -122,7 +123,7 @@ export const Main: React.FC = () => {
           <div className="" style={{ width: "45%" }}>
             <h4 className="fw-bold">Υπηρεσίες</h4>
             <div
-              className="border shadow bg-white p-4 ps-5"
+              className="border shadow-lg bg-white p-4 ps-5"
               style={{ borderRadius: "5%" }}
             >
               <div className="row row-cols-2 g-2">
