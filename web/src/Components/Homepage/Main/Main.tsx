@@ -14,6 +14,7 @@ const SearchBar: React.FC<SearchBarProps> = () => {
         <form
           className="bg-white me-5 shadow-lg rounded-pill d-flex"
           style={{ width: "34%" }}
+          onSubmit={(e) => e.preventDefault()}
         >
           <input
             type="text"

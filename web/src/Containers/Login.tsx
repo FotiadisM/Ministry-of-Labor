@@ -18,6 +18,8 @@ export const Login: React.FC = () => {
   const userContext = useContext(UserContext);
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+    e.preventDefault();
+
     const res = LogInAPI(input.username, input.password);
 
     if (res != null) {

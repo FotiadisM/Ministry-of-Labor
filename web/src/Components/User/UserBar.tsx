@@ -50,13 +50,16 @@ const drops: DropdownProps[] = [
     title: "Τα στοιχεία μου",
     routes: [
       { text: "Το προφίλ μου", href: "/user/profile" },
-      { text: "Τα ένσημά μου", href: "/user/profile/stamps" },
+      { text: "Ο οργανισμός μου", href: "/user/organization" },
     ],
   },
   {
     id: 2,
     title: "Ο οργανισμός μου",
-    routes: [{ text: "hasdf", href: "asdf" }],
+    routes: [
+      { text: "Στοιχεία", href: "/organization/profile" },
+      { text: "Ανθρώπινο δυναμικό", href: "/organization/employees" },
+    ],
   },
   {
     id: 3,
@@ -92,9 +95,19 @@ export const UserBar: React.FC<UserBarProps> = () => {
     history.push("/");
   };
 
+  let isOwner = false;
+  if (userInfo.user !== null) {
+    if (userInfo.user.employmentInfo !== null) {
+      isOwner = userInfo.user.employmentInfo.isOwner;
+    }
+  }
+
   return (
     <ul className="nav px-3 shadow">
       {drops.map((d) => {
+        if (!isOwner && d.id === 2) {
+          return undefined;
+        }
         return (
           <Dropdown key={d.title} title={d.title} routes={d.routes} id={d.id} />
         );

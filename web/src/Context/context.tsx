@@ -1,7 +1,7 @@
 import { createContext } from "react";
 
 interface UserContextProps {
-  userInfo: UserInfo;
-  setUserInfo: React.Dispatch<React.SetStateAction<UserInfo>>;
+  userInfo: UserState;
+  setUserInfo: React.Dispatch<React.SetStateAction<UserState>>;
 }
 export const UserContext = createContext<UserContextProps | null>(null);

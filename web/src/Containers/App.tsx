@@ -6,10 +6,11 @@ import { UserContext } from "../Context/context";
 import { Contact } from "./Contact";
 import { Homepage } from "./Homepage";
 import { Login } from "./Login";
-import { User } from "./User";
+import { OrganizationRouter } from "./OrganizationRouter";
+import { UserRouter } from "./UserRouter";
 
 function App() {
-  const [userInfo, setUserInfo] = useState<UserInfo>({
+  const [userInfo, setUserInfo] = useState<UserState>({
     isLogedIn: false,
     user: null,
   });
@@ -34,16 +35,25 @@ function App() {
             <Login />
           </Middleware>
         </Route>
-        <Route path="/user">
-          <Middleware>
-            <User />
-          </Middleware>
-        </Route>
         <Route path="/covid">
           <Middleware>
             <CovidRouter />
           </Middleware>
         </Route>
+        {/* {userInfo.user !== null ? ( */}
+        <Route path="/user">
+          <Middleware>
+            <UserRouter />
+          </Middleware>
+        </Route>
+        {/* ) : null}
+        {userInfo.user !== null ? ( */}
+        <Route path="/organization">
+          <Middleware>
+            <OrganizationRouter />
+          </Middleware>
+        </Route>
+        {/* ) : null} */}
         <Route path="/">
           <h4 className="text-center">
             404, the page you are trying to reach doesn't exist

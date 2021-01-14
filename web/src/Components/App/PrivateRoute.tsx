@@ -20,3 +20,26 @@ export const PrivateRoute: React.FC<RouteProps> = ({
     </Route>
   );
 };
+
+export const PrivateEmployerRoute: React.FC<RouteProps> = ({
+  children,
+  location,
+  ...rest
+}) => {
+  const userContext = useContext(UserContext);
+  const { userInfo } = userContext!;
+
+  return (
+    <Route {...rest}>
+      {userInfo.user !== null ? (
+        userInfo.user.employmentInfo !== null ? (
+          userInfo.user.employmentInfo.isOwner ? (
+            children
+          ) : null
+        ) : null
+      ) : (
+        <Redirect to={{ pathname: "/login", state: { from: location } }} />
+      )}
+    </Route>
+  );
+};
