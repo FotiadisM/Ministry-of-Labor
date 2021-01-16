@@ -59,11 +59,17 @@ const DateCard: React.FC<DateCardProps> = ({ day, showModal }) => {
 
 interface NewDateProps {
   months: Month[];
+  margin: number[];
   showModal: () => void;
 }
 
-const NewDate: React.FC<NewDateProps> = ({ months, showModal }) => {
+const NewDate: React.FC<NewDateProps> = ({ months, margin, showModal }) => {
   const [curMonth, setCurMonth] = useState<number>(0);
+
+  var rows = [];
+  for (let i = 0; i < margin[curMonth] - 1; i++) {
+    rows.push(<div></div>);
+  }
 
   return (
     <div className="container pt-5">
@@ -94,10 +100,7 @@ const NewDate: React.FC<NewDateProps> = ({ months, showModal }) => {
         <div className="fw-bold">Τετάρτη</div>
         <div className="fw-bold">Πέμπτη</div>
         <div className="fw-bold">Παρασκευή</div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
+        {rows}
         {months[curMonth].days.map((d, i) => {
           return (
             <div key={i} className="col g-2">
@@ -112,11 +115,19 @@ const NewDate: React.FC<NewDateProps> = ({ months, showModal }) => {
 
 export const NewDateProvider: React.FC = () => {
   const [months, setMonths] = useState<Month[]>([]);
+  const [margin, setMaring] = useState<number[]>([]);
+
   useEffect(() => {
-    let data = getAvailableDates("asfd");
-    if (data !== null) {
-      setMonths(data);
-    }
+    const fetchData = async () => {
+      let data = await getAvailableDates("asfd");
+      if (data !== null) {
+        setMonths(data.months);
+        setMaring(data.days);
+        console.log(data);
+      }
+    };
+
+    fetchData();
   }, []);
 
   // const [selectedDate, setSelectedDate] = useState<{
@@ -132,7 +143,11 @@ export const NewDateProvider: React.FC = () => {
 
   return (
     <div>
-      {months.length ? <NewDate months={months} showModal={showModal} /> : ""}
+      {months.length ? (
+        <NewDate months={months} margin={margin} showModal={showModal} />
+      ) : (
+        ""
+      )}
       <button
         type="button"
         id="newDateModalBtn"

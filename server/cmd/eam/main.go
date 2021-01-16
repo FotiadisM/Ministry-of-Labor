@@ -11,6 +11,7 @@ import (
 	"github.com/FotiadisM/eam/server/pkg/calendar"
 	"github.com/FotiadisM/eam/server/pkg/organization"
 	"github.com/FotiadisM/eam/server/pkg/user"
+	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 )
 
@@ -25,11 +26,13 @@ func init() {
 }
 
 func main() {
-
-	fmt.Println(os.Getenv("GOPATH"))
-
 	m := mux.NewRouter()
-	r := repository{}
+
+	r, err := newRepository("mongodb://localhost:27017")
+	if err != nil {
+		log.Println("error connecting to db:", err)
+		return
+	}
 
 	usvc := user.NewService(r)
 	m.Methods("POST").Path("/login").HandlerFunc(usvc.LoginHandler)
@@ -40,7 +43,10 @@ func main() {
 
 	dsvc := calendar.NewService(r)
 	m.Methods("GET").Path("/dates/available").HandlerFunc(dsvc.GetAvailableDates)
-	m.Methods("POST").Path("/dates/bool/{id}").HandlerFunc(dsvc.BookDate)
+	m.Methods("POST").Path("/dates/book/{id}").HandlerFunc(dsvc.BookDate)
+
+	corsOrigin := handlers.AllowedOrigins([]string{"*"})
+	h := handlers.LoggingHandler(os.Stdout, handlers.CORS(corsOrigin)(m))
 
 	errc := make(chan error)
 
@@ -53,8 +59,9 @@ func main() {
 	}()
 
 	go func() {
-		log.Println("HTTP server listening on port:", httpAddr)
-		errc <- http.ListenAndServe(httpAddr, m)
+
+		log.Println("HTTP server listening on port", httpAddr)
+		errc <- http.ListenAndServe(httpAddr, h)
 	}()
 
 	log.Println("exit", <-errc)

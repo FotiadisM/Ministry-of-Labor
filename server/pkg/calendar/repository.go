@@ -6,22 +6,22 @@ import (
 
 // Hour ..
 type Hour struct {
-	ID     string `json:"id"`
-	Hour   string `json:"hour"`
-	Minute string `json:"minute"`
-	Active bool   `json:"active"`
+	ID     string `json:"id" bson:"_id"`
+	Hour   string `json:"hour" bson:"hour"`
+	Minute string `json:"minute" bson:"minute"`
+	Active bool   `json:"active" bson:"active"`
 }
 
 // Day ..
 type Day struct {
-	Date  string `json:"date"`
-	Hours []Hour `json:"hours"`
+	Date  string `json:"date" bson:"date"`
+	Hours []Hour `json:"hours" bson:"hours"`
 }
 
 // Month ..
 type Month struct {
-	Name string `json:"month"`
-	Days []Day  `json:"days"`
+	Name string `json:"name" bson:"name"`
+	Days []Day  `json:"days" bson:"days"`
 }
 
 // Notebook ..

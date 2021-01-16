@@ -1,5 +1,10 @@
 package calendar
 
+type getAvailableDatesResponse struct {
+	Months []Month `json:"months"`
+	Days   []int   `json:"days"`
+}
+
 // // GetAvailableDatesRequest ..
 // type GetAvailableDatesRequest struct{}
 

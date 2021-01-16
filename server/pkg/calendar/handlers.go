@@ -13,7 +13,6 @@ func (s Service) GetAvailableDates(w http.ResponseWriter, r *http.Request) {
 
 	m, err := s.getAvailableDates(ctx)
 	if err != nil {
-
 		httptransport.ErrorEncoder(w, err)
 		return
 	}
