@@ -69,7 +69,7 @@ const PageMenuOption: React.FC<PageMenuOptionProps> = ({ text }) => {
 
 export const Main: React.FC = () => {
   let history = useHistory();
-  const [page, setPage] = useState<number>(1);
+  const [, setPage] = useState<number>(1);
 
   const changePage = (id: string) => {
     const el = document.getElementsByClassName("pageEl");
@@ -97,6 +97,7 @@ export const Main: React.FC = () => {
         </button>
       </div>
       <div className="container-fluid mt-5 pe-4">
+        <h4 className="pb-3">Γρήγορη Πρόσβαση</h4>
         <ul className="nav nav-tabs fw-bold">
           <PageLink id="1" text="Εργαζόμενοι" changePage={changePage} />
           <PageLink id="2" text="Εργοδότες" changePage={changePage} />
