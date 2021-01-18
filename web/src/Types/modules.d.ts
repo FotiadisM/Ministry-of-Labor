@@ -4,6 +4,8 @@ interface Route {
   href: string;
 }
 
+type darkBlue = "#255c99";
+
 interface EmploymentInfo {
   employId: string;
   organizationID: string;

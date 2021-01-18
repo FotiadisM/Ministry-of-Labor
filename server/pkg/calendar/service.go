@@ -2,7 +2,6 @@ package calendar
 
 import (
 	"context"
-	"fmt"
 	"strconv"
 	"time"
 )
@@ -69,6 +68,5 @@ func findWeekDay(month, day string) (int, error) {
 	}
 
 	t := time.Date(2021, m, d, 12, 30, 0, 0, time.UTC)
-	fmt.Println("\n", t)
 	return int(t.Weekday()), nil
 }

@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { UserContext } from "../../Context/context";
 import { UserBar } from "../User/UserBar";
-import { Covid } from "./Covid";
+// import { Covid } from "./Covid";
 
 const NavItem: React.FC<Route> = ({ text, status, href }) => {
   return (
@@ -68,7 +68,7 @@ export const NavBar: React.FC<NavBarProps> = () => {
           </div>
         </div>
       </nav>
-      <Covid />
+      {/* <Covid /> */}
       {userContext!.userInfo.isLogedIn ? <UserBar /> : ""}
     </header>
   );

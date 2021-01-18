@@ -13,9 +13,12 @@ export const Covid: React.FC<Props> = () => {
   let history = useHistory();
 
   return (
-    <nav className="container-fluid bg-dark text-white">
+    <nav
+      className="container-fluid"
+      // style={{ backgroundColor: "green" }}
+    >
       <div className="row py-2 px-4">
-        <div className="col my-auto fw-bolder">
+        <div className="col my-auto fw-bolder tex">
           Μάθετε τα τελευταία νέα για τον COVID-19
         </div>
         {routes.map((r) => {

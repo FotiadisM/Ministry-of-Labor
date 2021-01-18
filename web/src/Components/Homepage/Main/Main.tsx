@@ -4,7 +4,10 @@ import { useHistory } from "react-router-dom";
 const SearchBar: React.FC = () => {
   const [text, setText] = useState<string>("");
   return (
-    <div className="py-4 px-5 bg-primary shadow-lg rounded-start">
+    <div
+      className="py-4 px-5 bg-primary shadow-lg"
+      style={{ borderRadius: "10px" }}
+    >
       <div className="mx-5 d-flex justify-content-between">
         <h4 className="text-white ms-5 fw-bolder my-auto">
           Βρείτε εύκολα και γρήγορα αυτό που ψάχνετε
@@ -12,10 +15,12 @@ const SearchBar: React.FC = () => {
         <form
           className="bg-white me-5 shadow-lg rounded-pill d-flex"
           style={{ width: "34%" }}
+          id="searchBarForm"
           onSubmit={(e) => e.preventDefault()}
         >
           <input
             type="text"
+            id="searchBar"
             className="form-control border-0"
             value={text}
             onChange={(e) => setText(e.target.value)}
@@ -84,7 +89,28 @@ export const Main: React.FC = () => {
   return (
     <div className="ps-5">
       <SearchBar />
-      <div className="mt-5 d-flex justify-content-center">
+      <div
+        className="mt-5 py-4 text-light d-flex align-items-center"
+        style={{ backgroundColor: "#255c99", borderRadius: "10px" }}
+      >
+        <h4 className="fw-bold ps-4 mb-0 me-5">
+          Μάθετε τα τελευταία νέα για τον COVID-19
+        </h4>
+        <button
+          className="btn btn-primary me-2"
+          onClick={() => history.push("/covid/employees")}
+        >
+          Covid και Εργαζόμενοι
+        </button>
+        <button
+          className="btn btn-primary"
+          onClick={() => history.push("/covid/employer")}
+        >
+          Covid και Εργοδότες
+        </button>
+      </div>
+      {/* BOOK DATE */}
+      <div className="mt-5 d-flex ">
         <h4 className="m-0 my-auto me-5">
           Κλείστε ηλεκτρονικά ραντεβού και επισκεφθείτε το Υπουργείο
         </h4>
@@ -96,9 +122,10 @@ export const Main: React.FC = () => {
           <i className="bi bi-arrow-right ms-2 fs-4"></i>
         </button>
       </div>
+      {/* BOOK DATE -- END */}
       <div className="container-fluid mt-5 pe-4">
-        <h4 className="pb-3">Γρήγορη Πρόσβαση</h4>
-        <ul className="nav nav-tabs fw-bold">
+        <h5 className="pb-3">Γρήγορη Πρόσβαση</h5>
+        <ul className="nav nav-tabs fw-bold" style={{ fontSize: "1.1rem" }}>
           <PageLink id="1" text="Εργαζόμενοι" changePage={changePage} />
           <PageLink id="2" text="Εργοδότες" changePage={changePage} />
           <PageLink id="3" text="Άνεργοι" changePage={changePage} />
@@ -106,10 +133,10 @@ export const Main: React.FC = () => {
         </ul>
         <div className="mt-5 d-flex justify-content-around">
           <div className="" style={{ width: "45%" }}>
-            <h4 className="fw-bold">Πληροφορίες</h4>
+            <h4 className="fw-bold">Υπηρεσίες</h4>
             <div
-              className="border shadow-lg bg-white p-4 ps-5"
-              style={{ borderRadius: "5%" }}
+              className="shadow-lg bg-white p-4 ps-5"
+              style={{ borderRadius: "24px" }}
             >
               <div className="row row-cols-2 g-2">
                 <PageMenuOption text="asdsfg" />
@@ -122,10 +149,10 @@ export const Main: React.FC = () => {
             </div>
           </div>
           <div className="" style={{ width: "45%" }}>
-            <h4 className="fw-bold">Υπηρεσίες</h4>
+            <h4 className="fw-bold">Πληροφορίες</h4>
             <div
-              className="border shadow-lg bg-white p-4 ps-5"
-              style={{ borderRadius: "5%" }}
+              className="shadow-lg bg-white p-4 ps-5"
+              style={{ borderRadius: "24px" }}
             >
               <div className="row row-cols-2 g-2">
                 <PageMenuOption text="asdsfg" />
@@ -138,15 +165,6 @@ export const Main: React.FC = () => {
             </div>
           </div>
         </div>
-
-        {/* <div className="row g-0 justify-content-around px-4">
-          <div className="col" style={{ maxWidth: "42%" }}>
-            <NewsList title="Δελτία τύπου" />
-          </div>
-          <div className="col" style={{ maxWidth: "42%" }}>
-            <NewsList title="Νέα - Ανακοινώσεις" />
-          </div>
-        </div> */}
       </div>
     </div>
   );

@@ -6,10 +6,11 @@ import { UserContext } from "../../Context/context";
 interface DropdownProps {
   title: string;
   routes: Route[];
+  routes2: Route[];
   id: number;
 }
 
-const Dropdown: React.FC<DropdownProps> = ({ title, routes, id }) => {
+const Dropdown: React.FC<DropdownProps> = ({ title, routes, routes2, id }) => {
   return (
     <li className="nav-item dropdown">
       <div
@@ -39,6 +40,27 @@ const Dropdown: React.FC<DropdownProps> = ({ title, routes, id }) => {
             </li>
           );
         })}
+        {routes2.length !== 0 ? (
+          <li>
+            <hr className="mx-4" />
+          </li>
+        ) : null}
+        {routes2.length !== 0
+          ? routes2.map((r) => {
+              return (
+                <li key={r.text}>
+                  <NavLink
+                    className="dropdown-item"
+                    to={r.href}
+                    activeClassName="active"
+                    exact
+                  >
+                    {r.text}
+                  </NavLink>
+                </li>
+              );
+            })
+          : null}
       </ul>
     </li>
   );
@@ -52,6 +74,7 @@ const drops: DropdownProps[] = [
       { text: "Το προφίλ μου", href: "/user/profile" },
       { text: "Ο οργανισμός μου", href: "/user/organization" },
     ],
+    routes2: [],
   },
   {
     id: 2,
@@ -60,6 +83,7 @@ const drops: DropdownProps[] = [
       { text: "Στοιχεία", href: "/organization/profile" },
       { text: "Ανθρώπινο δυναμικό", href: "/organization/employees" },
     ],
+    routes2: [{ text: "asdf", href: "asdf" }],
   },
   {
     id: 3,
@@ -68,16 +92,19 @@ const drops: DropdownProps[] = [
       { text: "Νέο ραντεβού", href: "/user/dates/new" },
       { text: "Τα ραντεβού μου", href: "/user/dates" },
     ],
+    routes2: [],
   },
   {
     id: 4,
     title: "Αίτηση για Πιστoποιητικά",
     routes: [{ text: "hasdf", href: "asdf" }],
+    routes2: [],
   },
   {
     id: 5,
     title: "Covid-19",
     routes: [{ text: "hasdf", href: "asdf" }],
+    routes2: [],
   },
 ];
 
@@ -108,9 +135,7 @@ export const UserBar: React.FC<UserBarProps> = () => {
         if (!isOwner && d.id === 2) {
           return undefined;
         }
-        return (
-          <Dropdown key={d.title} title={d.title} routes={d.routes} id={d.id} />
-        );
+        return <Dropdown key={d.title} {...d} />;
       })}
       <div className="ms-auto">
         <li className="nav-item dropdown">

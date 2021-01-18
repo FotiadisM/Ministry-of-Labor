@@ -2,6 +2,7 @@ package httptransport
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 )
 
@@ -49,6 +50,7 @@ type errorWrapper struct {
 func ErrorEncoder(w http.ResponseWriter, err error) {
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	body, _ := json.Marshal(errorWrapper{Error: err.Error()})
+	fmt.Printf("Err: %v - - ", err)
 
 	if headerer, ok := err.(Headerer); ok {
 		for k := range headerer.Headers() {

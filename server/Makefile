@@ -3,11 +3,16 @@ EXEC2=populate
 
 BDIR=bin
 
+all: server populate
+
 server:
-	go build -o ./$(BDIR)/$(EXEC1) ./cmd/eam/main.go ./cmd/eam/repository.go
+	go build -o ./$(BDIR)/$(EXEC1) ./cmd/eam
 
 populate:
-	go build -o ./$(BDIR)/$(EXEC2) ./cmd/populate/main.go ./cmd/populate/repository.go
+	go build -o ./$(BDIR)/$(EXEC2) ./cmd/populate
+
+build:
+	CGO_ENABLED=0 go build -o ./bin/${EXEC1} ./cmd/eam
 
 clean:
 	rm ./$(BDIR)/$(EXEC1)
