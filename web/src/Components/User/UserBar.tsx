@@ -76,8 +76,12 @@ const drops: DropdownProps[] = [
     ],
     routes2: [
       {
-        text: "Φόρμα άδειας ειδικού σκοπόυ",
-        href: "/user/forms/timeof/special",
+        text: "Δήλωση άδειας",
+        href: "/user/forms/timeOff",
+      },
+      {
+        text: "Δήλωση άδειας ειδικού σκοπόυ",
+        href: "/user/forms/timeOff/special",
       },
     ],
   },
@@ -129,8 +133,7 @@ const drops: DropdownProps[] = [
 interface UserBarProps {}
 
 export const UserBar: React.FC<UserBarProps> = () => {
-  const userContext = useContext(UserContext);
-  const { userInfo, setUserInfo } = userContext!;
+  const { userInfo, setUserInfo } = useContext(UserContext)!;
 
   let history = useHistory();
   const LogOut = () => {

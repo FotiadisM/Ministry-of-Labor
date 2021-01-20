@@ -14,11 +14,10 @@ function App() {
     isLogedIn: false,
     user: null,
   });
+  const value = { userInfo: userInfo, setUserInfo: setUserInfo };
 
   return (
-    <UserContext.Provider
-      value={{ userInfo: userInfo, setUserInfo: setUserInfo }}
-    >
+    <UserContext.Provider value={value}>
       <Switch>
         <Route exact path="/">
           <Middleware>

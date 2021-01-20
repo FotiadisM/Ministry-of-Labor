@@ -120,7 +120,7 @@ const boxes: LinksBoxProps[] = [
   // },
   {
     // title: "Πληροφορίες για:",
-    title: "",
+    title: "Πληροφορίες για",
     boxes: [
       {
         title: "Προσκλήσεις",

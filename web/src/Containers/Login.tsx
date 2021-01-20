@@ -15,17 +15,27 @@ export const Login: React.FC = () => {
     password: "",
   });
 
-  const userContext = useContext(UserContext);
+  const { setUserInfo } = useContext(UserContext)!;
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+    const f = document.getElementById("loginForm") as HTMLFormElement;
+
     e.preventDefault();
+    e.stopPropagation();
+    if (f.checkValidity()) {
+      const fetchData = async () => {
+        let res = await LogInAPI(input.username, input.password);
+        if (res !== null) {
+          setUserInfo({ isLogedIn: true, user: res.user });
+          history.push(from);
+        }
+      };
 
-    const res = LogInAPI(input.username, input.password);
-
-    if (res != null) {
-      userContext!.setUserInfo(res);
-      history.push(from);
+      fetchData();
     }
+
+    f.classList.add("was-validated");
+    // e.preventDefault();
   };
 
   return (
@@ -36,7 +46,12 @@ export const Login: React.FC = () => {
           className="border p-4 shadow mx-auto"
           style={{ borderRadius: "1.6rem" }}
         >
-          <form onSubmit={(e) => onSubmit(e)}>
+          <form
+            id="loginForm"
+            className="needs-validation"
+            onSubmit={(e) => onSubmit(e)}
+            noValidate
+          >
             <label htmlFor="usernameLogin" className="form-label">
               Όνομα χρήστη
             </label>
@@ -47,6 +62,7 @@ export const Login: React.FC = () => {
               aria-describedby="usernameHelp"
               autoComplete="username"
               value={input.username}
+              required
               onChange={(e) => {
                 setInput((i) => {
                   return {
@@ -65,6 +81,7 @@ export const Login: React.FC = () => {
               id="passwordLogin"
               autoComplete="password"
               value={input.password}
+              required
               onChange={(e) => {
                 setInput((i) => {
                   return {

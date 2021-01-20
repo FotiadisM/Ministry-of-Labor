@@ -24,16 +24,48 @@ export const OrganizationRouter: React.FC = () => {
   useEffect(() => {
     if (employmentInfo !== null) {
       if (employmentInfo.isOwner) {
-        const org = getOrganization(employmentInfo.employId);
-        setOrganization(org);
+        getOrganization(employmentInfo.organizationID).then((o) => {
+          if (o != null) {
+            setOrganization(o);
+          }
+        });
       }
     }
   }, [employmentInfo]);
 
   // onSubmits
-  const onSuspensionSubmit = (info: Info) => {};
+  const onSuspensionSubmit = (
+    e: React.FormEvent<HTMLFormElement>,
+    info: Info
+  ) => {
+    const f = document.getElementById("orgEmployForm") as HTMLFormElement;
 
-  const onRemoteSubmit = (info: Info) => {};
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (f.checkValidity()) {
+      document.getElementById("orgFormModalBtn")!.click();
+    }
+
+    f.classList.add("was-validated");
+  };
+
+  const onRemoteSubmit = (e: React.FormEvent<HTMLFormElement>, info: Info) => {
+    const f = document.getElementById("orgEmployForm") as HTMLFormElement;
+
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (f.checkValidity()) {
+      document.getElementById("orgFormModalBtn")!.click();
+    }
+
+    f.classList.add("was-validated");
+  };
+
+  if (organization === null) {
+    return null;
+  }
 
   return (
     <Switch>

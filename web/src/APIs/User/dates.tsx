@@ -17,7 +17,6 @@ export const getAvailableDates = async (
 ): Promise<{ months: Month[]; days: number[] } | null> => {
   try {
     const res = await fetch("http://localhost:8080/dates/available");
-    console.log(res);
     if (res.status === 200) {
       return res.json();
     }

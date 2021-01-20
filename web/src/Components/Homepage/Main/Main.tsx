@@ -9,14 +9,16 @@ const SearchBar: React.FC = () => {
       style={{ borderRadius: "10px" }}
     >
       <div className="mx-5 d-flex justify-content-between">
-        <h4 className="text-white ms-5 fw-bolder my-auto">
+        <h2 className="text-white ms-5 fw-bolder my-auto fs-4">
           Βρείτε εύκολα και γρήγορα αυτό που ψάχνετε
-        </h4>
+        </h2>
         <form
           className="bg-white me-5 shadow-lg rounded-pill d-flex"
           style={{ width: "34%" }}
           id="searchBarForm"
           onSubmit={(e) => e.preventDefault()}
+          aria-label="Φόρμα αναζήτησης"
+          title="Φόρμα αναζήτησης"
         >
           <input
             type="text"
@@ -25,6 +27,7 @@ const SearchBar: React.FC = () => {
             value={text}
             onChange={(e) => setText(e.target.value)}
             placeholder="Πληκτρολογήστε εδώ για αναζήτηση"
+            aria-label="Πληκτρολογείστε εδω για αναζήτηση"
           />
           <div
             className="bg-warning rounded-pill"
@@ -93,9 +96,9 @@ export const Main: React.FC = () => {
         className="mt-5 py-4 text-light d-flex align-items-center"
         style={{ backgroundColor: "#255c99", borderRadius: "10px" }}
       >
-        <h4 className="fw-bold ps-4 mb-0 me-5">
+        <h3 className="fw-bold ps-4 mb-0 me-5 fs-4">
           Μάθετε τα τελευταία νέα για τον COVID-19
-        </h4>
+        </h3>
         <button
           className="btn btn-primary me-2"
           onClick={() => history.push("/covid/employees")}

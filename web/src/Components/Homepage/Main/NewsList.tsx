@@ -29,6 +29,7 @@ const NewsItem: React.FC<NewsItemProps> = ({ date, text }) => {
             className="btn btn-primary my-auto"
             data-bs-toggle="modal"
             data-bs-target="#modalPopUp"
+            aria-label="Διαβάστε όλο το κέιμενο παντώντας εδώ"
           >
             <i
               className="bi bi-arrow-right-short m-auto"

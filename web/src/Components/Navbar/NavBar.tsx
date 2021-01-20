@@ -23,13 +23,19 @@ const routes: Route[] = [
   { text: "Αρχική", href: "/", status: "active" },
   // { text: "Σχετικά με εμάς", href: "/about", status: "" },
   { text: "Επικοινωνία", href: "/contact", status: "" },
-  { text: "Σύνδεση μέσω TaxisNet", href: "/login", status: "" },
 ];
+
+const loginRoute: Route = {
+  text: "Σύνδεση μέσω TaxisNet",
+  href: "/login",
+  status: "",
+};
 
 interface NavBarProps {}
 
 export const NavBar: React.FC<NavBarProps> = () => {
   const userContext = useContext(UserContext);
+  const { userInfo } = userContext!;
 
   return (
     <header>
@@ -38,9 +44,9 @@ export const NavBar: React.FC<NavBarProps> = () => {
         style={{ backgroundColor: "#f8f9fa" }}
       >
         <div className="container-fluid">
-          <div className="navbar-brand fw-bold">
+          <h1 className="navbar-brand fw-bold">
             Υπουργείο Εργασίας & Κοινωνικών Υποθέσεων
-          </div>
+          </h1>
           <button
             className="navbar-toggler"
             type="button"
@@ -64,12 +70,13 @@ export const NavBar: React.FC<NavBarProps> = () => {
                   />
                 );
               })}
+              {!userInfo.isLogedIn ? <NavItem {...loginRoute} /> : null}
             </ul>
           </div>
         </div>
       </nav>
       {/* <Covid /> */}
-      {userContext!.userInfo.isLogedIn ? <UserBar /> : ""}
+      {userInfo.isLogedIn ? <UserBar /> : ""}
     </header>
   );
 };

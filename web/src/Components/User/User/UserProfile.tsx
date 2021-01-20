@@ -31,6 +31,7 @@ export const InfoField: React.FC<InfoFieldProps> = ({
           onChange(e.target.value);
         }}
         readOnly={readOnly}
+        required
       />
     </div>
   );
@@ -91,7 +92,7 @@ export const UserProfile: React.FC = () => {
               }}
             />
             <InfoField
-              text="ΑΦΜ"
+              text="Α.Φ.Μ."
               value={userInfo.user!.AFM}
               readOnly={readOnly}
               onChange={(v) => {
@@ -109,6 +110,17 @@ export const UserProfile: React.FC = () => {
                 setUserInfo((u) => ({
                   ...u,
                   user: { ...u.user!, born: v },
+                }));
+              }}
+            />
+            <InfoField
+              text="A.M.K.A."
+              value={userInfo.user!.AMKA}
+              readOnly={readOnly}
+              onChange={(v) => {
+                setUserInfo((u) => ({
+                  ...u,
+                  user: { ...u.user!, AMKA: v },
                 }));
               }}
             />

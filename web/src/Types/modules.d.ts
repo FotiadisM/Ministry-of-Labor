@@ -17,6 +17,7 @@ interface User {
   employmentInfo: EmploymentInfo | null;
   email: string;
   AFM: string;
+  AMKA: string;
   firstName: string;
   lastName: string;
   born: string;
@@ -33,19 +34,18 @@ interface UserState {
   access_token?: string;
 }
 
-// const enum Status {
-//   NORMAL = 1,
-//   SUSPENSION = 2,
-//   VACATION = 3,
-//   REMOTE = 4,
-// }
-
-type Status = "NORMAL" | "SUSPENSION" | "VACATION" | "REMOTE";
+type Status =
+  | "NORMAL"
+  | "SUSPENSION"
+  | "VACATION"
+  | "REMOTE"
+  | "SPECIAL_VACATION";
 
 interface Employ {
   id: string;
   // position: string;
   userId: string;
+  orgId: string;
   joined: string;
   salaryMonth: number;
   timeoffsYear: number;

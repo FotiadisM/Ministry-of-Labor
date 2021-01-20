@@ -22,6 +22,9 @@ const (
 
 	// ErrNotAuth ..
 	ErrNotAuth = "Not authorized"
+
+	// ErrInternal ..
+	ErrInternal = "Internal Error"
 )
 
 type repository struct {
@@ -66,6 +69,7 @@ func (r repository) GetLogin(ctx context.Context, username, password string) (id
 		if err == mongo.ErrNoDocuments {
 			return "", errors.New(ErrNotFound)
 		}
+		return "", errors.New(ErrInternal)
 	}
 
 	if l.Password != password {
@@ -88,6 +92,7 @@ func (r repository) GetUser(ctx context.Context, id string) (u *user.User, err e
 		if err == mongo.ErrNoDocuments {
 			return nil, errors.New(ErrNotFound)
 		}
+		return nil, errors.New(ErrInternal)
 	}
 
 	return
@@ -96,6 +101,62 @@ func (r repository) GetUser(ctx context.Context, id string) (u *user.User, err e
 // ORGANIZATION
 
 func (r repository) GetOrganization(ctx context.Context, id string) (o *organization.Organization, err error) {
+
+	db := r.client.Database("eam")
+
+	ctx, cancel := context.WithTimeout(ctx, 2*time.Second)
+	defer cancel()
+
+	o = &organization.Organization{}
+
+	err = db.Collection("organizations").FindOne(ctx, bson.D{bson.E{Key: "_id", Value: id}}).Decode(o)
+	if err != nil {
+		if err == mongo.ErrNoDocuments {
+			return nil, errors.New(ErrNotFound)
+		}
+		return nil, fmt.Errorf("db.Collection('organizations').FindOne() %w", err)
+	}
+
+	return
+}
+
+func (r repository) GetOrganizationEmployees(ctx context.Context, id string) (es []*organization.Employ, err error) {
+	db := r.client.Database("eam")
+
+	ctx1, cancel1 := context.WithTimeout(ctx, 2*time.Second)
+	defer cancel1()
+
+	cursor, err := db.Collection("employees").Find(ctx1, bson.D{bson.E{Key: "orgId", Value: id}})
+	if err != nil {
+		return nil, fmt.Errorf("Find(): %w", err)
+	}
+
+	ctx2, cancel2 := context.WithTimeout(ctx, 2*time.Second)
+	defer cancel2()
+
+	es = []*organization.Employ{}
+	err = cursor.All(ctx2, &es)
+	if err != nil {
+		return nil, fmt.Errorf("curson.All(): %w", err)
+	}
+
+	return
+}
+
+func (r repository) GetEmployByUserID(ctx context.Context, id string) (e *organization.Employ, err error) {
+	db := r.client.Database("eam")
+
+	ctx, cancel := context.WithTimeout(ctx, 2*time.Second)
+	defer cancel()
+
+	e = &organization.Employ{}
+	err = db.Collection("employees").FindOne(ctx, bson.D{bson.E{Key: "userId", Value: id}}).Decode(e)
+	if err != nil {
+		if err == mongo.ErrNoDocuments {
+			return nil, errors.New(ErrNotFound)
+		}
+		return nil, fmt.Errorf("db.Collection('employees').FindOne() %w", err)
+	}
 	return
 }
 

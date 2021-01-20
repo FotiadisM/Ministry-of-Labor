@@ -22,3 +22,19 @@ func (s Service) GetOrganization(w http.ResponseWriter, r *http.Request) {
 
 	httptransport.EncodeJSONResponse(w, o)
 }
+
+// GetEmployByUserID .
+func (s Service) GetEmployByUserID(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	id := vars["id"]
+
+	ctx := r.Context()
+
+	e, err := s.getEmployByUserID(ctx, id)
+	if err != nil {
+		httptransport.ErrorEncoder(w, err)
+		return
+	}
+
+	httptransport.EncodeJSONResponse(w, e)
+}

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getUser } from "../../APIs/auth";
+import { getStatus, getUser } from "../../APIs/auth";
 import { useHovered } from "../../Hooks/hooks";
 import { InfoField } from "../User/User/UserProfile";
 
@@ -12,13 +12,14 @@ const TableEntry: React.FC<TableEntryProps> = ({ employ, setEmploy }) => {
   const [hovered, setHovered] = useHovered();
 
   const [user, setUser] = useState<User | null>(null);
-  const { id } = employ;
+  const { userId } = employ;
   useEffect(() => {
-    const u = getUser(id);
-    if (u !== null) {
-      setUser(u);
-    }
-  }, [id]);
+    getUser(userId).then((u) => {
+      if (u !== null) {
+        setUser(u);
+      }
+    });
+  }, [userId]);
 
   if (user === null) {
     return null;
@@ -60,19 +61,20 @@ interface EmployProfileProps {
 const EmployProfile: React.FC<EmployProfileProps> = ({ employ }) => {
   const [user, setUser] = useState<User | null>(null);
 
-  var id: string = "";
+  var userId: string = "";
   if (employ !== null) {
-    id = employ.id;
+    userId = employ.userId;
   }
 
   useEffect(() => {
-    if (id !== "") {
-      const u = getUser(id);
-      if (u !== null) {
-        setUser(u);
-      }
+    if (userId !== "") {
+      getUser(userId).then((u) => {
+        if (u !== null) {
+          setUser(u);
+        }
+      });
     }
-  }, [id]);
+  }, [userId]);
 
   if (user === null || employ == null) {
     return null;
@@ -117,8 +119,41 @@ const EmployProfile: React.FC<EmployProfileProps> = ({ employ }) => {
           readOnly={true}
           onChange={(v) => {}}
         />
+        <InfoField
+          text="Κατάσταση"
+          value={getStatus(employ.status)}
+          readOnly={true}
+          onChange={() => {}}
+        />
+        {employ.status === "NORMAL" ? null : (
+          <div>
+            <div className="col d-flex">
+              <div>
+                <p>Από:</p>
+                <input
+                  type="text"
+                  className="form-control"
+                  readOnly={true}
+                  value=""
+                />
+              </div>
+              <div>
+                <p>Μέχρι:</p>
+                <input
+                  type="text"
+                  className="form-control"
+                  readOnly={true}
+                  value=""
+                />
+              </div>
+            </div>
+            <button className="btn btn-primary mt-4">
+              Κατάργηση {getStatus(employ.status)}ς
+            </button>
+          </div>
+        )}
       </div>
-      <div className="d-flex justify-content-end">
+      {/* <div className="d-flex justify-content-end">
         <button
           className="btn btn-primary mt-4"
           // onClick={() => {
@@ -130,7 +165,7 @@ const EmployProfile: React.FC<EmployProfileProps> = ({ employ }) => {
         >
           Tροποποίηση Στοιχείων
         </button>
-      </div>
+      </div> */}
     </div>
   );
 };
@@ -192,7 +227,7 @@ export const OrganizationEmployees: React.FC<OrganizationEmploysProps> = ({
             </tbody>
           </table>
         </div>
-        <div className="border rounded shadow ms-4" style={{ maxWidth: "30%" }}>
+        <div className="border rounded shadow ms-4" style={{ maxWidth: "40%" }}>
           <EmployProfile employ={employ} />
         </div>
       </div>

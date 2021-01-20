@@ -31,7 +31,7 @@ export const Footer: React.FC = () => {
               className="bg-primary"
               style={{ height: "5px", opacity: "initial" }}
             />
-            <h5>Υπουργείο Εργασίας & Κοινωνικών Υποθέσεων</h5>
+            <h4 className="fs-5">Υπουργείο Εργασίας & Κοινωνικών Υποθέσεων</h4>
           </div>
 
           <div className="col">

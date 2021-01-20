@@ -5,6 +5,7 @@ import { Calendar } from "../Components/User/Dates/Calendar";
 import { NewDateProvider } from "../Components/User/Dates/NewDate";
 import { UserOrganization } from "../Components/User/Organization/UserOrganization";
 import { UserProfile } from "../Components/User/User/UserProfile";
+import { UserFormTimeOff } from "../Components/User/User/UserFormTimOff";
 import { UserContext } from "../Context/context";
 
 export const UserRouter: React.FC = () => {
@@ -17,6 +18,11 @@ export const UserRouter: React.FC = () => {
       isEmployd = true;
     }
   }
+
+  const onTakeOff = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    document.getElementById("userFormModalBtn")!.click();
+  };
 
   return (
     <Switch>
@@ -31,6 +37,19 @@ export const UserRouter: React.FC = () => {
       </PrivateRoute>
       <PrivateRoute exact path="/user/organization">
         {isEmployd ? <UserOrganization /> : null}
+      </PrivateRoute>
+      <PrivateRoute exact path="/user/forms/timeOff">
+        {isEmployd ? (
+          <UserFormTimeOff title="Δήλωση άδειας" onSubmit={onTakeOff} />
+        ) : null}
+      </PrivateRoute>
+      <PrivateRoute exact path="/user/forms/timeOff/special">
+        {isEmployd ? (
+          <UserFormTimeOff
+            title="Δήλωση άδειας ειδικού σκοπού"
+            onSubmit={onTakeOff}
+          />
+        ) : null}
       </PrivateRoute>
       <Route path="/user">
         <div className="text-center fw-bold fs-4">404</div>

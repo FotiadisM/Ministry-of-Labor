@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import { getStatus } from "../../../APIs/auth";
 import {
   getEmployByUserID,
   getOrganization,
@@ -47,10 +48,11 @@ interface ButtonProps {
 
 const Button: React.FC<ButtonProps> = ({ text, textBtn, onClick }) => {
   return (
-    <div className="d-flex justify-content-between align-items-center">
-      <p className="mb-0">{text}</p>
+    <div className="d-flex justify-content-between align-items-center mb-4">
+      <p className="mb-0 fw-bold">{text}</p>
       <button className="btn btn-primary" onClick={onClick}>
-        {textBtn}
+        Δήλωση
+        <i className="bi bi-arrow-right ps-2"></i>
       </button>
     </div>
   );
@@ -65,15 +67,17 @@ export const UserOrganization: React.FC = () => {
   const { id } = userInfo.user!;
   const { organizationID } = userInfo.user!.employmentInfo!;
   useEffect(() => {
-    const res = getEmployByUserID(id);
-    if (res != null) {
-      setEmploy(res);
-    }
+    getEmployByUserID(id).then((e) => {
+      if (e != null) {
+        setEmploy(e);
+      }
+    });
 
-    const res2 = getOrganization(organizationID);
-    if (res2 !== null) {
-      setOrg(res2);
-    }
+    getOrganization(organizationID).then((o) => {
+      if (o !== null) {
+        setOrg(o);
+      }
+    });
   }, [id, organizationID]);
 
   if (employ === null || org === null) {
@@ -86,17 +90,42 @@ export const UserOrganization: React.FC = () => {
         <div className="flex-grow-1 me-5">
           <Header title="Προσωπικές πληροφορίες" logo="bi-person-fill" />
           <div>
-            <UserOrganizationInfoField text="Μπήκα" value={employ.joined} />
+            <UserOrganizationInfoField
+              text="Ημερομηνία πρόσληψης"
+              value={employ.joined}
+            />
             <UserOrganizationInfoField
               text="Μηνιαίος μισθός"
               value={employ.salaryMonth.toString()}
             />
             <UserOrganizationInfoField
               text="Εργασιακή κατάσταση"
-              value={employ.status}
+              value={getStatus(employ.status)}
             />
+            {employ.status === "NORMAL" ? null : (
+              <div className="col d-flex me-5 mb-5 ms-3  justify-content-around">
+                <div className="d-flex align-items-center">
+                  <p className="mb-0 me-4">Από:</p>
+                  <input
+                    type="text"
+                    className="form-control"
+                    readOnly={true}
+                    value=""
+                  />
+                </div>
+                <div className="d-flex align-items-center">
+                  <p className="mb-0 me-4">Μέχρι:</p>
+                  <input
+                    type="text"
+                    className="form-control"
+                    readOnly={true}
+                    value=""
+                  />
+                </div>
+              </div>
+            )}
             <UserOrganizationInfoField
-              text="Συόλικές άδειες κάθε χρόνο"
+              text="Δικαιούμενες μέρες αδείας κατ' έτος"
               value={employ.timeoffsYear.toString()}
             />
             <UserOrganizationInfoField
@@ -108,9 +137,21 @@ export const UserOrganization: React.FC = () => {
         <div className="d-flex flex-column justify-content-between">
           <div className="mb-5">
             <Header title="Ενέργειες" logo="bi-gear" />
-            <Button text="agffsg" textBtn="sdfhasd" onClick={() => {}} />
-            <Button text="asgfasdfg" textBtn="agfs" onClick={() => {}} />
-            <Button text="asdf" textBtn="gasffg" onClick={() => {}} />
+            <Button
+              text="Υποβολή δήλωσης άδειας"
+              textBtn="sdfhasd"
+              onClick={() => {}}
+            />
+            <Button
+              text="Υποβολή δήλωσης άδειας ειδικού σκοπού"
+              textBtn="agfs"
+              onClick={() => {}}
+            />
+            <Button
+              text="Εκτύπωη άδειας μετακίνησης"
+              textBtn="gasffg"
+              onClick={() => {}}
+            />
           </div>
           <div>
             <Header title="Στοιχεία οργανισμού" logo="bi-building" />

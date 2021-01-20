@@ -41,17 +41,20 @@ func main() {
 
 	usvc := user.NewService(r)
 	m.Methods("POST").Path("/login").HandlerFunc(usvc.LoginHandler)
-	m.Methods("GET").Path("/user/{id}").HandlerFunc(usvc.GetUser)
+	m.Methods("GET").Path("/users/{id}").HandlerFunc(usvc.GetUser)
 
 	osvc := organization.NewService(r)
-	m.Methods("GET").Path("/organization/{id}").HandlerFunc(osvc.GetOrganization)
+	m.Methods("GET").Path("/organizations/{id}").HandlerFunc(osvc.GetOrganization)
+	m.Methods("GET").Path("/employees/userId/{id}").HandlerFunc(osvc.GetEmployByUserID)
 
 	dsvc := calendar.NewService(r)
 	m.Methods("GET").Path("/dates/available").HandlerFunc(dsvc.GetAvailableDates)
 	m.Methods("POST").Path("/dates/book/{id}").HandlerFunc(dsvc.BookDate)
 
 	corsOrigin := handlers.AllowedOrigins([]string{"*"})
-	h := handlers.LoggingHandler(os.Stdout, handlers.CORS(corsOrigin)(m))
+	corsHeaders := handlers.AllowedHeaders([]string{"X-Requested-With", "Content-Type"})
+	methodsOK := handlers.AllowedMethods([]string{"GET", "POST", "OPTIONS", "DELETE", "PUT"})
+	h := handlers.LoggingHandler(os.Stdout, handlers.CORS(corsOrigin, corsHeaders, methodsOK)(m))
 
 	errc := make(chan error)
 
