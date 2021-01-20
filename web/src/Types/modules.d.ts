@@ -48,6 +48,8 @@ interface Employ {
   userId: string;
   joined: string;
   salaryMonth: number;
+  timeoffsYear: number;
+  timeoffsTaken: number;
   status: Status;
 }
 

@@ -74,7 +74,12 @@ const drops: DropdownProps[] = [
       { text: "Το προφίλ μου", href: "/user/profile" },
       { text: "Ο οργανισμός μου", href: "/user/organization" },
     ],
-    routes2: [],
+    routes2: [
+      {
+        text: "Φόρμα άδειας ειδικού σκοπόυ",
+        href: "/user/forms/timeof/special",
+      },
+    ],
   },
   {
     id: 2,
@@ -83,7 +88,16 @@ const drops: DropdownProps[] = [
       { text: "Στοιχεία", href: "/organization/profile" },
       { text: "Ανθρώπινο δυναμικό", href: "/organization/employees" },
     ],
-    routes2: [{ text: "asdf", href: "asdf" }],
+    routes2: [
+      {
+        text: "Φόρμα αναστολής σύμβασης εργασίας",
+        href: "/organization/employees/forms/suspension",
+      },
+      {
+        text: "Φόρμα δήλωσης τηλεργασίας",
+        href: "/organization/employees/forms/remote",
+      },
+    ],
   },
   {
     id: 3,
@@ -97,15 +111,19 @@ const drops: DropdownProps[] = [
   {
     id: 4,
     title: "Αίτηση για Πιστoποιητικά",
-    routes: [{ text: "hasdf", href: "asdf" }],
+    routes: [
+      { text: "Κάποια αίτηση 1", href: "asdf" },
+      { text: "Κάποια αίτηση 2", href: "asdf" },
+      { text: "Κάποια αίτηση 3", href: "asdf" },
+    ],
     routes2: [],
   },
-  {
-    id: 5,
-    title: "Covid-19",
-    routes: [{ text: "hasdf", href: "asdf" }],
-    routes2: [],
-  },
+  // {
+  //   id: 5,
+  //   title: "Covid-19",
+  //   routes: [{ text: "hasdf", href: "asdf" }],
+  //   routes2: [],
+  // },
 ];
 
 interface UserBarProps {}

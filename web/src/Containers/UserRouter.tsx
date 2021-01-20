@@ -29,11 +29,9 @@ export const UserRouter: React.FC = () => {
       <PrivateRoute exact path="/user/dates/new">
         <NewDateProvider />
       </PrivateRoute>
-      {isEmployd ? (
-        <PrivateRoute exact path="/user/organization">
-          <UserOrganization />
-        </PrivateRoute>
-      ) : null}
+      <PrivateRoute exact path="/user/organization">
+        {isEmployd ? <UserOrganization /> : null}
+      </PrivateRoute>
       <Route path="/user">
         <div className="text-center fw-bold fs-4">404</div>
       </Route>

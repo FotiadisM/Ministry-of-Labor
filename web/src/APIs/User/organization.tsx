@@ -11,6 +11,8 @@ export const getOrganization = (id: string): Organization | null => {
       joined: "",
       status: "NORMAL",
       salaryMonth: 4000,
+      timeoffsYear: 24,
+      timeoffsTaken: 5,
     },
     employees: [
       {
@@ -19,6 +21,8 @@ export const getOrganization = (id: string): Organization | null => {
         joined: "dd",
         status: "NORMAL",
         salaryMonth: 2500,
+        timeoffsYear: 24,
+        timeoffsTaken: 5,
       },
       {
         id: "2",
@@ -26,6 +30,8 @@ export const getOrganization = (id: string): Organization | null => {
         joined: "fff",
         status: "REMOTE",
         salaryMonth: 2000,
+        timeoffsYear: 24,
+        timeoffsTaken: 5,
       },
       {
         id: "3",
@@ -33,7 +39,21 @@ export const getOrganization = (id: string): Organization | null => {
         joined: "dd",
         status: "SUSPENSION",
         salaryMonth: 1900,
+        timeoffsYear: 24,
+        timeoffsTaken: 5,
       },
     ],
+  };
+};
+
+export const getEmployByUserID = (id: string): Employ | null => {
+  return {
+    id: "asdfasd",
+    userId: "2345",
+    joined: "asdf",
+    salaryMonth: 2345,
+    status: "NORMAL",
+    timeoffsYear: 24,
+    timeoffsTaken: 5,
   };
 };

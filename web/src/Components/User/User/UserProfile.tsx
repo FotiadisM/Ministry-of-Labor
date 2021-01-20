@@ -5,6 +5,7 @@ interface InfoFieldProps {
   text: string;
   value: string;
   readOnly: boolean;
+  type?: string;
   onChange: (v: string) => void;
 }
 
@@ -12,13 +13,18 @@ export const InfoField: React.FC<InfoFieldProps> = ({
   text,
   value,
   readOnly,
+  type,
   onChange,
 }) => {
+  let t: string = "text";
+  if (type !== undefined) {
+    t = text;
+  }
   return (
     <div className="col">
       <span>{text}</span>
       <input
-        type="text"
+        type={t}
         className="form-control"
         value={value}
         onChange={(e) => {

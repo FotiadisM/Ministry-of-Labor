@@ -119,8 +119,16 @@ const EmployProfile: React.FC<EmployProfileProps> = ({ employ }) => {
         />
       </div>
       <div className="d-flex justify-content-end">
-        <button className="btn btn-primary mt-4">
-          Φόρμα τροποποίησης σύμβασης
+        <button
+          className="btn btn-primary mt-4"
+          // onClick={() => {
+          //   history.push("/organization/employees/updateContract", {
+          //     employ: employ,
+          //     user: user,
+          //   });
+          // }}
+        >
+          Tροποποίηση Στοιχείων
         </button>
       </div>
     </div>

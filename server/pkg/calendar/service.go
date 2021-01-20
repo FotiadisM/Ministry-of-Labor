@@ -2,6 +2,7 @@ package calendar
 
 import (
 	"context"
+	"errors"
 	"strconv"
 	"time"
 )
@@ -20,6 +21,10 @@ func (s *Service) getAvailableDates(ctx context.Context) (res *getAvailableDates
 	months, err := s.r.GetAvailableDates(ctx)
 	if err != nil {
 		return
+	}
+
+	if len(months) != 3 {
+		return nil, errors.New("Empty response from db")
 	}
 
 	margin := []int{}
