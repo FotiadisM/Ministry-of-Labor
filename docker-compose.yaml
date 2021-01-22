@@ -1,0 +1,22 @@
+version: "3.7"
+services:
+  web:
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    ports:
+      - 3000:5000
+    environment:
+      REACT_APP_SERVER_HOST: server
+      SERVER_PORT: 8080
+
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    environment:
+      DATABASE_HOST: database
+      DATABASE_PORT: 27017
+
+  database:
+    image: mongo:4.2

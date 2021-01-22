@@ -50,11 +50,13 @@
 //   };
 // };
 
+const uri = "http://server:8080";
+
 export const getOrganization = async (
   id: string
 ): Promise<Organization | null> => {
   try {
-    const res = await fetch("http://localhost:8080/organizations/" + id);
+    const res = await fetch(uri + "/organizations/" + id);
     if (res.status === 200) {
       return res.json();
     }
@@ -80,7 +82,7 @@ export const getOrganization = async (
 
 export const getEmployByUserID = async (id: string): Promise<Employ | null> => {
   try {
-    const res = await fetch("http://localhost:8080/employees/userId/" + id);
+    const res = await fetch(uri + "/employees/userId/" + id);
     if (res.status === 200) {
       return res.json();
     }

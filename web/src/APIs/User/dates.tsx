@@ -12,11 +12,13 @@ export const getUserOldDates = (access_token: string): Date[] | null => {
   return dates;
 };
 
+const uri = "http://server:8080";
+
 export const getAvailableDates = async (
   access_token: string
 ): Promise<{ months: Month[]; days: number[] } | null> => {
   try {
-    const res = await fetch("http://localhost:8080/dates/available");
+    const res = await fetch(uri + "/dates/available");
     if (res.status === 200) {
       return res.json();
     }

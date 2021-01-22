@@ -51,14 +51,14 @@ const MenuItem: React.FC<Route> = ({ text }) => {
 };
 
 const items: Route[] = [
-  { text: "Υπουργείο", href: "#" },
+  { text: "Εργαζόμενοι", href: "#" },
+  { text: "Εργοδότες", href: "#" },
+  { text: "Άνεργοι", href: "#" },
+  { text: "Συνταξιούχοι", href: "#" },
   { text: "Νομοθεσία", href: "#" },
-  { text: "e-Βιβλιοθήκη", href: "#" },
   { text: "Προνοιακά", href: "#" },
   { text: "Κοινωνική Προστασία", href: "#" },
-  { text: "Διεθνή", href: "#" },
-  { text: "Για Ασφαλισμένους", href: "#" },
-  { text: "Για Εργοδότες", href: "#" },
+  { text: "Υπουργείο", href: "#" },
 ];
 
 interface MenuProps {}

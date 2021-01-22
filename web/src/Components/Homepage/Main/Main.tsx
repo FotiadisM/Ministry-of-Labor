@@ -77,11 +77,11 @@ const PageMenuOption: React.FC<PageMenuOptionProps> = ({ text }) => {
 
 export const Main: React.FC = () => {
   let history = useHistory();
-  const [, setPage] = useState<number>(1);
+  const [number, setPage] = useState<number>(1);
 
   const changePage = (id: string) => {
     const el = document.getElementsByClassName("pageEl");
-    for (let i = 0; i < 4; i += 1) {
+    for (let i = 0; i < 3; i += 1) {
       el[i].classList.remove("active");
       el[i].classList.remove("shadow");
     }
@@ -100,13 +100,13 @@ export const Main: React.FC = () => {
           Μάθετε τα τελευταία νέα για τον COVID-19
         </h3>
         <button
-          className="btn btn-primary me-2"
+          className="btn btn-primary me-2 bg-white text-primary fw-bold"
           onClick={() => history.push("/covid/employees")}
         >
           Covid και Εργαζόμενοι
         </button>
         <button
-          className="btn btn-primary"
+          className="btn btn-primary bg-white text-primary fw-bold"
           onClick={() => history.push("/covid/employer")}
         >
           Covid και Εργοδότες
@@ -132,40 +132,86 @@ export const Main: React.FC = () => {
           <PageLink id="1" text="Εργαζόμενοι" changePage={changePage} />
           <PageLink id="2" text="Εργοδότες" changePage={changePage} />
           <PageLink id="3" text="Άνεργοι" changePage={changePage} />
-          <PageLink id="4" text="Συνταξιούχοι" changePage={changePage} />
+          {/* <PageLink id="4" text="Συνταξιούχοι" changePage={changePage} /> */}
         </ul>
-        <div className="mt-5 d-flex justify-content-around">
-          <div className="" style={{ width: "45%" }}>
-            <h4 className="fw-bold">Υπηρεσίες</h4>
-            <div
-              className="shadow-lg bg-white p-4 ps-5"
-              style={{ borderRadius: "24px" }}
-            >
-              <div className="row row-cols-2 g-2">
-                <PageMenuOption text="asdsfg" />
-                <PageMenuOption text="asdsfg" />
-                <PageMenuOption text="asdsfg" />
-                <PageMenuOption text="asdsfg" />
-                <PageMenuOption text="asdsfg" />
-                <PageMenuOption text="asdsfg" />
-              </div>
-            </div>
+        {
+          number === 1 ? (
+            <MenuBox {...employ} />
+          ) : number === 2 ? (
+            <MenuBox {...employer} />
+          ) : number === 3 ? (
+            <MenuBox {...jobless} />
+          ) : number === 4 ? null : null // <MenuBox {...old} />
+        }
+      </div>
+    </div>
+  );
+};
+
+const employer = {
+  serv: [
+    "Προσλήψεις / Απολύσεις",
+    "Δήλωση ενσήμων",
+    "Δήλωση εργαζομένων",
+    "Δήλωση αναστολής εργασίας",
+    "Αίτημα για Επιστρεπτέα Προκαταβολή",
+    "Αίτημα για έκπτωση ενοικίου επιχείρησης",
+  ],
+  inf: [
+    "Μέτρα στήριξης επιχειρήσεων",
+    "Οδηγίες εφαρμογής μέτρων πρόληψης",
+    "Υπηρεσίας Click Away",
+  ],
+};
+const employ = {
+  serv: [
+    "Άδεις / Υπόλοιπο αδειών",
+    "Άδεια ειδικού σκοπού",
+    "Εύρεση δικαιούχου επιδόματος ειδικού σκοπού",
+  ],
+  inf: [
+    "Εργασιακά δικαιώματα",
+    "Ασφαλιστικοί Φορείς",
+    "Αποζημειώσεις",
+    "Εργασιακά δικαιώματα",
+  ],
+};
+const jobless = {
+  serv: ["Προγράμματα προσάρτησης", "Προγράμματα ΕΣΠΑ"],
+  inf: ["Πρόσληψη ανέργων με επιδότηση", "Προγράμματα κατάρτησης"],
+};
+
+interface MenuBoxProps {
+  serv: string[];
+  inf: string[];
+}
+
+const MenuBox: React.FC<MenuBoxProps> = ({ serv, inf }) => {
+  return (
+    <div className="mt-5 d-flex justify-content-around">
+      <div className="" style={{ width: "45%" }}>
+        <h4 className="fw-bold">Υπηρεσίες</h4>
+        <div
+          className="shadow-lg bg-white p-4 ps-5"
+          style={{ borderRadius: "24px" }}
+        >
+          <div className="row row-cols-2 g-2">
+            {serv.map((s, i) => {
+              return <PageMenuOption text={s} key={i} />;
+            })}
           </div>
-          <div className="" style={{ width: "45%" }}>
-            <h4 className="fw-bold">Πληροφορίες</h4>
-            <div
-              className="shadow-lg bg-white p-4 ps-5"
-              style={{ borderRadius: "24px" }}
-            >
-              <div className="row row-cols-2 g-2">
-                <PageMenuOption text="asdsfg" />
-                <PageMenuOption text="asdsfg" />
-                <PageMenuOption text="asdsfg" />
-                <PageMenuOption text="asdsfg" />
-                <PageMenuOption text="asdsfg" />
-                <PageMenuOption text="asdsfg" />
-              </div>
-            </div>
+        </div>
+      </div>
+      <div className="" style={{ width: "45%" }}>
+        <h4 className="fw-bold">Πληροφορίες</h4>
+        <div
+          className="shadow-lg bg-white p-4 ps-5"
+          style={{ borderRadius: "24px" }}
+        >
+          <div className="row row-cols-2 g-2">
+            {inf.map((s, i) => {
+              return <PageMenuOption text={s} key={i} />;
+            })}
           </div>
         </div>
       </div>

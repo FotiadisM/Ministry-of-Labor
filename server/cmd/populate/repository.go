@@ -87,7 +87,7 @@ func (r repository) PopulateUsers(ctx context.Context) (err error) {
 		ID:            employUUID.String(),
 		UserID:        userUUID.String(),
 		OrgID:         orgUUID.String(),
-		Joined:        "",
+		Joined:        "11/07/2020",
 		SalaryMonth:   3000,
 		Status:        organization.Normal,
 		TimeoffsYear:  24,
@@ -277,21 +277,12 @@ func (r repository) PopulateUsers(ctx context.Context) (err error) {
 	// FLWROS END
 
 	o := organization.Organization{
-		ID:      orgUUID.String(),
-		Name:    "Μπακάλικο - Ο Φρέσκος",
-		AFM:     "5820571057",
-		Address: "Μαραθώνος 24, Άνω Πατήσια",
-		Zipcode: "63915",
-		Owner: organization.Employ{
-			ID:            employUUID.String(),
-			UserID:        userUUID.String(),
-			OrgID:         orgUUID.String(),
-			Joined:        "11/07/2020",
-			SalaryMonth:   3000,
-			Status:        organization.Normal,
-			TimeoffsYear:  24,
-			TimeoffsTaken: 4,
-		},
+		ID:        orgUUID.String(),
+		Name:      "Μπακάλικο - Ο Φρέσκος",
+		AFM:       "5820571057",
+		Address:   "Μαραθώνος 24, Άνω Πατήσια",
+		Zipcode:   "63915",
+		Owner:     employ,
 		Employees: []string{tatasEmployUUID.String(), flwrosEmployUUID.String()},
 	}
 

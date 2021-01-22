@@ -1,5 +1,5 @@
 import React from "react";
-import { Route as ReactRoute, Switch } from "react-router-dom";
+import { NavLink, Route as ReactRoute, Switch } from "react-router-dom";
 
 // const workplace = {
 //   title: "Covid-19 και όσα αφορούν τον χώρο εργασίας",
@@ -17,7 +17,7 @@ import { Route as ReactRoute, Switch } from "react-router-dom";
 const employer: { info: Category[]; services: Category[] } = {
   info: [
     {
-      title: "Μέτρα πρόλυψης",
+      title: "Μέτρα πρόληψης",
       elements: [
         { text: "Οδηγίες εφαρμογής μέτρων πρόληψης", href: "cb1" },
         { text: "Οδηγίες σε περίπτωση εμφάνισης κρούσματος", href: "cb2" },
@@ -52,11 +52,11 @@ const employer: { info: Category[]; services: Category[] } = {
         {
           text:
             "Αίτημα για προγραμματισμό ελέγχων (rapid test) στην επιχείρηση",
-          href: "",
+          href: "/",
         },
         {
           text: "Αίτημα για μαζικό εμβολιασμό εργαζομένων",
-          href: "",
+          href: "/",
         },
       ],
     },
@@ -65,24 +65,28 @@ const employer: { info: Category[]; services: Category[] } = {
       elements: [
         {
           text: "Αίτημα για Επιστρεπτέα Προκαταβολή",
-          href: "",
+          href: "/",
         },
         {
           text: "Αίτημα για έκπτωση ενοικίου επιχείρησης",
-          href: "",
+          href: "/",
         },
         {
           text: "Αίτημα για αναστολή φορολογικών υποχρεώσεων",
-          href: "",
+          href: "/",
         },
       ],
     },
     {
-      title: "Κάτι",
+      title: "Δηλώσεις τροποποίησης συμβάσεων",
       elements: [
         {
           text: "Υποβολή δηλώσεων αναστολών/τροποποιήσεων συμβάσεων εργασίας",
-          href: "",
+          href: "/organization/employees/forms/suspension",
+        },
+        {
+          text: "Υποβολή δηλώσεων τηλεργασίας",
+          href: "/organization/employees/forms/remote",
         },
       ],
     },
@@ -92,7 +96,7 @@ const employer: { info: Category[]; services: Category[] } = {
 const employees: { info: Category[]; services: Category[] } = {
   info: [
     {
-      title: "Μέτρα πρόλυψης",
+      title: "Μέτρα πρόληψης",
       elements: [
         { text: "Απαραίτητα μέτρα πρόληψης", href: "cs1" },
         { text: "Οδηγίες σε περίπτωση εμφάνισης κρούσματος", href: "cs2" },
@@ -108,7 +112,7 @@ const employees: { info: Category[]; services: Category[] } = {
       ],
     },
     {
-      title: "Σχετικά με το ",
+      title: "Εργασιακά δικαιώματα",
       elements: [
         {
           text: "Δικαιώματα εργαζομένων",
@@ -124,27 +128,36 @@ const employees: { info: Category[]; services: Category[] } = {
   services: [
     {
       title: "Γενικές υπηρεσίες υγείας",
-      elements: [],
+      elements: [
+        {
+          text: "Υπηρεσία βαθμολόγησης με άριστα στην εργασία",
+          href: "/",
+        },
+      ],
     },
     {
       title: "Οικονομικές υπηρεσίες",
       elements: [
         {
           text: "Αίτημα για έκπτωση ενοικίου πληττόμενου εργαζόμενου",
-          href: "",
+          href: "/",
         },
         {
           text: "Εύρεση δικαιούχου επιδόματος ειδικού σκοπού",
-          href: "",
+          href: "/",
         },
       ],
     },
     {
-      title: "Κάτι",
+      title: "Βεβαιώσεις και άδειες",
       elements: [
         {
           text: "Εύρεση βεβαίωσης κίνησης",
-          href: "",
+          href: "/",
+        },
+        {
+          text: "Φόρμα  άδειας ειδικού σκοπού",
+          href: "/user/forms/timeOff/special",
         },
       ],
     },
@@ -185,9 +198,10 @@ interface Category {
 interface MenuProps {
   title: string;
   categories: Category[];
+  reh?: boolean;
 }
 
-const Menu: React.FC<MenuProps> = ({ title, categories }) => {
+const Menu: React.FC<MenuProps> = ({ title, categories, reh }) => {
   return (
     <div className="mt-4" style={{ width: "45%" }}>
       <h4 className="text-primary fw-bold">{title}</h4>
@@ -203,7 +217,11 @@ const Menu: React.FC<MenuProps> = ({ title, categories }) => {
                 {c.elements.map((e, index) => {
                   return (
                     <li key={index}>
-                      <a href={"#" + e.href}>{e.text}</a>
+                      {reh === undefined ? (
+                        <a href={"#" + e.href}>{e.text}</a>
+                      ) : (
+                        <NavLink to={e.href}>{e.text}</NavLink>
+                      )}
                     </li>
                   );
                 })}
@@ -229,7 +247,7 @@ const CovidPage: React.FC<CovidPageProps> = ({ title, info, services }) => {
       <hr />
       <div className="d-flex justify-content-around">
         <Menu title={"Πληροφορίες"} categories={info} />
-        <Menu title={"Υπηρεσίες"} categories={services} />
+        <Menu title={"Υπηρεσίες"} categories={services} reh={true} />
       </div>
       {info.map((c) => {
         return c.elements.map((e) => {

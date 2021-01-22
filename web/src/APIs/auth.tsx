@@ -29,12 +29,14 @@
 //   return userInfo;
 // };
 
+const uri = "http://server:8080";
+
 export const LogInAPI = async (
   username: string,
   password: string
 ): Promise<{ user: User } | null> => {
   try {
-    const res = await fetch("http://localhost:8080/login", {
+    const res = await fetch(uri + "/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -78,7 +80,7 @@ export const LogInAPI = async (
 
 export const getUser = async (id: string): Promise<User | null> => {
   try {
-    const res = await fetch("http://localhost:8080/users/" + id);
+    const res = await fetch(uri + "/users/" + id);
     if (res.status === 200) {
       return res.json();
     }
