@@ -50,7 +50,7 @@
 //   };
 // };
 
-const uri = "http://server:8080";
+import { uri } from "../apis";
 
 export const getOrganization = async (
   id: string

@@ -1,4 +1,5 @@
 import { Month } from "../../Types/User/calendar";
+import { uri } from "../apis";
 
 export const getUserActiveDates = (access_token: string): Date[] | null => {
   const dates: Date[] = [new Date(), new Date(), new Date()];
@@ -11,8 +12,6 @@ export const getUserOldDates = (access_token: string): Date[] | null => {
 
   return dates;
 };
-
-const uri = "http://server:8080";
 
 export const getAvailableDates = async (
   access_token: string

@@ -11,7 +11,7 @@ var (
 )
 
 func init() {
-	if uri := os.Getenv("MONGODB_URI"); uri != "" {
+	if uri := os.Getenv("DATABASE_URI"); uri != "" {
 		dbURI = uri
 	}
 }

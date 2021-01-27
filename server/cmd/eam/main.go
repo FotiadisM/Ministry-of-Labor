@@ -17,8 +17,7 @@ import (
 
 var (
 	httpAddr string = ":8080"
-	dbHost   string = "localhost"
-	dbPort   string = "27017"
+	dbURI    string = "mongodb://localhost:27017"
 )
 
 func init() {
@@ -26,20 +25,15 @@ func init() {
 		httpAddr = fmt.Sprintf(":%s", port)
 	}
 
-	if dbHostTmp := os.Getenv("DATABASE_HOST"); dbHostTmp != "" {
-		dbHost = dbHostTmp
-	}
-
-	if dbPortTmp := os.Getenv("DATABASE_PORT"); dbPortTmp != "" {
-		dbHost = dbPortTmp
+	if uri := os.Getenv("DATABASE_URI"); uri != "" {
+		dbURI = fmt.Sprintf("%s", uri)
 	}
 }
 
 func main() {
 	m := mux.NewRouter()
 
-	mongoURI := "mongodb://" + dbHost + ":" + dbPort
-	r, err := newRepository(mongoURI)
+	r, err := newRepository(dbURI)
 	if err != nil {
 		log.Println("error connecting to db:", err)
 		return

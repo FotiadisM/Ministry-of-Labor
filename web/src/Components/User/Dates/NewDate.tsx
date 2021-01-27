@@ -123,7 +123,6 @@ export const NewDateProvider: React.FC = () => {
       if (data !== null) {
         setMonths(data.months);
         setMaring(data.days);
-        console.log(data);
       }
     };
 

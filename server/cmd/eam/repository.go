@@ -38,13 +38,18 @@ func newRepository(uri string) (*repository, error) {
 		return nil, err
 	}
 
-	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
 	err = client.Connect(ctx)
 	if err != nil {
 		return nil, err
 	}
+
+	// err = client.Ping(ctx, nil)
+	// if err != nil {
+	// 	return nil, err
+	// }
 
 	return &repository{client: client}, nil
 }
@@ -59,7 +64,7 @@ type loginInfo struct {
 func (r repository) GetLogin(ctx context.Context, username, password string) (id string, err error) {
 
 	db := r.client.Database("eam")
-	ctx, cancel := context.WithTimeout(ctx, 2*time.Second)
+	ctx, cancel := context.WithTimeout(ctx, 4*time.Second)
 	defer cancel()
 
 	l := loginInfo{}
@@ -82,7 +87,7 @@ func (r repository) GetLogin(ctx context.Context, username, password string) (id
 func (r repository) GetUser(ctx context.Context, id string) (u *user.User, err error) {
 
 	db := r.client.Database("eam")
-	ctx, cancel := context.WithTimeout(ctx, 2*time.Second)
+	ctx, cancel := context.WithTimeout(ctx, 4*time.Second)
 	defer cancel()
 
 	u = &user.User{}
@@ -104,7 +109,7 @@ func (r repository) GetOrganization(ctx context.Context, id string) (o *organiza
 
 	db := r.client.Database("eam")
 
-	ctx, cancel := context.WithTimeout(ctx, 2*time.Second)
+	ctx, cancel := context.WithTimeout(ctx, 4*time.Second)
 	defer cancel()
 
 	o = &organization.Organization{}
@@ -123,7 +128,7 @@ func (r repository) GetOrganization(ctx context.Context, id string) (o *organiza
 func (r repository) GetOrganizationEmployees(ctx context.Context, id string) (es []*organization.Employ, err error) {
 	db := r.client.Database("eam")
 
-	ctx1, cancel1 := context.WithTimeout(ctx, 2*time.Second)
+	ctx1, cancel1 := context.WithTimeout(ctx, 4*time.Second)
 	defer cancel1()
 
 	cursor, err := db.Collection("employees").Find(ctx1, bson.D{bson.E{Key: "orgId", Value: id}})
@@ -131,7 +136,7 @@ func (r repository) GetOrganizationEmployees(ctx context.Context, id string) (es
 		return nil, fmt.Errorf("Find(): %w", err)
 	}
 
-	ctx2, cancel2 := context.WithTimeout(ctx, 2*time.Second)
+	ctx2, cancel2 := context.WithTimeout(ctx, 4*time.Second)
 	defer cancel2()
 
 	es = []*organization.Employ{}
@@ -146,7 +151,7 @@ func (r repository) GetOrganizationEmployees(ctx context.Context, id string) (es
 func (r repository) GetEmployByUserID(ctx context.Context, id string) (e *organization.Employ, err error) {
 	db := r.client.Database("eam")
 
-	ctx, cancel := context.WithTimeout(ctx, 2*time.Second)
+	ctx, cancel := context.WithTimeout(ctx, 4*time.Second)
 	defer cancel()
 
 	e = &organization.Employ{}
@@ -165,15 +170,15 @@ func (r repository) GetAvailableDates(ctx context.Context) (months []calendar.Mo
 
 	db := r.client.Database("eam")
 
-	ctx1, cancel1 := context.WithTimeout(ctx, 2*time.Second)
-	defer cancel1()
+	// ctx1, cancel1 := context.WithTimeout(ctx, 4*time.Second)
+	// defer cancel1()
 
-	cursor, err := db.Collection("dates").Find(ctx1, bson.D{})
+	cursor, err := db.Collection("dates").Find(context.TODO(), bson.D{})
 	if err != nil {
 		return nil, fmt.Errorf("Find(): %w", err)
 	}
 
-	ctx2, cancel2 := context.WithTimeout(ctx, 2*time.Second)
+	ctx2, cancel2 := context.WithTimeout(ctx, 4*time.Second)
 	defer cancel2()
 
 	err = cursor.All(ctx2, &months)

@@ -25,11 +25,10 @@
 //       zipcode: "14233",
 //     },
 //   };
-
 //   return userInfo;
 // };
 
-const uri = "http://server:8080";
+import { uri } from "./apis";
 
 export const LogInAPI = async (
   username: string,

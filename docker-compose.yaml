@@ -7,7 +7,7 @@ services:
     ports:
       - 3000:5000
     environment:
-      REACT_APP_SERVER_HOST: server
+      SERVER_HOST: server
       SERVER_PORT: 8080
 
   server:
