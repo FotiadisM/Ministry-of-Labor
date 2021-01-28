@@ -15,7 +15,7 @@ type User struct {
 	EmploymentInfo *EmploymentInfo `json:"employmentInfo" bson:"employmentInfo"`
 	Username       string          `json:"-" bson:"username"`
 	Email          string          `json:"email" bson:"email"`
-	AFM            string          `json:"AFM" bson:"afm"`
+	AFM            string          `json:"AFM" bson:"AFM"`
 	AMKA           string          `json:"AMKA" bson:"AMKA"`
 	FirstName      string          `json:"firstName" bson:"firstName"`
 	LastName       string          `json:"lastName" bson:"lastName"`

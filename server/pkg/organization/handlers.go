@@ -1,6 +1,7 @@
 package organization
 
 import (
+	"encoding/json"
 	"net/http"
 
 	"github.com/FotiadisM/eam/server/pkg/httptransport"
@@ -37,4 +38,20 @@ func (s Service) GetEmployByUserID(w http.ResponseWriter, r *http.Request) {
 	}
 
 	httptransport.EncodeJSONResponse(w, e)
+}
+
+// UpdateEmployStatus ..
+func (s Service) UpdateEmployStatus(w http.ResponseWriter, r *http.Request) {
+	req := updateEmployStatusRequest{}
+	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+		httptransport.ErrorEncoder(w, err)
+		return
+	}
+
+	ctx := r.Context()
+
+	if err := s.updateEmployStatus(ctx, &req); err != nil {
+		httptransport.ErrorEncoder(w, err)
+		return
+	}
 }

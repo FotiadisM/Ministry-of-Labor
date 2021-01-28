@@ -66,7 +66,7 @@ export const Footer: React.FC = () => {
             />
             <h5>Υπηρεσίες και Προσβασιμότητα</h5>
             <ul className="list-unstyled">
-              <Service text="Υπηρερίσες" />
+              <Service text="Υπηρεσίες" />
               <Service text="Υποστήριξη" />
               <Service text="Προσβασιμότητα" />
             </ul>

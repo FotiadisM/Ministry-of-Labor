@@ -109,9 +109,7 @@ export const OrganizationEmployeesForm: React.FC<OrganizationEmployeesFormProps>
         style={{ visibility: "hidden", display: "none" }}
         data-bs-toggle="modal"
         data-bs-target="#orgFormModal"
-      >
-        Το αίτημα σας καταχωρήθηκε με επιτυχία
-      </button>
+      ></button>
       <div
         className="modal fade"
         id="orgFormModal"

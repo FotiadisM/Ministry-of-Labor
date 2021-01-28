@@ -8,9 +8,16 @@ interface DropdownProps {
   routes: Route[];
   routes2: Route[];
   id: number;
+  dis?: boolean;
 }
 
-const Dropdown: React.FC<DropdownProps> = ({ title, routes, routes2, id }) => {
+const Dropdown: React.FC<DropdownProps> = ({
+  title,
+  routes,
+  routes2,
+  id,
+  dis,
+}) => {
   return (
     <li className="nav-item dropdown">
       <div
@@ -30,7 +37,9 @@ const Dropdown: React.FC<DropdownProps> = ({ title, routes, routes2, id }) => {
           return (
             <li key={r.text}>
               <NavLink
-                className="dropdown-item"
+                className={
+                  "dropdown-item " + (dis === undefined ? "disabled" : "")
+                }
                 to={r.href}
                 activeClassName="active"
                 exact
@@ -112,16 +121,7 @@ const drops: DropdownProps[] = [
     ],
     routes2: [],
   },
-  {
-    id: 4,
-    title: "Αίτηση για Πιστoποιητικά",
-    routes: [
-      { text: "Κάποια αίτηση 1", href: "asdf" },
-      { text: "Κάποια αίτηση 2", href: "asdf" },
-      { text: "Κάποια αίτηση 3", href: "asdf" },
-    ],
-    routes2: [],
-  },
+
   // {
   //   id: 5,
   //   title: "Covid-19",
@@ -129,6 +129,17 @@ const drops: DropdownProps[] = [
   //   routes2: [],
   // },
 ];
+
+const dr: DropdownProps = {
+  id: 4,
+  title: "Αίτηση για Πιστoποιητικά",
+  routes: [
+    { text: "Κάποια αίτηση 1", href: "asdf" },
+    { text: "Κάποια αίτηση 2", href: "asdf" },
+    { text: "Κάποια αίτηση 3", href: "asdf" },
+  ],
+  routes2: [],
+};
 
 interface UserBarProps {}
 
@@ -156,8 +167,9 @@ export const UserBar: React.FC<UserBarProps> = () => {
         if (!isOwner && d.id === 2) {
           return undefined;
         }
-        return <Dropdown key={d.title} {...d} />;
+        return <Dropdown key={d.title} {...d} dis />;
       })}
+      <Dropdown {...dr} />
       <div className="ms-auto">
         <li className="nav-item dropdown">
           <div

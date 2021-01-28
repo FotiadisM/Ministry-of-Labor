@@ -46,6 +46,7 @@ func main() {
 	osvc := organization.NewService(r)
 	m.Methods("GET").Path("/organizations/{id}").HandlerFunc(osvc.GetOrganization)
 	m.Methods("GET").Path("/employees/userId/{id}").HandlerFunc(osvc.GetEmployByUserID)
+	m.Methods("PUT").Path("/employees/update/status").HandlerFunc(osvc.UpdateEmployStatus)
 
 	dsvc := calendar.NewService(r)
 	m.Methods("GET").Path("/dates/available").HandlerFunc(dsvc.GetAvailableDates)

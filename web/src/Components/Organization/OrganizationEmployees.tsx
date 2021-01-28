@@ -25,18 +25,18 @@ const TableEntry: React.FC<TableEntryProps> = ({ employ, setEmploy }) => {
     return null;
   }
 
-  var status = "-";
-  switch (employ.status) {
-    case "REMOTE":
-      status = "Τηλεργασία";
-      break;
-    case "SUSPENSION":
-      status = "Αναστολή";
-      break;
-    case "VACATION":
-      status = "Άδεια";
-      break;
-  }
+  // var status = "-";
+  // switch (employ.status.status) {
+  //   case "REMOTE":
+  //     status = "Τηλεργασία";
+  //     break;
+  //   case "SUSPENSION":
+  //     status = "Αναστολή";
+  //     break;
+  //   case "VACATION":
+  //     status = "Άδεια";
+  //     break;
+  // }
 
   return (
     <tr
@@ -49,7 +49,7 @@ const TableEntry: React.FC<TableEntryProps> = ({ employ, setEmploy }) => {
       <th>{user.AFM}</th>
       <td>{user.firstName}</td>
       <td>{user.lastName}</td>
-      <td>{status}</td>
+      <td>{getStatus(employ.status.status)}</td>
     </tr>
   );
 };
@@ -102,7 +102,7 @@ const EmployProfile: React.FC<EmployProfileProps> = ({ employ }) => {
           onChange={(v) => {}}
         />
         <InfoField
-          text="ΑΦΜ"
+          text="Α.Φ.Μ."
           value={user.AFM}
           readOnly={true}
           onChange={(v) => {}}
@@ -121,11 +121,11 @@ const EmployProfile: React.FC<EmployProfileProps> = ({ employ }) => {
         />
         <InfoField
           text="Κατάσταση"
-          value={getStatus(employ.status)}
+          value={getStatus(employ.status.status)}
           readOnly={true}
           onChange={() => {}}
         />
-        {employ.status === "NORMAL" ? null : (
+        {employ.status.status === "NORMAL" ? null : (
           <div>
             <div className="col d-flex">
               <div>
@@ -134,7 +134,7 @@ const EmployProfile: React.FC<EmployProfileProps> = ({ employ }) => {
                   type="text"
                   className="form-control"
                   readOnly={true}
-                  value=""
+                  value={employ.status.from}
                 />
               </div>
               <div>
@@ -143,12 +143,12 @@ const EmployProfile: React.FC<EmployProfileProps> = ({ employ }) => {
                   type="text"
                   className="form-control"
                   readOnly={true}
-                  value=""
+                  value={employ.status.to}
                 />
               </div>
             </div>
             <button className="btn btn-primary mt-4">
-              Κατάργηση {getStatus(employ.status)}ς
+              Κατάργηση {getStatus(employ.status.status)}ς
             </button>
           </div>
         )}

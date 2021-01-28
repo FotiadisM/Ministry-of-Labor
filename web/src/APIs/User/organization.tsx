@@ -92,3 +92,47 @@ export const getEmployByUserID = async (id: string): Promise<Employ | null> => {
 
   return null;
 };
+
+export const updateEmployState = async (
+  fName: string,
+  lName: string,
+  afm: string,
+  amka: string,
+  status: Status,
+  from: string,
+  to: string
+): Promise<"ok" | "bad" | null> => {
+  try {
+    const res = await fetch(uri + "/employees/update/status", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        firstName: fName,
+        lastName: lName,
+        AFM: afm,
+        AMKA: amka,
+        status: status,
+        from: from,
+        to: to,
+      }),
+    });
+
+    if (res.status === 200) {
+      return "ok";
+    }
+
+    const d = await res.json();
+    if (d.error === undefined) {
+      return null;
+    }
+    if (d.error === "Not found") {
+      return "bad";
+    }
+  } catch (err) {
+    console.log(err);
+  }
+
+  return null;
+};

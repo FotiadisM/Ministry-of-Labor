@@ -41,6 +41,12 @@ type Status =
   | "REMOTE"
   | "SPECIAL_VACATION";
 
+interface StatusProps {
+  status: Stauts;
+  from: string;
+  to: string;
+}
+
 interface Employ {
   id: string;
   // position: string;
@@ -50,7 +56,7 @@ interface Employ {
   salaryMonth: number;
   timeoffsYear: number;
   timeoffsTaken: number;
-  status: Status;
+  status: StatusProps;
 }
 
 interface Organization {

@@ -100,9 +100,9 @@ export const UserOrganization: React.FC = () => {
             />
             <UserOrganizationInfoField
               text="Εργασιακή κατάσταση"
-              value={getStatus(employ.status)}
+              value={getStatus(employ.status.status)}
             />
-            {employ.status === "NORMAL" ? null : (
+            {employ.status.status === "NORMAL" ? null : (
               <div className="col d-flex me-5 mb-5 ms-3  justify-content-around">
                 <div className="d-flex align-items-center">
                   <p className="mb-0 me-4">Από:</p>
@@ -110,7 +110,7 @@ export const UserOrganization: React.FC = () => {
                     type="text"
                     className="form-control"
                     readOnly={true}
-                    value=""
+                    value={employ.status.from}
                   />
                 </div>
                 <div className="d-flex align-items-center">
@@ -119,7 +119,7 @@ export const UserOrganization: React.FC = () => {
                     type="text"
                     className="form-control"
                     readOnly={true}
-                    value=""
+                    value={employ.status.to}
                   />
                 </div>
               </div>

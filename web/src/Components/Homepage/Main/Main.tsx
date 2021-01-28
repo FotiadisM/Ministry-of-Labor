@@ -70,7 +70,12 @@ interface PageMenuOptionProps {
 const PageMenuOption: React.FC<PageMenuOptionProps> = ({ text }) => {
   return (
     <div className="col">
-      <button className="btn btn-outline-primary w-100">{text}</button>
+      <button
+        className="btn btn-outline-primary w-100 fw-bold"
+        style={{ borderWidth: ".15rem" }}
+      >
+        {text}
+      </button>
     </div>
   );
 };

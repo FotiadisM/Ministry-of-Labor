@@ -43,3 +43,14 @@ func (s Service) getEmployByUserID(ctx context.Context, id string) (e *Employ, e
 
 	return s.r.GetEmployByUserID(ctx, id)
 }
+
+func (s Service) updateEmployStatus(ctx context.Context, in *updateEmployStatusRequest) (err error) {
+
+	sp := StatusProps{
+		Status: in.Status,
+		From:   in.From,
+		To:     in.To,
+	}
+
+	return s.r.UpdateEmployStatus(ctx, in.FirstName, in.LastName, in.AFM, in.AMKA, sp)
+}

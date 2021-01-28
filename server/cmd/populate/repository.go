@@ -84,12 +84,16 @@ func (r repository) PopulateUsers(ctx context.Context) (err error) {
 	}
 
 	employ := organization.Employ{
-		ID:            employUUID.String(),
-		UserID:        userUUID.String(),
-		OrgID:         orgUUID.String(),
-		Joined:        "11/07/2020",
-		SalaryMonth:   3000,
-		Status:        organization.Normal,
+		ID:          employUUID.String(),
+		UserID:      userUUID.String(),
+		OrgID:       orgUUID.String(),
+		Joined:      "11/07/2020",
+		SalaryMonth: 3000,
+		Status: &organization.StatusProps{
+			Status: organization.Normal,
+			From:   "",
+			To:     "",
+		},
 		TimeoffsYear:  24,
 		TimeoffsTaken: 4,
 	}
@@ -166,7 +170,11 @@ func (r repository) PopulateUsers(ctx context.Context) (err error) {
 		TimeoffsYear:  22,
 		TimeoffsTaken: 2,
 		Joined:        "25/11/2020",
-		Status:        organization.Remote,
+		Status: &organization.StatusProps{
+			Status: organization.Remote,
+			From:   "20/01/2021",
+			To:     "27/01/2021",
+		},
 	}
 
 	ctx3, cancel3 := context.WithTimeout(ctx, 2*time.Second)
@@ -241,7 +249,11 @@ func (r repository) PopulateUsers(ctx context.Context) (err error) {
 		TimeoffsYear:  22,
 		TimeoffsTaken: 0,
 		Joined:        "23/12/2020",
-		Status:        organization.Suspension,
+		Status: &organization.StatusProps{
+			Status: organization.Suspension,
+			From:   "13/12/2020",
+			To:     "12/01/2021",
+		},
 	}
 
 	ctx6, cancel6 := context.WithTimeout(ctx, 2*time.Second)

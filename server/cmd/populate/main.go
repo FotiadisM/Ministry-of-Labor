@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"os"
 )
@@ -17,6 +18,7 @@ func init() {
 }
 
 func main() {
+	fmt.Println(dbURI)
 	r, err := newRepository(dbURI)
 	if err != nil {
 		log.Println("error connecting to db:", err)

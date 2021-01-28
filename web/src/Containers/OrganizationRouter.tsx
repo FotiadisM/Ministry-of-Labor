@@ -1,7 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Switch } from "react-router-dom";
-import { getOrganization } from "../APIs/User/organization";
+import { getOrganization, updateEmployState } from "../APIs/User/organization";
 import { PrivateEmployerRoute } from "../Components/App/PrivateRoute";
+import { Modal, showModal } from "../Components/App/Modal";
 import { OrganizationEmployees } from "../Components/Organization/OrganizationEmployees";
 import {
   OrganizationEmployeesForm,
@@ -34,7 +35,7 @@ export const OrganizationRouter: React.FC = () => {
   }, [employmentInfo]);
 
   // onSubmits
-  const onSuspensionSubmit = (
+  const onSuspensionSubmit = async (
     e: React.FormEvent<HTMLFormElement>,
     info: Info
   ) => {
@@ -44,20 +45,51 @@ export const OrganizationRouter: React.FC = () => {
     e.stopPropagation();
 
     if (f.checkValidity()) {
-      document.getElementById("orgFormModalBtn")!.click();
+      const res = await updateEmployState(
+        info.firstName,
+        info.lastName,
+        info.AFM,
+        info.AMKA,
+        "SUSPENSION",
+        info.from,
+        info.to
+      );
+
+      if (res === "ok") {
+        document.getElementById("orgFormModalBtn")!.click();
+      } else {
+        showModal();
+      }
     }
 
     f.classList.add("was-validated");
   };
 
-  const onRemoteSubmit = (e: React.FormEvent<HTMLFormElement>, info: Info) => {
+  const onRemoteSubmit = async (
+    e: React.FormEvent<HTMLFormElement>,
+    info: Info
+  ) => {
     const f = document.getElementById("orgEmployForm") as HTMLFormElement;
 
     e.preventDefault();
     e.stopPropagation();
 
     if (f.checkValidity()) {
-      document.getElementById("orgFormModalBtn")!.click();
+      const res = await updateEmployState(
+        info.firstName,
+        info.lastName,
+        info.AFM,
+        info.AMKA,
+        "REMOTE",
+        info.from,
+        info.to
+      );
+
+      if (res === "ok") {
+        document.getElementById("orgFormModalBtn")!.click();
+      } else {
+        showModal();
+      }
     }
 
     f.classList.add("was-validated");
@@ -68,34 +100,40 @@ export const OrganizationRouter: React.FC = () => {
   }
 
   return (
-    <Switch>
-      <PrivateEmployerRoute exact path="/organization/profile">
-        <OrganizationProfile
-          organization={organization!}
-          setOrganization={setOrganization}
-        />
-      </PrivateEmployerRoute>
-      <PrivateEmployerRoute exact path="/organization/employees">
-        <OrganizationEmployees
-          organization={organization!}
-          setOrganization={setOrganization}
-        />
-      </PrivateEmployerRoute>
-      <PrivateEmployerRoute
-        exact
-        path="/organization/employees/forms/suspension"
-      >
-        <OrganizationEmployeesForm
-          title="Φορμά αναστολής σύμβασης εργασίας"
-          onSubmit={onSuspensionSubmit}
-        />
-      </PrivateEmployerRoute>
-      <PrivateEmployerRoute exact path="/organization/employees/forms/remote">
-        <OrganizationEmployeesForm
-          title="Φορμά τηλεργασίας"
-          onSubmit={onRemoteSubmit}
-        />
-      </PrivateEmployerRoute>
-    </Switch>
+    <>
+      <Switch>
+        <PrivateEmployerRoute exact path="/organization/profile">
+          <OrganizationProfile
+            organization={organization!}
+            setOrganization={setOrganization}
+          />
+        </PrivateEmployerRoute>
+        <PrivateEmployerRoute exact path="/organization/employees">
+          <OrganizationEmployees
+            organization={organization!}
+            setOrganization={setOrganization}
+          />
+        </PrivateEmployerRoute>
+        <PrivateEmployerRoute
+          exact
+          path="/organization/employees/forms/suspension"
+        >
+          <OrganizationEmployeesForm
+            title="Φορμά αναστολής σύμβασης εργασίας"
+            onSubmit={onSuspensionSubmit}
+          />
+        </PrivateEmployerRoute>
+        <PrivateEmployerRoute exact path="/organization/employees/forms/remote">
+          <OrganizationEmployeesForm
+            title="Φορμά τηλεργασίας"
+            onSubmit={onRemoteSubmit}
+          />
+        </PrivateEmployerRoute>
+      </Switch>
+      <Modal
+        title="Λάθος στοιχεία"
+        msg="Τα στοιχεία που πληκτρολογείσατε δεν είναι σωστά"
+      />
+    </>
   );
 };

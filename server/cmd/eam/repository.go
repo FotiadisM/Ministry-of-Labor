@@ -165,6 +165,35 @@ func (r repository) GetEmployByUserID(ctx context.Context, id string) (e *organi
 	return
 }
 
+func (r repository) UpdateEmployStatus(ctx context.Context, fName string, lName string, afm string, amka string, status organization.StatusProps) (err error) {
+
+	db := r.client.Database("eam")
+
+	ctx, cancel := context.WithTimeout(ctx, 4*time.Second)
+	defer cancel()
+
+	u := &user.User{}
+	filters := bson.D{
+		primitive.E{Key: "firstName", Value: fName},
+		primitive.E{Key: "lastName", Value: lName},
+		primitive.E{Key: "AFM", Value: afm},
+		primitive.E{Key: "AMKA", Value: amka},
+	}
+	if err = db.Collection("users").FindOne(ctx, filters).Decode(u); err != nil {
+		if err == mongo.ErrNoDocuments {
+			return errors.New(ErrNotFound)
+		}
+	}
+
+	e := &organization.Employ{}
+	update := bson.D{primitive.E{Key: "$set", Value: bson.D{primitive.E{Key: "status", Value: status}}}}
+	if err = db.Collection("employees").FindOneAndUpdate(ctx, bson.D{primitive.E{Key: "userId", Value: u.ID}}, update).Decode(e); err != nil {
+		return err
+	}
+
+	return
+}
+
 // CALENDAR
 func (r repository) GetAvailableDates(ctx context.Context) (months []calendar.Month, err error) {
 

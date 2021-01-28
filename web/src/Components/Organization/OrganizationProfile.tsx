@@ -57,7 +57,7 @@ export const OrganizationProfile: React.FC<OrganizationProfileProps> = ({
               onChange={(v) => {}}
             />
             <InfoField
-              text="ΑΦΜ"
+              text="Α.Φ.Μ."
               value={organization.AFM}
               readOnly={readOnly}
               onChange={(v) => {}}
