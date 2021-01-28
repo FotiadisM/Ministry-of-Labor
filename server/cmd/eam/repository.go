@@ -105,6 +105,15 @@ func (r repository) GetUser(ctx context.Context, id string) (u *user.User, err e
 
 func (r repository) UpdateUser(ctx context.Context, u *user.User) (err error) {
 
+	db := r.client.Database("eam")
+	ctx, cancel := context.WithTimeout(ctx, 4*time.Second)
+	defer cancel()
+
+	_, err = db.Collection("users").ReplaceOne(ctx, bson.D{primitive.E{Key: "_id", Value: u.ID}}, u)
+	if err != nil {
+		return err
+	}
+
 	return
 }
 

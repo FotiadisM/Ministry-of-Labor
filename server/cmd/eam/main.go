@@ -42,6 +42,7 @@ func main() {
 	usvc := user.NewService(r)
 	m.Methods("POST").Path("/login").HandlerFunc(usvc.LoginHandler)
 	m.Methods("GET").Path("/users/{id}").HandlerFunc(usvc.GetUser)
+	m.Methods("PUT").Path("/users").HandlerFunc(usvc.UpdateUser)
 
 	osvc := organization.NewService(r)
 	m.Methods("GET").Path("/organizations/{id}").HandlerFunc(osvc.GetOrganization)

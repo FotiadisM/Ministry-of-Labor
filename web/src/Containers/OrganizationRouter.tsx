@@ -105,9 +105,9 @@ export const OrganizationRouter: React.FC = () => {
     f.classList.add("was-validated");
   };
 
-  if (organization === null) {
-    return null;
-  }
+  // if (organization === null) {
+  //   return null;
+  // }
 
   return (
     <>

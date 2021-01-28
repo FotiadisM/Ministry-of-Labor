@@ -106,3 +106,23 @@ export const getStatus = (s: string): string => {
 
   return "-";
 };
+
+export const updateUser = async (u: User): Promise<"ok" | null> => {
+  try {
+    const res = await fetch(uri + "/users", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ ...u }),
+    });
+
+    if (res.status === 200) {
+      return "ok";
+    }
+  } catch (err) {
+    console.log(err);
+  }
+
+  return null;
+};

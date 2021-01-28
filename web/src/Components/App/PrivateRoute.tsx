@@ -31,12 +31,22 @@ export const PrivateEmployerRoute: React.FC<RouteProps> = ({
 
   return (
     <Route {...rest}>
-      {userInfo.user !== null ? (
-        userInfo.user.employmentInfo !== null ? (
-          userInfo.user.employmentInfo.isOwner ? (
-            children
-          ) : null
-        ) : null
+      {userInfo.isLogedIn !== false ? (
+        userInfo.user !== null ? (
+          userInfo.user.employmentInfo !== null ? (
+            userInfo.user.employmentInfo.isOwner ? (
+              children
+            ) : (
+              <Redirect
+                to={{ pathname: "/login", state: { from: location } }}
+              />
+            )
+          ) : (
+            <Redirect to={{ pathname: "/login", state: { from: location } }} />
+          )
+        ) : (
+          <Redirect to={{ pathname: "/login", state: { from: location } }} />
+        )
       ) : (
         <Redirect to={{ pathname: "/login", state: { from: location } }} />
       )}

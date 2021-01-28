@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import { updateUser } from "../../../APIs/auth";
 import { UserContext } from "../../../Context/context";
 
 interface InfoFieldProps {
@@ -44,6 +45,17 @@ export const UserProfile: React.FC = () => {
   const userContext = useContext(UserContext);
   const { userInfo, setUserInfo } = userContext!;
 
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const f = document.getElementById("userInfoUpdateFrom") as HTMLFormElement;
+
+    if (f.checkValidity()) {
+      await updateUser(userInfo.user!);
+    }
+    f.classList.add("was-validated");
+  };
+
   const [readOnly, setReadOnly] = useState<boolean>(true);
   return (
     <div className="container my-5">
@@ -77,11 +89,7 @@ export const UserProfile: React.FC = () => {
           </div>
         </div>
         <hr />
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-          }}
-        >
+        <form onSubmit={(e) => onSubmit(e)} id="userInfoUpdateFrom">
           <div className="row row-cols-2 gy-3">
             <InfoField
               text="Επίθετο"
