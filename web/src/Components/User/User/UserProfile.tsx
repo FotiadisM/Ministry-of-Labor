@@ -6,6 +6,7 @@ interface InfoFieldProps {
   value: string;
   readOnly: boolean;
   type?: string;
+  pattern?: string;
   onChange: (v: string) => void;
 }
 
@@ -14,6 +15,7 @@ export const InfoField: React.FC<InfoFieldProps> = ({
   value,
   readOnly,
   type,
+  pattern,
   onChange,
 }) => {
   let t: string = "text";
@@ -30,6 +32,7 @@ export const InfoField: React.FC<InfoFieldProps> = ({
         onChange={(e) => {
           onChange(e.target.value);
         }}
+        pattern={pattern}
         readOnly={readOnly}
         required
       />

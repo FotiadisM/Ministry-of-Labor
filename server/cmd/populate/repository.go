@@ -64,7 +64,7 @@ func (r repository) PopulateUsers(ctx context.Context) (err error) {
 
 	u := user.User{
 		ID:   userUUID.String(),
-		AMKA: "251099678",
+		AMKA: "12345678901",
 		EmploymentInfo: &user.EmploymentInfo{
 			EmployID:       "1234",
 			OrganizationID: orgUUID.String(),
@@ -72,7 +72,7 @@ func (r repository) PopulateUsers(ctx context.Context) (err error) {
 		},
 		Username:    "mike",
 		Email:       "mike@mail.com",
-		AFM:         "1234534123",
+		AFM:         "123456789",
 		FirstName:   "Μιχαήλ",
 		LastName:    "Φωτιάδης",
 		Born:        "25/10/99",
@@ -143,7 +143,7 @@ func (r repository) PopulateUsers(ctx context.Context) (err error) {
 
 	tatas := user.User{
 		ID:   tatasUUID.String(),
-		AMKA: "2307995782",
+		AMKA: "09876543210",
 		EmploymentInfo: &user.EmploymentInfo{
 			EmployID:       tatasEmployUUID.String(),
 			OrganizationID: orgUUID.String(),
@@ -151,7 +151,7 @@ func (r repository) PopulateUsers(ctx context.Context) (err error) {
 		},
 		Username:    "tatas",
 		Email:       "tatas@mail.com",
-		AFM:         "1234534123",
+		AFM:         "098765432",
 		FirstName:   "Μιχαήλ",
 		LastName:    "Τατάς",
 		Born:        "13/7/99",
@@ -222,7 +222,7 @@ func (r repository) PopulateUsers(ctx context.Context) (err error) {
 
 	flwros := user.User{
 		ID:   flwrosUUID.String(),
-		AMKA: "120699901",
+		AMKA: "01928374648",
 		EmploymentInfo: &user.EmploymentInfo{
 			EmployID:       flwrosEmployUUID.String(),
 			OrganizationID: orgUUID.String(),
@@ -230,7 +230,7 @@ func (r repository) PopulateUsers(ctx context.Context) (err error) {
 		},
 		Username:    "flwros",
 		Email:       "flwros@mail.com",
-		AFM:         "1234534123",
+		AFM:         "019283746",
 		FirstName:   "Γεώργιος",
 		LastName:    "Φλώρος",
 		Born:        "13/7/99",

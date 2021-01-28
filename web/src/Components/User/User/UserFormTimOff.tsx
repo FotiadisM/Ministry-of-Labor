@@ -1,14 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 
 interface UserFormTimeOffProps {
   title: string;
-  onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  onSubmit: (
+    e: React.FormEvent<HTMLFormElement>,
+    info: {
+      from: string;
+      to: string;
+    }
+  ) => void;
 }
 
 export const UserFormTimeOff: React.FC<UserFormTimeOffProps> = ({
   title,
   onSubmit,
 }) => {
+  const [info, setInfo] = useState<{ from: string; to: string }>({
+    from: "",
+    to: "",
+  });
+
   return (
     <div className="container my-5">
       <div className="pb-4">
@@ -19,19 +30,35 @@ export const UserFormTimeOff: React.FC<UserFormTimeOffProps> = ({
         <hr />
       </div>
       <form
+        id="userFormTimeOff"
         className="mt-5"
         onSubmit={(e) => {
-          onSubmit(e);
+          onSubmit(e, info);
         }}
+        noValidate
       >
         <div className="row">
           <div className="col">
             <span>Από</span>
-            <input type="date" className="form-control" onChange={(e) => {}} />
+            <input
+              type="date"
+              className="form-control"
+              onChange={(e) => {
+                setInfo((o) => ({ ...o, from: e.target.value }));
+              }}
+              required
+            />
           </div>
           <div className="col">
             <span>Μέχρι</span>
-            <input type="date" className="form-control" onChange={(e) => {}} />
+            <input
+              type="date"
+              className="form-control"
+              onChange={(e) => {
+                setInfo((o) => ({ ...o, to: e.target.value }));
+              }}
+              required
+            />
           </div>
         </div>
         <button type="submit" className="btn btn-primary mt-4">

@@ -54,3 +54,7 @@ func (s Service) updateEmployStatus(ctx context.Context, in *updateEmployStatusR
 
 	return s.r.UpdateEmployStatus(ctx, in.FirstName, in.LastName, in.AFM, in.AMKA, sp)
 }
+
+func (s Service) cancelEmployStatus(ctx context.Context, id string) (err error) {
+	return s.r.CancelEmployStatus(ctx, id)
+}

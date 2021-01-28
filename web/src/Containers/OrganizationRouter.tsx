@@ -56,6 +56,11 @@ export const OrganizationRouter: React.FC = () => {
       );
 
       if (res === "ok") {
+        getOrganization(employmentInfo!.organizationID).then((o) => {
+          if (o != null) {
+            setOrganization(o);
+          }
+        });
         document.getElementById("orgFormModalBtn")!.click();
       } else {
         showModal();
@@ -86,6 +91,11 @@ export const OrganizationRouter: React.FC = () => {
       );
 
       if (res === "ok") {
+        getOrganization(employmentInfo!.organizationID).then((o) => {
+          if (o != null) {
+            setOrganization(o);
+          }
+        });
         document.getElementById("orgFormModalBtn")!.click();
       } else {
         showModal();

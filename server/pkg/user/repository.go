@@ -31,4 +31,5 @@ type User struct {
 type Repository interface {
 	GetLogin(ctx context.Context, username, password string) (id string, err error)
 	GetUser(ctx context.Context, id string) (u *User, err error)
+	UpdateUser(ctx context.Context, u *User) (err error)
 }

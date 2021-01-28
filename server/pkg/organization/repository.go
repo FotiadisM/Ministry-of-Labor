@@ -58,4 +58,5 @@ type Repository interface {
 	GetOrganizationEmployees(ctx context.Context, id string) (es []*Employ, err error)
 	GetEmployByUserID(ctx context.Context, id string) (e *Employ, err error)
 	UpdateEmployStatus(ctx context.Context, fName string, lName string, afm string, amka string, status StatusProps) (err error)
+	CancelEmployStatus(ctx context.Context, id string) (err error)
 }

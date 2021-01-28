@@ -55,3 +55,17 @@ func (s Service) UpdateEmployStatus(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 }
+
+// CancelEmployStatus ..
+func (s Service) CancelEmployStatus(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	id := vars["id"]
+
+	ctx := r.Context()
+
+	err := s.cancelEmployStatus(ctx, id)
+	if err != nil {
+		httptransport.ErrorEncoder(w, err)
+		return
+	}
+}

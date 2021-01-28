@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { InfoField } from "../User/User/UserProfile";
 
 export interface Info {
@@ -27,6 +28,26 @@ export const OrganizationEmployeesForm: React.FC<OrganizationEmployeesFormProps>
     from: "",
     to: "",
   });
+
+  let location = useLocation<{
+    firstName: string;
+    lastName: string;
+    AFM: string;
+    AMKA: string;
+  }>();
+
+  let { state } = location;
+  useEffect(() => {
+    if (state !== null) {
+      setInfo((i) => ({
+        ...i,
+        firstName: state.firstName,
+        lastName: state.lastName,
+        AFM: state.AFM,
+        AMKA: state.AMKA,
+      }));
+    }
+  }, [state]);
 
   return (
     <div className="container my-5">
@@ -69,6 +90,7 @@ export const OrganizationEmployeesForm: React.FC<OrganizationEmployeesFormProps>
               onChange={(v) => {
                 setInfo((oldInfo) => ({ ...oldInfo, AFM: v }));
               }}
+              pattern="[0-9]{9}"
             />
             <InfoField
               text="Α.Μ.Κ.Α."
@@ -77,6 +99,7 @@ export const OrganizationEmployeesForm: React.FC<OrganizationEmployeesFormProps>
               onChange={(v) => {
                 setInfo((oldInfo) => ({ ...oldInfo, AMKA: v }));
               }}
+              pattern="[0-9]{11}"
             />
             <div className="col">
               <span>Από</span>
@@ -86,6 +109,7 @@ export const OrganizationEmployeesForm: React.FC<OrganizationEmployeesFormProps>
                 onChange={(e) =>
                   setInfo((oldInfo) => ({ ...oldInfo, from: e.target.value }))
                 }
+                required
               />
             </div>
             <div className="col">
@@ -96,6 +120,7 @@ export const OrganizationEmployeesForm: React.FC<OrganizationEmployeesFormProps>
                 onChange={(e) =>
                   setInfo((oldInfo) => ({ ...oldInfo, to: e.target.value }))
                 }
+                required
               />
             </div>
           </div>

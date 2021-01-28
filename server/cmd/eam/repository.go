@@ -103,6 +103,11 @@ func (r repository) GetUser(ctx context.Context, id string) (u *user.User, err e
 	return
 }
 
+func (r repository) UpdateUser(ctx context.Context, u *user.User) (err error) {
+
+	return
+}
+
 // ORGANIZATION
 
 func (r repository) GetOrganization(ctx context.Context, id string) (o *organization.Organization, err error) {
@@ -188,6 +193,22 @@ func (r repository) UpdateEmployStatus(ctx context.Context, fName string, lName 
 	e := &organization.Employ{}
 	update := bson.D{primitive.E{Key: "$set", Value: bson.D{primitive.E{Key: "status", Value: status}}}}
 	if err = db.Collection("employees").FindOneAndUpdate(ctx, bson.D{primitive.E{Key: "userId", Value: u.ID}}, update).Decode(e); err != nil {
+		return err
+	}
+
+	return
+}
+
+func (r repository) CancelEmployStatus(ctx context.Context, id string) (err error) {
+	db := r.client.Database("eam")
+
+	ctx, cancel := context.WithTimeout(ctx, 4*time.Second)
+	defer cancel()
+
+	e := &organization.Employ{}
+	st := organization.StatusProps{Status: organization.Normal, From: "", To: ""}
+	update := bson.D{primitive.E{Key: "$set", Value: bson.D{primitive.E{Key: "status", Value: st}}}}
+	if err = db.Collection("employees").FindOneAndUpdate(ctx, bson.D{primitive.E{Key: "_id", Value: id}}, update).Decode(e); err != nil {
 		return err
 	}
 

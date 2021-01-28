@@ -103,7 +103,7 @@ export const updateEmployState = async (
   to: string
 ): Promise<"ok" | "bad" | null> => {
   try {
-    const res = await fetch(uri + "/employees/update/status", {
+    const res = await fetch(uri + "/employees/status/update", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -132,6 +132,20 @@ export const updateEmployState = async (
     }
   } catch (err) {
     console.log(err);
+  }
+
+  return null;
+};
+
+export const cancelEmployStatus = async (id: string): Promise<"ok" | null> => {
+  try {
+    const res = await fetch(uri + "/employees/status/cancel/" + id);
+
+    if (res.status === 200) {
+      return "ok";
+    }
+  } catch (e) {
+    console.log(e);
   }
 
   return null;

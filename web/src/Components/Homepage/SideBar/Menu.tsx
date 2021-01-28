@@ -23,7 +23,7 @@ const MenuItem: React.FC<Route> = ({ text }) => {
           "bg-white ms-4 text-center py-2 " +
           (hovered ? "fw-bold text-primary" : "")
         }
-        style={{ flexGrow: 1 }}
+        style={{ flexGrow: 1, cursor: "pointer" }}
       >
         {text}
       </div>

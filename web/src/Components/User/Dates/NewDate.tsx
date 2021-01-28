@@ -186,7 +186,11 @@ export const NewDateProvider: React.FC = () => {
               >
                 Ακύρωση
               </button>
-              <button type="button" className="btn btn-primary">
+              <button
+                type="button"
+                className="btn btn-primary"
+                data-bs-dismiss="modal"
+              >
                 Υποβολή
               </button>
             </div>

@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import { getStatus, getUser } from "../../APIs/auth";
+import { cancelEmployStatus } from "../../APIs/User/organization";
 import { useHovered } from "../../Hooks/hooks";
 import { InfoField } from "../User/User/UserProfile";
 
@@ -56,10 +58,15 @@ const TableEntry: React.FC<TableEntryProps> = ({ employ, setEmploy }) => {
 
 interface EmployProfileProps {
   employ: Employ | null;
+  onStatusCancel: (id: string) => void;
 }
 
-const EmployProfile: React.FC<EmployProfileProps> = ({ employ }) => {
+const EmployProfile: React.FC<EmployProfileProps> = ({
+  employ,
+  onStatusCancel,
+}) => {
   const [user, setUser] = useState<User | null>(null);
+  let history = useHistory();
 
   var userId: string = "";
   if (employ !== null) {
@@ -125,7 +132,36 @@ const EmployProfile: React.FC<EmployProfileProps> = ({ employ }) => {
           readOnly={true}
           onChange={() => {}}
         />
-        {employ.status.status === "NORMAL" ? null : (
+        {employ.status.status === "NORMAL" ? (
+          <div className="col d-flex justify-content-between">
+            <button
+              className="btn btn-primary me-3"
+              onClick={() => {
+                history.push("/organization/employees/forms/remote", {
+                  firstName: user.firstName,
+                  lastName: user.lastName,
+                  AFM: user.AFM,
+                  AMKA: user.AMKA,
+                });
+              }}
+            >
+              Φόρμα δήλωσης τηλεργασίας
+            </button>
+            <button
+              className="btn btn-primary"
+              onClick={() => {
+                history.push("/organization/employees/forms/suspension", {
+                  firstName: user.firstName,
+                  lastName: user.lastName,
+                  AFM: user.AFM,
+                  AMKA: user.AMKA,
+                });
+              }}
+            >
+              Φόρμα αναστολής σύμβασης
+            </button>
+          </div>
+        ) : (
           <div>
             <div className="col d-flex">
               <div>
@@ -147,7 +183,10 @@ const EmployProfile: React.FC<EmployProfileProps> = ({ employ }) => {
                 />
               </div>
             </div>
-            <button className="btn btn-primary mt-4">
+            <button
+              className="btn btn-primary mt-4"
+              onClick={() => onStatusCancel(employ.id)}
+            >
               Κατάργηση {getStatus(employ.status.status)}ς
             </button>
           </div>
@@ -177,6 +216,7 @@ interface OrganizationEmploysProps {
 
 export const OrganizationEmployees: React.FC<OrganizationEmploysProps> = ({
   organization,
+  setOrganization,
 }) => {
   const [employ, setEmploy] = useState<Employ | null>(null);
 
@@ -191,6 +231,21 @@ export const OrganizationEmployees: React.FC<OrganizationEmploysProps> = ({
   if (organization === null) {
     return null;
   }
+
+  const onStatusCancel = async (id: string) => {
+    const res = await cancelEmployStatus(id);
+    if (res === "ok") {
+      let em = organization.employees;
+      for (let i = 0; i < em.length; i += 1) {
+        if (em[i].id === id) {
+          em[i].status.status = "NORMAL";
+          em[i].status.from = "";
+          em[i].status.to = "";
+        }
+      }
+      setOrganization((o) => ({ ...o!, employees: em }));
+    }
+  };
 
   return (
     <div className="container my-5">
@@ -228,7 +283,7 @@ export const OrganizationEmployees: React.FC<OrganizationEmploysProps> = ({
           </table>
         </div>
         <div className="border rounded shadow ms-4" style={{ maxWidth: "40%" }}>
-          <EmployProfile employ={employ} />
+          <EmployProfile employ={employ} onStatusCancel={onStatusCancel} />
         </div>
       </div>
     </div>

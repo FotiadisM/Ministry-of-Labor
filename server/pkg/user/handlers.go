@@ -1,6 +1,7 @@
 package user
 
 import (
+	"encoding/json"
 	"net/http"
 
 	"github.com/FotiadisM/eam/server/pkg/httptransport"
@@ -41,4 +42,20 @@ func (s Service) GetUser(w http.ResponseWriter, r *http.Request) {
 	}
 
 	httptransport.EncodeJSONResponse(w, u)
+}
+
+// UpdateUser ..
+func (s Service) UpdateUser(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+
+	u := &User{}
+	if err := json.NewDecoder(r.Body).Decode(u); err != nil {
+		httptransport.ErrorEncoder(w, err)
+		return
+	}
+
+	if err := s.updateUser(ctx, u); err != nil {
+		httptransport.ErrorEncoder(w, err)
+		return
+	}
 }

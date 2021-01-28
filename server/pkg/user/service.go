@@ -37,3 +37,7 @@ func (s Service) getUser(ctx context.Context, id string) (u *User, err error) {
 
 	return s.r.GetUser(ctx, id)
 }
+
+func (s Service) updateUser(ctx context.Context, u *User) (err error) {
+	return s.r.UpdateUser(ctx, u)
+}

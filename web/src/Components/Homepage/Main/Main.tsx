@@ -55,6 +55,7 @@ const PageLink: React.FC<PageLinkProps> = ({ text, id, changePage }) => {
         className={
           "nav-link text-primary pageEl " + (id === "1" ? "active" : "")
         }
+        style={{ cursor: "pointer" }}
         onClick={() => changePage(id)}
       >
         {text}
@@ -198,7 +199,7 @@ const MenuBox: React.FC<MenuBoxProps> = ({ serv, inf }) => {
         <h4 className="fw-bold">Υπηρεσίες</h4>
         <div
           className="shadow-lg bg-white p-4 ps-5"
-          style={{ borderRadius: "24px" }}
+          style={{ borderRadius: "24px", minHeight: "170px" }}
         >
           <div className="row row-cols-2 g-2">
             {serv.map((s, i) => {
@@ -211,7 +212,7 @@ const MenuBox: React.FC<MenuBoxProps> = ({ serv, inf }) => {
         <h4 className="fw-bold">Πληροφορίες</h4>
         <div
           className="shadow-lg bg-white p-4 ps-5"
-          style={{ borderRadius: "24px" }}
+          style={{ borderRadius: "24px", minHeight: "170px" }}
         >
           <div className="row row-cols-2 g-2">
             {inf.map((s, i) => {
