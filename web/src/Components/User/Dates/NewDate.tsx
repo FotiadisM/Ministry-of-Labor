@@ -71,6 +71,19 @@ const NewDate: React.FC<NewDateProps> = ({ months, margin, showModal }) => {
     rows.push(<div></div>);
   }
 
+  const getMonthName = (name: string): string => {
+    switch (name) {
+      case "February":
+        return "Φεβρουάριος";
+      case "March":
+        return "Μάρτιος";
+      case "April":
+        return "Απρίλιος";
+    }
+
+    return "";
+  };
+
   return (
     <div className="container pt-5">
       <div className="d-flex justify-content-center mb-5">
@@ -83,7 +96,7 @@ const NewDate: React.FC<NewDateProps> = ({ months, margin, showModal }) => {
         >
           Πίσω
         </button>
-        <h2 className="px-5">{months[curMonth].name}</h2>
+        <h2 className="px-5">{getMonthName(months[curMonth].name)}</h2>
         <button
           className="btn btn-primary"
           disabled={curMonth === months.length - 1 ? true : false}
